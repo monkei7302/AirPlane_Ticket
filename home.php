@@ -42,7 +42,7 @@
               <a class="nav-link" href="search_flight.html"> Chuyến bay</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Giảm giá</a>
+              <a class="nav-link" href="#">Giảm giá abc</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="history.html">Tra cứu</a>
