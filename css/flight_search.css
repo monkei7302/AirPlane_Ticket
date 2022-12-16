@@ -1,0 +1,78 @@
+.check-btn{
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+}
+.flight-route{
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+.dot {
+  height: 5px;
+  width: 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+#btn-filter{
+  margin-left: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  border: 1px solid #9AC1F0;
+  background-color: #9AC1F0;
+  color: white;
+}
+@media only screen and (min-width: 768px){
+  .btn-book-ticket{
+    padding: 5px;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #9AC1F0;
+    background-color: #9AC1F0;
+    color: white;
+    margin-left: 50px;
+    float: right;
+  }
+  .btn-seedel-ticket{
+    padding: 5px;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #9AC1F0;
+    background-color: #9AC1F0;
+    color: white;
+    margin-left: 50px;
+    float: right;
+  }
+}
+@media only screen and (max-device-width: 767px) {
+  .btn-seedel-ticket{
+    padding: 5px;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #9AC1F0;
+    background-color: #9AC1F0;
+    color: white;
+    margin-top: 10px;
+  }
+  .btn-book-ticket{
+    padding: 5px;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #9AC1F0;
+    background-color: #9AC1F0;
+    color: white;
+    margin-left: 50px;
+    margin-top: 10px;
+  }
+}
+
+/* .flight-route{
+  text-align: center;
+} */

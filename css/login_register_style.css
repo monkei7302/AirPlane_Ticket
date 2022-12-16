@@ -1,0 +1,99 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+  html{
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("imageCSS/bg_login.png");
+    height: 120%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+  }
+  .form {
+    margin: auto;
+    max-width: 350px;
+    border: 1.5px solid #ced4da;
+    text-align: center;
+  }
+  .title{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-size: 24px;
+  }
+  .text-radio{
+    color: white;
+    margin-left: 8px;
+  }
+  input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: whitesmoke;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+  }
+  input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #9AC1F0;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid whitesmoke;
+  }
+  .input-control {
+    font-size: 15px;
+    background: transparent;
+    width: 90%;
+    border-radius: 5px;
+    border: 1px solid #ced4da; 
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    color: #fff;
+    outline: none;
+  }
+  .input-control:focus{
+    border-radius: 5px;
+    border: 2px solid #9AC1F0;
+  }
+  input::placeholder{
+    color: #fff;
+  }
+  .radio-btn{
+    margin: 0 0 15px;
+    text-align: left;
+    margin-left: 15px;
+  }
+  .form button {
+    background: #9AC1F0;
+    width: 90%;
+    border: 0;
+    border-radius: 5px;
+    margin: 0 0 15px;
+    padding: 15px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .form button:hover,.form button:active,.form button:focus {
+    background: #9AC1F0;
+  }
+  .form .message {
+    margin-top: 15px;
+    color: white;
+  }
+  .form .register-form {
+    display: none;
+  }
+  .form .message a {
+    color: #9AC1F0;
+    text-decoration: none;
+  }
