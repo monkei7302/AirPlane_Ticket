@@ -148,7 +148,7 @@
                               <h5 class="card-title">'.$name_hl.'</h5>
                               <p class="card-text">Ngày đi: '.$date_hl.'</p>
                               <p class="card-text">'.$des_hl.'</p>
-                              <h5 class = "text-danger font-weight-bold">Giá chỉ từ: '.number_format($price_hl,0,',','.').'</h5>
+                              <h5 class = "text-danger font-weight-bold">Giá chỉ từ: '.number_format(floatval($price_hl),0,',','.').' đ</h5>
                               <a href="#" class="btnHover btn mt-3">Tìm hiểu thêm</a>
                             </div>
                           </div>

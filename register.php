@@ -3,7 +3,7 @@
 
     $message = '';
     if(isset($_GET['exist'])) {
-      $message = '! Username is already existed !';
+      $message = '! Username đã tồn tại !';
     }
 ?>
 <!DOCTYPE html>

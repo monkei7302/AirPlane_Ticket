@@ -5,11 +5,11 @@
     $flag = '';
     if(isset($_GET['error'])) {
       $flag = false;
-      $message = '! User not found !';
+      $message = '! Không tìm thấy tài khoản !';
     }
     else if(isset($_GET['signup'])){
       $flag = true;
-      $message = '~ Sign up success ~';
+      $message = '~ Đăng ký thành công ~';
     }
 ?>
 <!DOCTYPE html>
