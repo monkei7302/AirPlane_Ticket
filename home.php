@@ -49,6 +49,7 @@
                 echo '<li class="nav-item dropdown">
                         <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> Welcome '.$_SESSION['username'].'</a>
                           <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile.php"> Thông tin cá nhân</a></li>
                             <li><a class="dropdown-item" href="#"> Lịch sử đặt vé</a></li>
                             <li><a class="dropdown-item" href="logout.php"> Đăng xuất</a></li>
                         </ul>

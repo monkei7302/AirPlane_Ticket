@@ -505,7 +505,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="id_his_pro" id="delete_id_his_pro">
                         <input type="hidden" name="id_his_flight" id="delete_id_his_flight">
-                        <input type="hidden" name="id_his_ticket" id="delete_id_his_ticket">
+                        <input type="hidden" name=" " id="delete_id_his_ticket">
                         <p>Bạn có chắc muốn xóa lịch sử mua vé này không này không?</p>
                     </div>
                     <div class="modal-footer">

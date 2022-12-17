@@ -1,0 +1,202 @@
+.bg-nav{
+    background-color: #3968a1!important;
+}
+.me-5 {
+    margin-right: 6rem!important;
+}
+.dropdown-menu{
+    background-color: #3968a1!important;
+}
+.dropdown-menu a{
+    color: white;
+}
+/* .dropdown-menu a:hover, .dropdown-btn:hover{
+    background-image: none;
+    background-color: #3968a1!important;
+    color: white!important;
+} */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #edf2f6;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+.sidebar button {
+    display: block;
+    background-color: inherit;
+    color: #747f85;
+    padding: 22px 16px;
+    /* margin-left: 40px; */
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+.sidebar button:hover {
+    color: #2b6cb0;
+}
+.sidebar button.active {
+    background-color: #2b6cb0;
+    color: white;
+}
+.content{
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+    background-color: #f6fafd;
+}
+.container-dasboard{
+    display: flex;
+    /* height: 1000px; */
+    justify-content: center;
+    margin-top: 100px;
+    flex-wrap: wrap;
+}
+.card-function{
+    border-radius: 5px;
+    margin-left: 30px;
+    border: 1px solid #edf2f6;
+    background-color: #edf2f6;
+    height: 80px;
+    width: 240px;
+    color: #747f85;
+    font-weight: bolder;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 50px;
+    
+}
+.card-function:hover{
+    color: white;
+    background-color: #9AC1F0;
+}
+.title{
+    margin-top: 20px;
+    margin-left: 180px;
+    font-size: 24px;
+    color: #747f85;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.btn-add{
+    float: right;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #9AC1F0;
+    background-color: #9AC1F0;
+    color: white;
+    text-decoration: none;
+}
+.btn-update{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #9AC1F0;
+    background-color: #9AC1F0;
+    color: white; 
+    text-decoration: none;
+}
+.btn_update_hight_light{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #9AC1F0;
+    background-color: #9AC1F0;
+    color: white; 
+    text-decoration: none;
+}
+.btn_delete_hight_light{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #D9534F;
+    background-color: #D9534F;
+    color: white;
+    text-decoration: none;
+}
+.btn_delete_start{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #D9534F;
+    background-color: #D9534F;
+    color: white;
+    text-decoration: none;
+}
+.btn_delete_user{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #D9534F;
+    background-color: #D9534F;
+    color: white;
+    text-decoration: none;
+}
+.btn_delete_history{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #D9534F;
+    background-color: #D9534F;
+    color: white;
+    text-decoration: none;
+}
+.btn_delete_des{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #D9534F;
+    background-color: #D9534F;
+    color: white;
+    text-decoration: none;
+}
+.btn-delete{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #D9534F;
+    background-color: #D9534F;
+    color: white;
+    text-decoration: none;
+}
+td{
+    text-align: center;
+    vertical-align: middle;
+}
+input, select,textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.add-color{
+    background-color: #9AC1F0!important;
+    color: white!important;
+}
+.custom-file-button input[type=file] {
+    margin-left: -2px !important;
+  }
+  
+  .custom-file-button input[type=file]::-webkit-file-upload-button {
+    display: none;
+  }
+  
+  .custom-file-button input[type=file]::file-selector-button {
+    display: none;
+  }
+  
+  .custom-file-button:hover label {
+    background-color: #dde0e3;
+    cursor: pointer;
+  }
