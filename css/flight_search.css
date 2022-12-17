@@ -25,6 +25,10 @@
   background-color: #9AC1F0;
   color: white;
 }
+.continue{
+  display: flex;
+  float: right;
+}
 @media only screen and (min-width: 768px){
   .btn-book-ticket{
     padding: 5px;

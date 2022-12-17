@@ -9,6 +9,10 @@ body {
 label {
     width: 100%;
 }
+img{
+    width:50%;
+    height: 50%;
+}
 .card-input-element {
     display: none;
 }
@@ -37,7 +41,7 @@ form{
     font-weight: bold;
 }
 .price-luggage{
-    color: #3968a1;
+    color: #9AC1F0;
     font-weight: bold;
 }
 .btn-continue{
