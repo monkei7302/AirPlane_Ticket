@@ -28,7 +28,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="home.html" style = "font-size: 30px;">Sky Airlines
+        <a class="navbar-brand" href="home.php" style = "font-size: 30px;">Sky Airlines
             <div class="logo">
                 <img src="img/plane.png" class="img-fluid">
             </div>
@@ -36,16 +36,13 @@
         </a>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="home.html"><i class="fa fa-home"></i> Trang chủ</a>
+              <a class="nav-link active" aria-current="page" href="home.php"><i class="fa fa-home"></i> Trang chủ</a>
             </li>
             <li class="nav-item aria-current">
-              <a class="nav-link" href="search_flight.html"> Chuyến bay</a>
+              <a class="nav-link" href="search_flight.php"> Chuyến bay</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Giảm giá</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="history.html">Tra cứu</a>
+              <a class="nav-link" href="history.php">Tra cứu</a>
             </li>
             <?php
               if(isset($_SESSION['login'])){
@@ -64,7 +61,7 @@
               }
             ?>
             <li class="nav-item">
-              <a class="nav-link" href="help.html"> Trợ giúp</a>
+              <a class="nav-link" href="help.php"> Trợ giúp</a>
             </li>
           </ul>
         </div>
@@ -74,45 +71,56 @@
       </div>
       <div class="container mt-3">
           <div class="row">
-              <div class="card w-75 mx-auto" id = "searchCard" >
-                  <div class="card-body">
-                    <div class="radio fs-6">
-                      <input type="radio" id="radio1" name="ticket_type"><span style="margin-right: 250px;"> Khứ hồi</span>
-                      <input type="radio" id="radio2" name="ticket_type"><span> Một chiều</span>
+            <form action="search_flight.php" method="post" >
+              <div class="card w-75 mx-auto" id = "searchCard"  style="padding-left: 10px;">
+                    <div class="card-body">
+                      <div class="radio fs-6">
+                        <input type="radio" id="radio1" name="ticket_type" value="Two-way" required><span style="margin-right: 250px;"> Khứ hồi</span>
+                        <input type="radio" id="radio2" name="ticket_type" value="One-way" required><span> Một chiều</span>
+                      </div>
                     </div>
+                    <div class = "radio passenger">
+                      <span>Người lớn (từ 12 tuổi trở lên):</span>
+                      <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_over12" type="number" value="0">
+                      <span>Trẻ em (dưới 12 tuổi):</span>
+                      <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_lower12" type="number" value="0">
+                      <span>Em bé (dưới 2 tuổi):</span>
+                      <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_lower2" type="number" value="0">
+                    </div>
+                    <div>
+                    <select class="form-select" aria-label="Default select example" style = "width: 45%" name="start" required="true"> 
+                      <option label="Chọn điểm đi" value="">Điểm đi</option>
+                      <?php
+                         $sql_st = "SELECT * FROM `start_place`";
+                         $run_st = mysqli_query($con,$sql_st);
+                         while($row_st = mysqli_fetch_array($run_st)):;
+                      ?>
+                      <option value="<?php echo $row_st['id_start'];?>"><?php echo $row_st['name_start'];?></option>
+                      <?php endwhile; ?>
+                    </select>
+                    <select class="form-select" aria-label="Default select example" style = "width: 45%" name="destination" required="true"> 
+                      <option label="Chọn điểm đến" value=""></option>
+                      <?php
+                         $sql_ds = "SELECT * FROM `destination`";
+                         $run_ds = mysqli_query($con,$sql_ds);
+                         while($row_ds = mysqli_fetch_array($run_ds)):;
+                      ?>
+                      <option value="<?php echo $row_ds['id_des'];?>"><?php echo $row_ds['name_des'];?></option>
+                      <?php endwhile; ?>
+                    </select>
                   </div>
-                  <div class = "radio passenger">
-                  <span>Người lớn (từ 12 tuổi trở lên):</span>
-                    <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger" type="number" value="0">
-                    <span>Trẻ em (dưới 12 tuổi):</span>
-                    <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger" type="number" value="0">
-                    <span>Em bé (dưới 2 tuổi):</span>
-                    <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger" type="number" value="0">
-                </div>
-                <div>
-                  <select class="form-select" aria-label="Default select example" style = "width: 45%"> 
-                    <option selected>Điểm đi</option>
-                    <option value="1">Thành phố Hồ Chí Minh</option>
-                    <option value="2">Hà Nội</option>
-                    <option value="3">Đà Nẵng</option>
-                  </select>
-                  <select class="form-select" aria-label="Default select example" style = "width: 45%"> 
-                    <option selected>Điểm đến</option>
-                    <option value="1">Thành phố Hồ Chí Minh</option>
-                    <option value="2">Hà Nội</option>
-                    <option value="3">Đà Nẵng</option>
-                  </select>
-                </div>
-                <div class = "radio">
-                  <span>Chọn ngày đi: </span>
-                  <input type = "date" id = "ngayDi" style = "margin-right: 150px;">
-                  <br><br>
-                  <span>Chọn ngày về: </span>
-                  <input type = "date" id = "ngayVe">
-                  <br>
-                </div>
-                <a id = "searchButton" class="btnHover btn text-white mx-auto mt-3 mb-3">Tìm chuyến bay <i class="fa fa-search fa-1x" aria-hidden="true"></i></a>
+                  <div class = "radio">
+                    <span>Chọn ngày đi: </span>
+                    <input type = "date" id = "ngayDi" style = "margin-right: 150px;" name="day_start" required>
+                    <br><br>
+                    <span>Chọn ngày về: </span>
+                    <input type = "date" id = "ngayVe" name="day_back">
+                    <span>(Nếu chọn khứ hồi)</span>
+                    <br>
+                  </div>
+                  <button type="submit" id = "searchButton" class="btnHover btn text-white mx-auto mt-3 mb-3" name="find_flight">Tìm chuyến bay <i class="fa fa-search fa-1x" aria-hidden="true"></i></button>
               </div>
+            </form>
               <div class = "symbols">
                 <img src = "img/symbols/anh1.png" width="250px" height="250px" style="margin-right: 30px">
                 <img src = "img/symbols/anh2.png" width="250px" height="250px">

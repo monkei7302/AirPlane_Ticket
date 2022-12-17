@@ -1,3 +1,19 @@
+<?php
+  require 'connect.php';
+  session_start();
+
+  if(isset($_POST['find_flight'])){
+    $ticket_type = $_POST['ticket_type'];
+    $over12 = $_POST['numberOfPassenger_over12'];
+    $lower12 = $_POST['numberOfPassenger_lower12'];
+    $lower2 = $_POST['numberOfPassenger_lower2'];
+    $start = $_POST['start'];
+    $destination = $_POST['destination'];
+    $day_start = $_POST['day_start'];
+    $day_back = $_POST['day_back'];
+  }
+  
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,23 +43,33 @@
           </a>
         </a>
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="home.html"><i class="fa fa-home"></i> Trang chủ</a>
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="home.php"><i class="fa fa-home"></i> Trang chủ</a>
             </li>
             <li class="nav-item aria-current">
-              <a class="nav-link active" href="search_flight.html"> Chuyến bay</a>
+              <a class="nav-link" href="search_flight.php"> Chuyến bay</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Giảm giá</a>
+              <a class="nav-link" href="history.php">Tra cứu</a>
             </li>
+            <?php
+              if(isset($_SESSION['login'])){
+                echo '<li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> Welcome '.$_SESSION['username'].'</a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"> Lịch sử đặt vé</a></li>
+                            <li><a class="dropdown-item" href="logout.php"> Đăng xuất</a></li>
+                        </ul>
+                      </li>';
+              }
+              else{
+                echo '<li class="nav-item">
+                        <a class="nav-link" href="login.php">Đăng nhập</a>
+                      </li>';
+              }
+            ?>
             <li class="nav-item">
-              <a class="nav-link" href="history.html">Tra cứu</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.html"><i class="fa fa-user-o" aria-hidden="true"></i> Đăng nhập</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="help.html"> Trợ giúp</a>
+              <a class="nav-link" href="help.php"> Trợ giúp</a>
             </li>
           </ul>
         </div>
@@ -68,45 +94,79 @@
     <div class="container mt-3">
       <h1 style = "text-align: center;">Chọn vé máy bay</h1>   
         <div class="row">
-            <div class="card w-75 mx-auto mt-3 mb-3" id = "searchCard">
+        <form action="search_flight.php" method="post" >
+            <div class="card w-75 mx-auto mt-3 mb-3" id = "searchCard" style="padding-left: 10px;"> 
                 <div class="card-body">
                   <div class="radio fs-6">
-                    <input type="radio" id="radio1" name="ticket_type"><span style="margin-right: 250px;"> Khứ hồi</span>
-                    <input type="radio" id="radio2" name="ticket_type"><span> Một chiều</span>
+                    <input type="radio" id="radio1" name="ticket_type" <?php if (isset($ticket_type) && $ticket_type=="Two-way") echo "checked";?> value="Two-way" required><span style="margin-right: 250px;"> Khứ hồi</span>
+                    <input type="radio" id="radio2" name="ticket_type" <?php if (isset($ticket_type) && $ticket_type=="One-way") echo "checked";?> value="One-way" required><span> Một chiều</span>
                   </div>
                 </div>
                 <div class = "radio passenger">
                 <span>Người lớn (từ 12 tuổi trở lên):</span>
-                  <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger" type="number" value="0">
+                  <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_over12" type="number" value="<?php if(isset($over12)){echo $over12;} else{echo 0;}?>">
                   <span>Trẻ em (dưới 12 tuổi):</span>
-                  <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger" type="number" value="0">
+                  <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_lower12" type="number" value="<?php if(isset($lower12)){echo $lower12;} else{echo 0;}?>">
                   <span>Em bé (dưới 2 tuổi):</span>
-                  <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger" type="number" value="0">
+                  <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_lower2" type="number" value="<?php if(isset($lower2)){echo $lower2;} else{echo 0;}?>">
               </div>
               <div>
-                <select class="form-select" aria-label="Default select example" style = "width: 45%"> 
-                  <option selected>Điểm đi</option>
-                  <option value="1">Thành phố Hồ Chí Minh</option>
-                  <option value="2">Hà Nội</option>
-                  <option value="3">Đà Nẵng</option>
+                <select class="form-select" aria-label="Default select example" style = "width: 45%" name="start"> 
+                  <option selected><?php if($start == "Điểm đi"){
+                    echo "Điểm đi";
+                  }
+                  else{
+                    $sql_check_st = "SELECT * FROM `start_place` WHERE `id_start` LIKE '$start' OR `name_start` LIKE '%$start%'";
+                    $sql_check_st_run = mysqli_query($con,$sql_check_st);
+                    while($row = $sql_check_st_run->fetch_array(MYSQLI_ASSOC)){
+                      $name_st = $row['name_start'];
+                    }
+                    echo $name_st;
+                  }
+                  ?></option>
+                  <?php
+                         $sql_st = "SELECT * FROM `start_place`";
+                         $run_st = mysqli_query($con,$sql_st);
+                         while($row_st = mysqli_fetch_array($run_st)):;
+                      ?>
+                      <option value="<?php echo $row_st['id_start'];?>"><?php echo $row_st['name_start'];?></option>
+                      <?php endwhile; ?>
                 </select>
-                <select class="form-select" aria-label="Default select example" style = "width: 45%"> 
-                  <option selected>Điểm đến</option>
-                  <option value="1">Thành phố Hồ Chí Minh</option>
-                  <option value="2">Hà Nội</option>
-                  <option value="3">Đà Nẵng</option>
+
+                <select class="form-select" aria-label="Default select example" style = "width: 45%" name="destination"> 
+                  <option selected><?php if($destination == "Điểm đến"){
+                    echo "Điểm đến";
+                  }
+                  else{
+                    $sql_check_des = "SELECT * FROM `destination` WHERE `id_des` LIKE '$destination' OR `name_des` LIKE '%$destination%'";
+                    $sql_check_des_run = mysqli_query($con,$sql_check_des);
+                    while($row = $sql_check_des_run->fetch_array(MYSQLI_ASSOC)){
+                      $name_des = $row['name_des'];
+                    }
+                    echo $name_des;
+                  }
+                  ?></option>
+                  <?php
+                         $sql_ds = "SELECT * FROM `destination`";
+                         $run_ds = mysqli_query($con,$sql_ds);
+                         while($row_ds = mysqli_fetch_array($run_ds)):;
+                      ?>
+                      <option value="<?php echo $row_ds['id_des'];?>"><?php echo $row_ds['name_des'];?></option>
+                      <?php endwhile; ?>
                 </select>
               </div>
               <div class = "radio">
                 <span>Chọn ngày đi: </span>
-                <input type = "date" id = "ngayDi" style = "margin-right: 150px;">
+                <input type = "date" id = "ngayDi" style = "margin-right: 150px;" value="<?php if(isset($day_start)){echo $day_start;}?>"  name="day_start" required>
                 <br><br>
                 <span>Chọn ngày về: </span>
-                <input type = "date" id = "ngayVe">
+                <input type = "date" id = "ngayVe" value="<?php if(isset($day_back)){echo $day_back;}?>" name="day_back">
+                <span>(Nếu chọn khứ hồi)</span>
                 <br><br>
               </div>
-              <a id = "searchButton" class="btnHover btn text-white mx-auto mt-3 mb-3">Tìm chuyến bay <i class="fa fa-search fa-1x" aria-hidden="true"></i></a>
+              <button type="submit" id = "searchButton" class="btnHover btn text-white mx-auto mt-3 mb-3" name="find_flight">Tìm chuyến bay <i class="fa fa-search fa-1x" aria-hidden="true"></i></button>
             </div>
+        </form>
             <div class="card">
                 <div class="card-body">
                     <h5>Chuyến bay đi</h5>

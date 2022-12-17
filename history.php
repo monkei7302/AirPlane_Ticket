@@ -1,3 +1,7 @@
+<?php
+  require 'connect.php';
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,23 +35,33 @@
           </a>
         </a>
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="home.html"><i class="fa fa-home"></i> Trang chủ</a>
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="home.php"><i class="fa fa-home"></i> Trang chủ</a>
             </li>
             <li class="nav-item aria-current">
-              <a class="nav-link" href="search_flight.html"> Chuyến bay</a>
+              <a class="nav-link" href="search_flight.php"> Chuyến bay</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Giảm giá</a>
+              <a class="nav-link" href="history.php">Tra cứu</a>
             </li>
+            <?php
+              if(isset($_SESSION['login'])){
+                echo '<li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> Welcome '.$_SESSION['username'].'</a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"> Lịch sử đặt vé</a></li>
+                            <li><a class="dropdown-item" href="logout.php"> Đăng xuất</a></li>
+                        </ul>
+                      </li>';
+              }
+              else{
+                echo '<li class="nav-item">
+                        <a class="nav-link" href="login.php">Đăng nhập</a>
+                      </li>';
+              }
+            ?>
             <li class="nav-item">
-              <a class="nav-link active" href="history.html">Tra cứu</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.html"><i class="fa fa-user-o" aria-hidden="true"></i> Đăng nhập</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="help.html"> Trợ giúp</a>
+              <a class="nav-link" href="help.php"> Trợ giúp</a>
             </li>
           </ul>
         </div>
