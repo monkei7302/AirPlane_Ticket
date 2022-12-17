@@ -36,7 +36,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="home.html" style = "font-size: 30px;">Sky Airlines
+        <a class="navbar-brand" href="home.php" style = "font-size: 30px;">Sky Airlines
             <div class="logo">
                 <img src="img/plane.png" class="img-fluid">
             </div>
@@ -112,17 +112,21 @@
               </div>
               <div>
                 <select class="form-select" aria-label="Default select example" style = "width: 45%" name="start"> 
-                  <option selected><?php if($start == "Điểm đi"){
-                    echo "Điểm đi";
+                  <option selected><?php if(isset($_POST['find_flight'])){ if($start == "Điểm đi"){
+                    echo "Chọn điểm đi";
                   }
-                  else{
+                  else if(isset($start)){
                     $sql_check_st = "SELECT * FROM `start_place` WHERE `id_start` LIKE '$start' OR `name_start` LIKE '%$start%'";
                     $sql_check_st_run = mysqli_query($con,$sql_check_st);
                     while($row = $sql_check_st_run->fetch_array(MYSQLI_ASSOC)){
                       $name_st = $row['name_start'];
                     }
                     echo $name_st;
+                  }}
+                  else{
+                    echo "Chọn điểm đi";
                   }
+
                   ?></option>
                   <?php
                          $sql_st = "SELECT * FROM `start_place`";
@@ -134,8 +138,8 @@
                 </select>
 
                 <select class="form-select" aria-label="Default select example" style = "width: 45%" name="destination"> 
-                  <option selected><?php if($destination == "Điểm đến"){
-                    echo "Điểm đến";
+                  <option selected><?php if(isset($_POST['find_flight'])){ if($destination == "Điểm đến"){
+                    echo "Chọn điểm đến";
                   }
                   else{
                     $sql_check_des = "SELECT * FROM `destination` WHERE `id_des` LIKE '$destination' OR `name_des` LIKE '%$destination%'";
@@ -144,6 +148,9 @@
                       $name_des = $row['name_des'];
                     }
                     echo $name_des;
+                  }}
+                  else{
+                    echo "Chọn điểm đến";
                   }
                   ?></option>
                   <?php
