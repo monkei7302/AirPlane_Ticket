@@ -1,6 +1,7 @@
 <?php
   if(isset($_POST['choose_luggage'])){
     $price = $_POST['price'];
+    $flight_id = $_POST['flight_id'];
     $type_luggage = $_POST['luggage'];
     if($type_luggage == 0){
       $price = $price;
@@ -32,7 +33,8 @@
         <link rel="stylesheet" href="css/signedluggage.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <style>
         .note {
@@ -83,19 +85,19 @@
     .seat:nth-child(3) {
         margin-right: 55px;
     }
-    .seat input[type=checkbox] {
+    .seat input[type=radio] {
         position: absolute;
         opacity: 0;
     }
-    .seat input[type=checkbox]:checked + label {
+    .seat input[type=radio]:checked + label {
         background: #bada55;
     }
-    .seat input[type=checkbox]:disabled + label {
+    .seat input[type=radio]:disabled + label {
         background: #ddd;
         text-indent: -9999px;
         overflow: hidden;
     }
-    .seat input[type=checkbox]:disabled + label:after {
+    .seat input[type=radio]:disabled + label:after {
         content: "X";
         text-indent: 0;
         position: absolute;
@@ -164,7 +166,7 @@
                   <a class="nav-link active" href="search_flight.html" style = "background-color: #6db7cb;border: 1px solid #6db7cb; border-radius: 25px;">Chuyến bay</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="signedluggage.html" style = "background-color: #6db7cb; border: 1px solid #6db7cb; border-radius: 25px;">Hành lý</a>
+                  <a class="nav-link active" href="signedluggage.php" style = "background-color: #6db7cb; border: 1px solid #6db7cb; border-radius: 25px;">Hành lý</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="planeSeating.html" style = "color: white; background-color: #6db7cb;border: 1px solid #6db7cb; border-radius: 25px;">Chỗ ngồi</a>
@@ -176,6 +178,9 @@
             <h1 class = "text-center mt-3 mb-3">Chọn chỗ ngồi</h1>>
         </div>
         <div class  ="container mx-auto">
+          <form action="" method="post">
+          <input id = "price" type="hidden" name="price" value="<?php echo $price?>">
+          <input id = "flight_id" type="hidden" name="flight_id" value="<?php echo $flight_id?>">
             <div class = "row">
                 <div class = "card col-lg-3" style = "height: fit-content;">
                     <div class = "card-body">
@@ -193,29 +198,29 @@
                     <div class="exit exit--front"></div>
                     <ol class="cabin ">
                       <li class="row row--1">
-                        <ol class="seats  typeSeat1" type="A">
+                        <ol class="seats typeSeat1" type="A">
                           <li class="seat">
-                            <input type="checkbox" id="1A" />
+                            <input cate="1" type="radio" name="seat" id="1A" />
                             <label for="1A">1A</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="1B" />
+                            <input cate="1" type="radio" name="seat" id="1B" />
                             <label for="1B">1B</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="1C" />
+                            <input cate="1" type="radio" name="seat" id="1C" />
                             <label for="1C">1C</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" disabled id="1D" />
+                            <input cate="1" type="radio" name="seat" id="1D" />
                             <label for="1D">1D</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox"  id="1E" />
+                            <input cate="1" type="radio" name="seat"  id="1E" />
                             <label for="1E">1E</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="1F" />
+                            <input cate="1" type="radio" name="seat" id="1F" />
                             <label for="1F">1F</label>
                           </li>
                         </ol>
@@ -223,27 +228,27 @@
                       <li class="row row--2 ">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
-                            <input type="checkbox" disabled id="2A" />
+                            <input cate="2" type="radio" name="seat" id="2A" />
                             <label for="2A">2A</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="2B" />
+                            <input cate="2" type="radio" name="seat" id="2B" />
                             <label for="2B">2B</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="2C" />
+                            <input cate="2" type="radio" name="seat" id="2C" />
                             <label for="2C">2C</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="2D" />
+                            <input cate="2" type="radio" name="seat" id="2D" />
                             <label for="2D">2D</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="2E" />
+                            <input cate="2" type="radio" name="seat" id="2E" />
                             <label for="2E">2E</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="2F" />
+                            <input cate="2" type="radio" name="seat" id="2F" />
                             <label for="2F">2F</label>
                           </li>
                         </ol>
@@ -251,27 +256,27 @@
                       <li class="row row--3">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
-                            <input type="checkbox" id="3A" />
+                            <input cate="2" type="radio" name="seat" id="3A" />
                             <label for="3A">3A</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="3B" />
+                            <input cate="2" type="radio" name="seat" id="3B" />
                             <label for="3B">3B</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="3C" />
+                            <input cate="2" type="radio" name="seat" id="3C" />
                             <label for="3C">3C</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="3D" />
+                            <input cate="2" type="radio" name="seat" id="3D" />
                             <label for="3D">3D</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="3E" />
+                            <input cate="2" type="radio" name="seat" id="3E" />
                             <label for="3E">3E</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="3F" />
+                            <input cate="2" type="radio" name="seat" id="3F" />
                             <label for="3F">3F</label>
                           </li>
                         </ol>
@@ -279,27 +284,27 @@
                       <li class="row row--4">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
-                            <input type="checkbox" id="4A" />
+                            <input cate="2" type="radio" name="seat" id="4A" />
                             <label for="4A">4A</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="4B" />
+                            <input cate="2" type="radio" name="seat" id="4B" />
                             <label for="4B">4B</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="4C" />
+                            <input cate="2" type="radio" name="seat" id="4C" />
                             <label for="4C">4C</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="4D" />
+                            <input cate="2" type="radio" name="seat" id="4D" />
                             <label for="4D">4D</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="4E" />
+                            <input cate="2" type="radio" name="seat" id="4E" />
                             <label for="4E">4E</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="4F" />
+                            <input cate="2" type="radio" name="seat" id="4F" />
                             <label for="4F">4F</label>
                           </li>
                         </ol>
@@ -307,27 +312,27 @@
                       <li class="row row--5">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
-                            <input type="checkbox" disabled id="5A" />
+                            <input cate="2" type="radio" name="seat" id="5A" />
                             <label for="5A">5A</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" disabled id="5B" />
+                            <input cate="2" type="radio" name="seat" id="5B" />
                             <label for="5B">5B</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="5C" />
+                            <input cate="2" type="radio" name="seat" id="5C" />
                             <label for="5C">5C</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="5D" />
+                            <input cate="2" type="radio" name="seat" id="5D" />
                             <label for="5D">5D</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="5E" />
+                            <input cate="2" type="radio" name="seat" id="5E" />
                             <label for="5E">5E</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="5F" />
+                            <input cate="2" type="radio" name="seat" id="5F" />
                             <label for="5F">5F</label>
                           </li>
                         </ol>
@@ -335,27 +340,27 @@
                       <li class="row row--6">
                         <ol class="seats" type="A">
                           <li class="seat">
-                            <input type="checkbox" id="6A" />
+                            <input cate="3"  type="radio" name="seat" id="6A" />
                             <label for="6A">6A</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="6B" />
+                            <input cate="3"  type="radio" name="seat" id="6B" />
                             <label for="6B">6B</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="6C" />
+                            <input cate="3"  type="radio" name="seat" id="6C" />
                             <label for="6C">6C</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="6D" />
+                            <input cate="3"  type="radio" name="seat" id="6D" />
                             <label for="6D">6D</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="6E" />
+                            <input cate="3"  type="radio" name="seat" id="6E" />
                             <label for="6E">6E</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="6F" />
+                            <input cate="3"  type="radio" name="seat" id="6F" />
                             <label for="6F">6F</label>
                           </li>
                         </ol>
@@ -363,27 +368,27 @@
                       <li class="row row--7">
                         <ol class="seats" type="A">
                           <li class="seat">
-                            <input type="checkbox"disabled  id="7A" />
+                            <input cate="3"  type="radio" name="seat" id="7A" />
                             <label for="7A">7A</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="7B" />
+                            <input cate="3"  type="radio" name="seat" id="7B" />
                             <label for="7B">7B</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="7C" />
+                            <input cate="3"  type="radio" name="seat" id="7C" />
                             <label for="7C">7C</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" disabled id="7D" />
+                            <input cate="3"  type="radio" name="seat" id="7D" />
                             <label for="7D">7D</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="7E" />
+                            <input cate="3"  type="radio" name="seat" id="7E" />
                             <label for="7E">7E</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="7F" />
+                            <input cate="3"  type="radio" name="seat" id="7F" />
                             <label for="7F">7F</label>
                           </li>
                         </ol>
@@ -391,27 +396,27 @@
                       <li class="row row--8">
                         <ol class="seats" type="A">
                           <li class="seat">
-                            <input type="checkbox" id="8A" />
+                            <input cate="3"  type="radio" name="seat" id="8A" />
                             <label for="8A">8A</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="8B" />
+                            <input cate="3"  type="radio" name="seat" id="8B" />
                             <label for="8B">8B</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="8C" />
+                            <input cate="3"  type="radio" name="seat" id="8C" />
                             <label for="8C">8C</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="8D" />
+                            <input cate="3"  type="radio" name="seat" id="8D" />
                             <label for="8D">8D</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="8E" />
+                            <input cate="3"  type="radio" name="seat" id="8E" />
                             <label for="8E">8E</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="8F" />
+                            <input cate="3"  type="radio" name="seat" id="8F" />
                             <label for="8F">8F</label>
                           </li>
                         </ol>
@@ -419,27 +424,27 @@
                       <li class="row row--9">
                         <ol class="seats" type="A">
                           <li class="seat">
-                            <input type="checkbox" id="9A" />
+                            <input cate="3"  type="radio" name="seat" id="9A" />
                             <label for="9A">9A</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="9B" />
+                            <input cate="3"  type="radio" name="seat" id="9B" />
                             <label for="9B">9B</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="9C" />
+                            <input cate="3"  type="radio" name="seat" id="9C" />
                             <label for="9C">9C</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="9D" />
+                            <input cate="3"  type="radio" name="seat" id="9D" />
                             <label for="9D">9D</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="9E" />
+                            <input cate="3"  type="radio" name="seat" id="9E" />
                             <label for="9E">9E</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="9F" />
+                            <input cate="3"  type="radio" name="seat" id="9F" />
                             <label for="9F">9F</label>
                           </li>
                         </ol>
@@ -447,27 +452,27 @@
                       <li class="row row--10">
                         <ol class="seats" type="A">
                           <li class="seat">
-                            <input type="checkbox" id="10A" />
+                            <input cate="3"  type="radio" name="seat" id="10A" />
                             <label for="10A">10A</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="10B" />
+                            <input cate="3"  type="radio" name="seat" id="10B" />
                             <label for="10B">10B</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="10C" />
+                            <input cate="3"  type="radio" name="seat" id="10C" />
                             <label for="10C">10C</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="10D" />
+                            <input cate="3"  type="radio" name="seat" id="10D" />
                             <label for="10D">10D</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="10E" />
+                            <input cate="3"  type="radio" name="seat" id="10E" />
                             <label for="10E">10E</label>
                           </li>
                           <li class="seat">
-                            <input type="checkbox" id="10F" />
+                            <input cate="3"  type="radio" name="seat" id="10F" />
                             <label for="10F">10F</label>
                           </li>
                         </ol>
@@ -476,14 +481,16 @@
                     <div class="exit exit--back"></div>
                 </div>
             </div>
+           
         </div>
         
         <div class="card container" style="margin-top: 180px;">
             <div class="card-body">
-                <a href="inforbooking.html" class="btn-continue">Tiếp tục</a>
-                <span class="price">1.150.000 VNĐ</span>
+                <a class="btn-continue">Tiếp tục</a>
+                <span class="price">Giá tiền: <?php echo $price?> VNĐ</span>
             </div>
         </div>
+        </form>
         <footer class="bg-dark text-center text-lg-start text-white mt-5">
           <div class="container p-4">
             <div class="row">
@@ -556,8 +563,9 @@
           </div>
           <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
             © 2022 Copyright:
-            <a class="text-white" href="home.html">SkyAirlines.com.vn</a>
+            <a class="text-white" href="home.php">SkyAirlines.com.vn</a>
           </div>
-      </footer>  
+      </footer>        
     </body>
+    <script src="script/seat_script.js"></script>
 </html>
