@@ -155,6 +155,7 @@ function getReturn(detail) {
                             category = "Thương gia";
                         }
                         let card_body = `
+                        <form action="signedluggage.php" method="post">
                         <div class="card-body">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
@@ -212,7 +213,8 @@ function getReturn(detail) {
                                 </div>
                             </div>
                         </div>
-                    </div>`;
+                    </div>
+                    </form>`;
                         card_des.innerHTML = card_body;
                         card_container_des.appendChild(card_des);
 
