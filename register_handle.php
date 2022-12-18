@@ -1,5 +1,5 @@
 <?php
-    require 'connect.php';
+    require 'api/connect.php';
 
     function createID($old_id){
         $char = substr($old_id, 0, 2);

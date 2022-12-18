@@ -1,5 +1,5 @@
 <?php
-  require 'connect.php';
+  require 'api/connect.php';
   session_start();
 ?>
 <!DOCTYPE html>
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <style>
@@ -88,25 +89,11 @@
                       <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_lower2" type="number" value="0">
                     </div>
                     <div>
-                    <select class="form-select" aria-label="Default select example" style = "width: 45%" name="start" required="true"> 
+                    <select id = "start" class="form-select" aria-label="Default select example" style = "width: 45%" name="start" required="true"> 
                       <option label="Chọn điểm đi" value="">Điểm đi</option>
-                      <?php
-                         $sql_st = "SELECT * FROM `start_place`";
-                         $run_st = mysqli_query($con,$sql_st);
-                         while($row_st = mysqli_fetch_array($run_st)):;
-                      ?>
-                      <option value="<?php echo $row_st['id_start'];?>"><?php echo $row_st['name_start'];?></option>
-                      <?php endwhile; ?>
                     </select>
-                    <select class="form-select" aria-label="Default select example" style = "width: 45%" name="destination" required="true"> 
-                      <option label="Chọn điểm đến" value=""></option>
-                      <?php
-                         $sql_ds = "SELECT * FROM `destination`";
-                         $run_ds = mysqli_query($con,$sql_ds);
-                         while($row_ds = mysqli_fetch_array($run_ds)):;
-                      ?>
-                      <option value="<?php echo $row_ds['id_des'];?>"><?php echo $row_ds['name_des'];?></option>
-                      <?php endwhile; ?>
+                    <select id = "destination" class="form-select" aria-label="Default select example" style = "width: 45%" name="destination" required="true"> 
+                      <option label="Chọn điểm đến" value="">Điểm đến</option>
                     </select>
                   </div>
                   <div class = "radio">
@@ -127,37 +114,7 @@
                 <img src = "img/symbols/anh3.png" width="250px" height="250px" style="margin-right: 30px">
                 <img src = "img/symbols/anh4.png" width="250px" height="250px">
               </div>
-              <h3>Chặng bay nổi bật của Sky Airlines</h3>
-              <?php
-                    $sql_hl = "SELECT * FROM `hight_light`";
-                    $run_hl = mysqli_query($con,$sql_hl);
-                    while($row = $run_hl->fetch_array(MYSQLI_ASSOC)){
-                      $id_hl = $row['id_hight'];
-                      $name_hl = $row['flight_name'];
-                      $image_hl = $row['image'];
-                      $date_hl = $row['date'];
-                      $des_hl = $row['description'];
-                      $price_hl = $row['price'];
-
-                      echo '
-                      <div class="col-sm-4">
-                        <div class="highlights">
-                          <div class="card">
-                            <img src="img/highlights/'.$image_hl.'" class="card-img-top">
-                            <div class="card-body">
-                              <h5 class="card-title">'.$name_hl.'</h5>
-                              <p class="card-text">Ngày đi: '.$date_hl.'</p>
-                              <p class="card-text">'.$des_hl.'</p>
-                              <h5 class = "text-danger font-weight-bold">Giá chỉ từ: '.number_format($price_hl,0,',','.').'</h5>
-                              <a href="#" class="btnHover btn mt-3">Tìm hiểu thêm</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      ';
-
-                    }
-                ?>
+              <h3 id="h3_hl">Chặng bay nổi bật của Sky Airlines</h3>
             </div>
             <h3>Những điểm đến nổi bật</h3>
             <div class = "img-fluid">
@@ -260,5 +217,8 @@
           <a class="text-white" href="home.html">SkyAirlines.com.vn</a>
         </div>
       </footer>
+
+      <!-- Script -->
+      <script src="script/home_script.js"></script>
 </body>                
 </html>

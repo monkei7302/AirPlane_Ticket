@@ -1,5 +1,5 @@
 <?php
-    require 'connect.php';
+    require 'api/connect.php';
 
     $message = '';
     if(isset($_GET['exist'])) {

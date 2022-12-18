@@ -1,5 +1,5 @@
 <?php
-    require 'connect.php';
+    require 'api/connect.php';
     session_start();
     
     if (isset($_POST['login'])) {
