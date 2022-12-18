@@ -36,69 +36,69 @@ function getFlight(detail) {
                     let card_body = `
                     <form action="signedluggage.php" method="post">
                         <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <div class="flight-route">
-                                    <div id="route-start" style="margin-right: 50px;">
-                                        <span style="font-weight: bold;">`+ datetime_start[1] + `</span><br>
-                                        <span>`+ flight.from_location + `</span>
-                                    </div> 
-                                    <div>
-                                        <span class="fa">&#xf041;</span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="fa fa-plane"></span><br>
-                                        <span style="margin-left: 30px;">`+ flight.duration + `</span>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="flight-route">
+                                        <div id="route-start" style="margin-right: 50px;">
+                                            <span style="font-weight: bold;">`+ formatTime(datetime_start[1]) + `</span><br>
+                                            <span>`+ flight.from_location + `</span>
+                                        </div> 
+                                        <div>
+                                            <span class="fa">&#xf041;</span>
+                                            <span class="dot"></span>
+                                            <span class="dot"></span>
+                                            <span class="dot"></span>
+                                            <span class="dot"></span>
+                                            <span class="dot"></span>
+                                            <span class="dot"></span>
+                                            <span class="dot"></span>
+                                            <span class="dot"></span>
+                                            <span class="fa fa-plane"></span><br>
+                                            <span style="margin-left: 30px;">`+ formatTime(flight.duration) + `</span>
+                                        </div>
+                                        <div id="route-end" style="margin-left: 50px;">
+                                            <span style="font-weight: bold;">`+ formatTime(datetime_des[1]) + `</span><br>
+                                            <span>`+ flight.to_location + `</span>
+                                        </div> 
                                     </div>
-                                    <div id="route-end" style="margin-left: 50px;">
-                                        <span style="font-weight: bold;">`+ datetime_des[1] + `</span><br>
-                                        <span>`+ flight.to_location + `</span>
-                                    </div> 
-                                </div>
-                                <input type="hidden" name="start" value="`+flight.from_location+`">
-                                <input type="hidden" name="destination" value="`+ flight.to_location+`">
-                                <input type="hidden" name="date" value="`+ datetime_start[0]+`">
-                                <input type="hidden" name="price" value="`+price+`">
-                            </li>
-                            <li class="list-group-item">
-                                <span>`+ category + `</span>
-                                <span style="font-weight: bold;margin-left: 75px;">`+ price + `VNĐ</span>
-                                <button class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail`+ flight.flight_id + `">Xem chi tiết</button>
-                                <button type="submit" name="choose_ticket" value="choose" class="btn-book-ticket">Chọn vé</button>
-                            </li>
-                        </ul>
-                        <div class="modal" id="seedetail`+ flight.flight_id + `">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">`+ flight.from_location + ` - ` + flight.to_location + `</h4>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <div id="modal-body" class="modal-body">
-                                        Chuyến bay: <b>`+ flight.flight_id + `</b> <br>
-                                        Khởi hành: <b>Ngày `+ datetime_start[0] + `, Vào lúc ` + datetime_start[1] + `, ` + flight.from_location + `</b> <br>
-                                        Đến: <b>Ngày `+ datetime_des[0] + `, Vào lúc ` + datetime_des[1] + `, ` + flight.to_location + ` </b> <br>
-                                        Hạng: <b>`+ category + `</b> <br>     
-                                        Thời gian: <b>`+ flight.duration + `</b>  <br>    
-                                        Máy bay: <b>`+ flight.airline_name + `</b>  <br>   
-                                        Số ghế trống: <b>`+ seat + `</b>  <br>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                        <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
+                                    <input type="hidden" name="start" value="`+ flight.from_location + `">
+                                    <input type="hidden" name="destination" value="`+ flight.to_location + `">
+                                    <input type="hidden" name="date" value="`+ datetime_start[0] + `">
+                                    <input type="hidden" name="price" value="`+ price + `">
+                                </li>
+                                <li class="list-group-item">
+                                    <span>`+ category + `</span>
+                                    <span style="font-weight: bold;margin-left: 75px;">`+ formatNumber(price) + ` VNĐ</span>
+                                    <button class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail`+ flight.flight_id + `">Xem chi tiết</button>
+                                    <button type="submit" class="btn-book-ticket" name="choose_ticket" value="choose">Chọn vé</button>
+                                </li>
+                            </ul>
+                            
+                            <div class="modal" id="seedetail`+ flight.flight_id + `">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">`+ flight.from_location + ` - ` + flight.to_location + `</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div id="modal-body" class="modal-body">
+                                            Chuyến bay: <b>`+ flight.flight_id + `</b> <br>
+                                            Khởi hành: <b>Ngày `+ formatDate(datetime_start[0]) + `, Vào lúc ` + formatTime(datetime_start[1]) + `, ` + flight.from_location + `</b> <br>
+                                            Đến: <b>Ngày `+ formatDate(datetime_des[0]) + `, Vào lúc ` + formatTime(datetime_des[1]) + `, ` + flight.to_location + ` </b> <br>
+                                            Hạng: <b>`+ category + `</b> <br>     
+                                            Thời gian: <b>`+ formatTime(flight.duration) + `</b>  <br>    
+                                            Máy bay: <b>`+ flight.airline_name + `</b>  <br>   
+                                            Số ghế trống: <b>`+ seat + `</b>  <br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                            <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>`;
-                
+                    </form>`;
                     card.innerHTML = card_body;
                     card_container.appendChild(card);
                 }
@@ -162,12 +162,13 @@ function getReturn(detail) {
                             category = "Thương gia";
                         }
                         let card_body = `
+                        <form action="signedluggage.php" method="post">
                         <div class="card-body">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <div class="flight-route">
                                     <div id="route-start" style="margin-right: 50px;">
-                                        <span style="font-weight: bold;">`+ datetime_start[1] + `</span><br>
+                                        <span style="font-weight: bold;">`+ formatTime(datetime_start[1]) + `</span><br>
                                         <span>`+ flight.from_location + `</span>
                                     </div> 
                                     <div>
@@ -181,17 +182,17 @@ function getReturn(detail) {
                                         <span class="dot"></span>
                                         <span class="dot"></span>
                                         <span class="fa fa-plane"></span><br>
-                                        <span style="margin-left: 30px;">`+ flight.duration + `</span>
+                                        <span style="margin-left: 30px;">`+ formatTime(flight.duration) + `</span>
                                     </div>
                                     <div id="route-end" style="margin-left: 50px;">
-                                        <span style="font-weight: bold;">`+ datetime_des[1] + `</span><br>
+                                        <span style="font-weight: bold;">`+ formatTime(datetime_des[1]) + `</span><br>
                                         <span>`+ flight.to_location + `</span>
                                     </div> 
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <span>`+ category + `</span>
-                                <span style="font-weight: bold;margin-left: 75px;">`+ price + `VNĐ</span>
+                                <span style="font-weight: bold;margin-left: 75px;">`+ formatNumber(price) + ` VNĐ</span>
                                 <button class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail`+ flight.flight_id + `">Xem chi tiết</button>
                                 <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
                             </li>
@@ -205,10 +206,10 @@ function getReturn(detail) {
                                     </div>
                                     <div id="modal-body" class="modal-body">
                                         Chuyến bay: <b>`+ flight.flight_id + `</b> <br>
-                                        Khởi hành: <b>Ngày `+ datetime_start[0] + `, Vào lúc ` + datetime_start[1] + `, ` + flight.from_location + `</b> <br>
-                                        Đến: <b>Ngày `+ datetime_des[0] + `, Vào lúc ` + datetime_des[1] + `, ` + flight.to_location + ` </b> <br>
+                                        Khởi hành: <b>Ngày `+ formatDate(datetime_start[0]) + `, Vào lúc ` + formatTime(datetime_start[1]) + `, ` + flight.from_location + `</b> <br>
+                                        Đến: <b>Ngày `+ formatDate(datetime_des[0]) + `, Vào lúc ` + formatTime(datetime_des[1]) + `, ` + flight.to_location + ` </b> <br>
                                         Hạng: <b>`+ category + `</b> <br>     
-                                        Thời gian: <b>`+ flight.duration + `</b>  <br>    
+                                        Thời gian: <b>`+ formatTime(flight.duration) + `</b>  <br>    
                                         Máy bay: <b>`+ flight.airline_id + `</b>  <br>   
                                         Số ghế trống: <b>`+ seat + `</b>  <br>
                                     </div>
@@ -219,7 +220,8 @@ function getReturn(detail) {
                                 </div>
                             </div>
                         </div>
-                    </div>`;
+                    </div>
+                    </form>`;
                         card_des.innerHTML = card_body;
                         card_container_des.appendChild(card_des);
 
@@ -268,17 +270,56 @@ function getDestination() {
     }, "json");
 }
 
+function formatDate(date) {
+    let ymd = date.split('-')
+    return ymd[2] + "/" + ymd[1] + "/" + ymd[0];
+}
+
+function formatTime(time) {
+    let hms = time.split(":");
+    return hms[0] + ":" + hms[1];
+}
+
+function formatNumber(val) {
+    // remove sign if negative
+    var sign = 1;
+    if (val < 0) {
+        sign = -1;
+        val = -val;
+    }
+    // trim the number decimal point if it exists
+    let num = val.toString().includes('.') ? val.toString().split('.')[0] : val.toString();
+    let len = num.toString().length;
+    let result = '';
+    let count = 1;
+
+    for (let i = len - 1; i >= 0; i--) {
+        result = num.toString()[i] + result;
+        if (count % 3 === 0 && count !== 0 && i !== 0) {
+            result = ',' + result;
+        }
+        count++;
+    }
+
+    // add number after decimal point
+    if (val.toString().includes('.')) {
+        result = result + '.' + val.toString().split('.')[1];
+    }
+    // return result with - sign if negative
+    return sign < 0 ? '-' + result : result;
+}
+
 $(document).ready(function () {
     getDestination();
     getStart();
     getDetail();
+
     $('.check-btn-1').on('change', function () {
         var filter_list = [];
         $('#filters-1 :input:checked').each(function () {
             var category = $(this).val();
             filter_list.push(category);
         });
-        console.log(filter_list)
         if (filter_list.length == 0)
             $('#card-container-start').fadeIn();
         else {
