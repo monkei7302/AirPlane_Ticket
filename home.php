@@ -1,5 +1,5 @@
 <?php
-  require 'api/connect.php';
+  require 'connect.php';
   session_start();
 ?>
 <!DOCTYPE html>
@@ -116,6 +116,34 @@
                 <img src = "img/symbols/anh4.png" width="250px" height="250px">
               </div>
               <h3 id="h3_hl">Chặng bay nổi bật của Sky Airlines</h3>
+              <?php
+                    $sql_hl = "SELECT * FROM `hight_light`";
+                    $run_hl = mysqli_query($con,$sql_hl);
+                    while($row = $run_hl->fetch_array(MYSQLI_ASSOC)){
+                      $id_hl = $row['id_hight'];
+                      $name_hl = $row['flight_name'];
+                      $image_hl = $row['image'];
+                      $date_hl = $row['date'];
+                      $des_hl = $row['description'];
+                      $price_hl = $row['price'];
+                      echo '
+                      <div class="col-sm-4">
+                        <div class="highlights">
+                          <div class="card">
+                            <img src="img/highlights/'.$image_hl.'" class="card-img-top">
+                            <div class="card-body">
+                              <h5 class="card-title">'.$name_hl.'</h5>
+                              <p class="card-text">Ngày đi: '.$date_hl.'</p>
+                              <p class="card-text">'.$des_hl.'</p>
+                              <h5 class = "text-danger font-weight-bold">Giá chỉ từ: '.number_format(floatval($price_hl),0,',','.').' đ</h5>
+                              <a href="#" class="btnHover btn mt-3">Tìm hiểu thêm</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      ';
+                    }
+                ?>
             </div>
             <h3>Những điểm đến nổi bật</h3>
             <div class = "img-fluid">
