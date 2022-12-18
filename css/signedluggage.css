@@ -41,7 +41,7 @@ form{
     font-weight: bold;
 }
 .price-luggage{
-    color: #9AC1F0;
+    color: #3069af;
     font-weight: bold;
 }
 .btn-continue{
@@ -53,4 +53,8 @@ form{
     color: white;
     margin-left: 50px;
     float: right;
+    font-size: 20px;
+}
+.btn-continue:hover{
+    color: #f6fafd;
 }
