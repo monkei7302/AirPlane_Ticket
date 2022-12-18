@@ -16,12 +16,15 @@ function getOccupiedSeat() {
 $(document).ready(function () {
     getOccupiedSeat()
 
-    $(".btn-continue").click(function () {
+    let button = document.getElementById("btn-continue")
+    button.addEventListener("click", submitData, false);
+    function submitData(e) {
         seat = document.querySelector('input[name="seat"]:checked');
         price = document.getElementById("price")
         totalprice = price.value
         if (seat == null) {
             alert("Vui lòng chọn chỗ ngồi")
+            e.preventDefault();
         }
         else {
             if (seat.getAttribute("cate") == "1") {
@@ -33,13 +36,10 @@ $(document).ready(function () {
             if (seat.getAttribute("cate") == "3") {
                 seat_price = 80000
             }
+            $("#seat_price").val(seat_price)
+            $("#seat_id").val(seat.getAttribute("id"))
             totalprice = parseInt(totalprice) + seat_price
             price.value = totalprice;
-            $(".btn-continue").attr("href", "inforbooking.html")
         }
-
-
-        console.log(totalprice)
-
-    });
+    }
 })

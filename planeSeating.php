@@ -1,25 +1,31 @@
 <?php
+  session_start();
   if(isset($_POST['choose_luggage'])){
     $price = $_POST['price'];
     $flight_id = $_POST['flight_id'];
     $type_luggage = $_POST['luggage'];
+
+    $_SESSION['price'] = $price;
+    $_SESSION['flight_id'] = $flight_id;
+    $_SESSION['type_luggage'] = $type_luggage;
+
     if($type_luggage == 0){
-      $price = $price;
+      $_SESSION['price'] = $_SESSION['price'];
     }
     else if($type_luggage == 20){
-      $price = floatval($price) + 200000;
+      $_SESSION['price'] = floatval($_SESSION['price']) + 200000;
     }
     else if($type_luggage == 25){
-      $price = floatval($price) + 250000;
+      $_SESSION['price'] = floatval($_SESSION['price']) + 250000;
     }
     else if($type_luggage == 30){
-      $price = floatval($price) + 300000;
+      $_SESSION['price'] = floatval($_SESSION['price']) + 300000;
     }
     else if($type_luggage == 35){
-      $price = floatval($price) + 350000;
+      $_SESSION['price'] = floatval($_SESSION['price']) + 350000;
     }
     else if($type_luggage == 40){
-      $price = floatval($price) + 400000;
+      $_SESSION['price'] = floatval($_SESSION['price']) + 400000;
     }
   }
 ?>
@@ -177,9 +183,8 @@
             </ul> 
             <h1 class = "text-center mt-3 mb-3">Chọn chỗ ngồi</h1>>
         </div>
-        <div class  ="container mx-auto">
-          <form action="" method="post">
-          <input id = "price" type="hidden" name="price" value="<?php echo $price?>">
+        <div class  ="container mx-auto">   
+          <input id = "price" type="hidden" name="price" value="<?php echo $_SESSION['price']?>">
           <input id = "flight_id" type="hidden" name="flight_id" value="<?php echo $flight_id?>">
             <div class = "row">
                 <div class = "card col-lg-3" style = "height: fit-content;">
@@ -195,7 +200,9 @@
                     </div>
                 </div>
                 <div class="plane card col-lg-3">
+                
                     <div class="exit exit--front"></div>
+                   
                     <ol class="cabin ">
                       <li class="row row--1">
                         <ol class="seats typeSeat1" type="A">
@@ -452,7 +459,7 @@
                       <li class="row row--10">
                         <ol class="seats" type="A">
                           <li class="seat">
-                            <input cate="3"  type="radio" name="seat" id="10A" />
+                            <input cate="3"  type="radio" name="seat" id="10A" required/>
                             <label for="10A">10A</label>
                           </li>
                           <li class="seat">
@@ -479,15 +486,18 @@
                       </li>
                     </ol>
                     <div class="exit exit--back"></div>
+                
                 </div>
-            </div>
-           
+                
+            </div> 
         </div>
-        
+        <form action="inforbooking.php" method="post">
+          <input id="seat_price" type="hidden" name="seat_price">
+          <input id="seat_id" type="hidden" name="seat_id">
         <div class="card container" style="margin-top: 180px;">
             <div class="card-body">
-                <a class="btn-continue">Tiếp tục</a>
-                <span class="price">Giá tiền: <?php echo $price?> VNĐ</span>
+                <button type="submit" value="seat" id="btn-continue" class="btn-continue" name="plane_seating">Tiếp tục</button>
+                <span class="price">Giá tiền: <?php if(isset($price)) echo $price;?> VNĐ</span>
             </div>
         </div>
         </form>

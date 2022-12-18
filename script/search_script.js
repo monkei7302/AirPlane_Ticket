@@ -8,14 +8,13 @@ function getFlight() {
         let hasFlight = false;
         if (data) {
             data.data.forEach(flight => {
-                if (flight.from_location == start && flight.to_location == des) {
-                    datetime_start = flight.departure_time.split(' ');
-                    datetime_des = flight.arrival_time.split(' ');
+                let date_start = document.getElementById("ngayDi");
+                let datetime_start = flight.departure_time.split(' ');
+                date = datetime_start[0];
+                datetime_des = flight.arrival_time.split(' ');
+                if (flight.from_location == start && flight.to_location == des && date_start.value==date) {
                     price = flight.price;
-                    date = datetime_start[0];
                     seat = flight.totals_seats;
-
-
                     hasFlight = true;
                     let card = document.createElement("div");
                     card.classList.add("card");
@@ -118,11 +117,12 @@ function getReturn() {
             let hasFlight = false;
             if (data) {
                 data.data.forEach(flight => {
-                    if (flight.from_location == des && flight.to_location == start) {
-                        let datetime_start = flight.departure_time.split(' ');
-                        let datetime_des = flight.arrival_time.split(' ');
+                    let date_start = document.getElementById("ngayVe")
+                    let datetime_start = flight.departure_time.split(' ');
+                    let datetime_des = flight.arrival_time.split(' ');
+                    date = datetime_start[0];
+                    if (flight.from_location == des && flight.to_location == start && date_start.value == date) {
                         price = flight.price;
-                        date = datetime_start[0];
                         seat = flight.totals_seats;
                         hasFlight = true;
                         let card_des = document.createElement("div");
@@ -287,9 +287,10 @@ function formatNumber(val) {
 }
 
 $(document).ready(function () {
+    getFlight();
+    getReturn();
     getDestination();
     getStart();
-    getDetail();
 
     $('.check-btn-1').on('change', function () {
         var filter_list = [];

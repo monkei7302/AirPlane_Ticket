@@ -1,3 +1,37 @@
+<?php
+require 'connect.php';
+if(isset($_POST['plane_seating'])){
+    $seat_price = $_POST['seat_price'];
+    $seat_id = $_POST['seat_id'];
+}
+session_start();
+if($_SESSION['type_luggage'] == 0){
+  $luggage = 0;
+}
+else if($_SESSION['type_luggage'] == 20){
+  $luggage = 200000;
+}
+else if($_SESSION['type_luggage'] == 25){
+  $luggage = 250000;
+}
+else if($_SESSION['type_luggage'] == 30){
+  $luggage = 300000;
+}
+else if($_SESSION['type_luggage'] == 35){
+  $luggage = 350000;
+}
+else if($_SESSION['type_luggage'] == 40){
+  $luggage = 400000;
+}
+
+$flight_id = $_SESSION['flight_id'];
+$sql_locate = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` = '$flight_id'");
+while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
+  $from = $row_locate['from_location'];
+  $to = $row_locate['to_location'];
+  $date = explode(" ", $row_locate['departure_time']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,13 +40,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/inforbooking.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="script/inforBooking_script.js">
+       if(isset($_SESSION['login'])){
+          getProfile();
+      }   
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container w-100">
-            <a class="navbar-brand" href="home.html" style = "font-size: 30px;">Sky Airlines
+            <a class="navbar-brand" href="home.php" style = "font-size: 30px;">Sky Airlines
                 <div class="logo">
                     <img src="img/plane.png" class="img-fluid">
                 </div>
@@ -20,96 +61,96 @@
             </a>
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="home.html"><i class="fa fa-home"></i> Trang chủ</a>
+                  <a class="nav-link" aria-current="page" href="home.php"><i class="fa fa-home"></i> Trang chủ</a>
                 </li>
                 <li class="nav-item aria-current">
-                  <a class="nav-link active" href="search_flight.html"> Chuyến bay</a>
+                  <a class="nav-link active" href="search_flight.php"> Chuyến bay</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="history.html">Tra cứu</a>
+                  <a class="nav-link" href="history.php">Tra cứu</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="login.html"><i class="fa fa-user-o" aria-hidden="true"></i> Đăng nhập
-                  </a>
+                <?php
+              if(isset($_SESSION['login'])){
+                echo '<li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> Welcome '.$_SESSION['username'].'</a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile.php"> Thông tin cá nhân</a></li>
+                            <li><a class="dropdown-item" href="#"> Lịch sử đặt vé</a></li>
+                            <li><a class="dropdown-item" href="logout.php"> Đăng xuất</a></li>
+                        </ul>
+                      </li>';
+              }
+              else{
+                echo '<li class="nav-item">
+                        <a class="nav-link" href="login.php">Đăng nhập</a>
+                      </li>';
+              }
+            ?>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="help.html"> Trợ giúp</a>
+                  <a class="nav-link" href="help.php"> Trợ giúp</a>
                 </li>
               </ul>
             </div>
         </nav> 
         <ul class="nav nav-pills navbar-expand-lg mx-auto mt-3 justify-content-center">
             <li class="nav-item">
-              <a class="nav-link active" href="search_flight.html" style = "background-color: #6db7cb;border: 1px solid #6db7cb; border-radius: 25px;">Chuyến bay</a>
+              <a class="nav-link active" href="search_flight.php" style = "background-color: #6db7cb;border: 1px solid #6db7cb; border-radius: 25px;">Chuyến bay</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="signedluggage.php" style = "background-color: #6db7cb; border: 1px solid #6db7cb; border-radius: 25px;">Hành lý</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="planeSeating.html" style = "color: white; background-color: #6db7cb;border: 1px solid #6db7cb; border-radius: 25px;">Chỗ ngồi</a>
+              <a class="nav-link" href="planeSeating.php" style = "color: white; background-color: #6db7cb;border: 1px solid #6db7cb; border-radius: 25px;">Chỗ ngồi</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="inforbooking.html" style = "color: white; background-color: #6db7cb;border: 1px solid #6db7cb; border-radius: 25px;">Điền thông tin và thanh toán</a>
+              <a class="nav-link" href="inforbooking.php" style = "color: white; background-color: #6db7cb;border: 1px solid #6db7cb; border-radius: 25px;">Điền thông tin và thanh toán</a>
             </li>
         </ul> 
         <h1 class = "text-center mt-3">Điền thông tin và thanh toán</h1>>
     </div>
-    <form>
+    <form action="payment_handle.php" method="post">
+        <input type = "hidden" value="<?php echo $seat_id;?>">
         <div class="container">
             <div class="row mt-3">
-                <h4>Người lớn 1</h4>
+                <h4>Thông tin liên hệ</h4>
                 <div class="col-lg-6 mt-3">
-                    Nhập họ và tên đệm<br>
-                    <input type="text" class="input-control" placeholder="Nhập họ và tên đệm" name="firstname"/>
+                    Nhập họ<br>
+                    <input type="hidden" id = "passenger_username" 
+                    value="<?php 
+                    if(isset($_SESSION['login'])){
+                        echo $_SESSION['username'];
+                    }                   
+                    ?>">
+                    <input id = "f_name" type="text" class="input-control" placeholder="Nhập họ và tên đệm" name="firstname" required/>
                 </div>
                 <div class="col-lg-6 mt-3">
                     Nhập Tên<br>
-                    <input type="text" class="input-control" placeholder="Nhập tên" name="lastname"/>
+                    <input id = "l_name" type="text" class="input-control" placeholder="Nhập tên" name="lastname" required/>
                 </div>
             </div>
             <div style="margin-top:15px">
                 Chọn giới tính <br>
-                <select id="gender" name="gender">
+                <select id="gender" name="gender" required>
                     <option></option>
-                    <option value="female">Nữ</option>
-                    <option value="male">Nam</option>
+                    <option id="female" value="female">Nữ</option>
+                    <option id="male" value="male">Nam</option>
                 </select>
             </div>
             <div style="margin-top:15px">
                 Nhập email<br>
-                <input type="email" class="input-control" placeholder="Nhập email" name="email"/>
+                <input id="email" type="email" class="input-control" placeholder="Nhập email" name="email" required/>
             </div>
             <div style="margin-top:15px">
                 Nhập số điện thoại<br>
-                <input type="number" class="input-control" placeholder="Nhập số điện thoại" name="phonenumber"/>
+                <input id="phone" type="number" class="input-control" placeholder="Nhập số điện thoại" name="phonenumber" required/>
             </div>
-            <div style="margin-top:15px">
-                <input type="checkbox" class="check-btn" name="accept" id="accept"><span style="font-size: 16px; margin-left:10px;">Tôi chọn thông tin này làm thông tin liên hệ</span></input><br>
-            </div>
-
-            <div class="row mt-6">
-                <h4>Thông tin liên hệ</h4>
-                <div class="col-lg-6 mt-3">
-                    Nhập họ và tên đệm<br>
-                    <input type="text" class="input-control" placeholder="Nhập họ và tên đệm" name="firstname"/>
-                </div>
-                <div class="col-lg-6 mt-3">
-                    Nhập Tên<br>
-                    <input type="text" class="input-control" placeholder="Nhập tên" name="lastname"/>
-                </div>
-            </div>
-            <div style="margin-top:15px">
-                Nhập email<br>
-                <input type="email" class="input-control" placeholder="Nhập email" name="email"/>
-            </div>
-            <div style="margin-top:15px">
-                Nhập số điện thoại<br>
-                <input type="number" class="input-control" placeholder="Nhập số điện thoại" name="phonenumber"/>
-            </div>
+            
             <div class="card" style="margin-top: 100px;">
                 <div class="card-body">
-                    <a href="#" class="btn-continue" data-bs-toggle="modal" data-bs-target="#payment">Thanh toán</a>
-                    <span class="price">1.150.000 VNĐ</span>
+                <a href="#" class="btn-continue" data-bs-toggle="modal" data-bs-target="#payment">Thanh toán</a>
+                    <span class="price"><?php echo number_format(floatval($_SESSION['price']),0,',','.')?> VNĐ</span>
                 </div>
             </div>
         </div>
@@ -120,41 +161,28 @@
                         <h4 class="modal-title">Tóm tắt thanh toán</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <form>
+                    
                         <div class="modal-body">
-                            <h5 class="modal-title" style="margin-bottom: 30px;text-align: center;">Chuyến bay từ Tp. Hồ Chí Minh đến Đà Nẵng –Thứ Bảy 24 Tháng Mười Hai 2022</h5>
+                            <h5 class="modal-title" style="margin-bottom: 30px;text-align: center;">Chuyến bay từ <?php echo $from;?> đến <?php echo $to;?> <br> Ngày <?php echo str_replace('-','/',date("d-m-Y", strtotime($date[0])));?></h5>
                             <div style="margin-bottom: 15px;">
-                                <span style="font-weight: bold;font-size: 18px;">Giá vé</span><span style="float: right;font-size: 18px;">1.150.000 VNĐ</span>
+                                <span style="font-weight: bold;font-size: 18px;">Giá vé</span><span style="float: right;font-size: 18px;"><?php if(isset($_SESSION)) echo number_format(floatval($_SESSION['price']),0,',','.');?> VNĐ</span>
                             </div>
                             <div style="margin-bottom: 15px;">
-                                <span style="font-weight: bold;font-size: 18px;">Hành lý ký gửi</span><span style="float: right;font-size: 18px;">600.000 VNĐ</span>
+                                <span style="font-weight: bold;font-size: 18px;">Hành lý ký gửi</span><span style="float: right;font-size: 18px;"><?php echo number_format(floatval($luggage),0,',','.')?> VNĐ</span>
                             </div>
                             <div>
-                                <span style="font-weight: bold;font-size: 18px;">Chỗ ngồi</span><span style="float: right;font-size: 18px;">700.000 VNĐ</span>
+                                <span style="font-weight: bold;font-size: 18px;">Chỗ ngồi</span><span style="float: right;font-size: 18px;"><?php echo number_format(floatval($seat_price),0,',','.')?> VNĐ</span>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <a href="#" type="button" class="btn add-color" data-bs-toggle="modal" data-bs-target="#success">Thanh toán</a>
+                            <button type = "submit" class="btn add-color" data-bs-toggle="modal" name="paid" value="paid">Thanh toán</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </form>
-    <div class="modal" id="success">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <p style="text-align: center;font-size: 24px;font-weight: bold;">Thanh toán thành công</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <a href="home.html" type="button" class="btn btn-success">OK</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <footer class="bg-dark text-center text-lg-start text-white mt-5">
         <div class="container p-4">
           <div class="row">
@@ -180,7 +208,7 @@
     
               <ul class="list-unstyled">
                 <li>
-                  <i class="fa fa-ticket" aria-hidden="true"></i><a href="search_flight.html" class="text-white"> Vé máy bay</a>
+                  <i class="fa fa-ticket" aria-hidden="true"></i><a href="search_flight.php" class="text-white"> Vé máy bay</a>
                 </li>
               </ul>
             </div>
@@ -227,7 +255,7 @@
         </div>
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
           © 2022 Copyright:
-          <a class="text-white" href="home.html">SkyAirlines.com.vn</a>
+          <a class="text-white" href="home.php">SkyAirlines.com.vn</a>
         </div>
     </footer>  
 </body>
