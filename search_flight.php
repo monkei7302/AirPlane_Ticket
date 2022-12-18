@@ -155,11 +155,13 @@
             <div class="card">
                 <div class="card-body">
                     <h5>Chuyến bay đi</h5>
-                    <span><span class="fa fa-plane"></span>  <b><?php echo $start?> đến <?php echo $destination;?> </b> – 
+                    <span><span class="fa fa-plane"></span>  <b><?php if(isset($start)) {echo $start;}?> đến <?php if(isset($destination)){echo $destination;}?> </b> – 
                     <?php
-                    $day = explode("-", $day_start);
-                    $start_date = 'Ngày '.$day[2].'/'.$day[1].'/'.$day[0];
-                    echo $start_date;
+                    if(isset($day_start)){
+                      $day = explode("-", $day_start);
+                      $start_date = 'Ngày '.$day[2].'/'.$day[1].'/'.$day[0];
+                      echo $start_date;
+                    }
                     ?>
                   </span>
                 
@@ -203,11 +205,13 @@
             <div class="card mt-3 return-div">
                 <div class="card-body">
                     <h5>Chuyến bay về</h5>
-                    <span><span class="fa fa-plane"></span>  <b><?php echo $destination?> đến <?php echo $start;?> </b> 
+                    <span><span class="fa fa-plane"></span>  <b><?php if(isset($destination))echo $destination;?> đến <?php if(isset($start))echo $start;?> </b> 
                     – <?php
-                    $day = explode("-", $day_back);
-                    $back_date = 'Ngày '.$day[2].'/'.$day[1].'/'.$day[0];
-                    echo $back_date;
+                    if(isset($day_back)){
+                      $day = explode("-", $day_back);
+                      $back_date = 'Ngày '.$day[2].'/'.$day[1].'/'.$day[0];
+                      echo $back_date;
+                    }
                     ?>
                   </span>
                 </div>
