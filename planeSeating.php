@@ -1,3 +1,27 @@
+<?php
+  if(isset($_POST['choose_luggage'])){
+    $price = $_POST['price'];
+    $type_luggage = $_POST['luggage'];
+    if($type_luggage == 0){
+      $price = $price;
+    }
+    else if($type_luggage == 20){
+      $price = floatval($price) + 200000;
+    }
+    else if($type_luggage == 25){
+      $price = floatval($price) + 250000;
+    }
+    else if($type_luggage == 30){
+      $price = floatval($price) + 300000;
+    }
+    else if($type_luggage == 35){
+      $price = floatval($price) + 350000;
+    }
+    else if($type_luggage == 40){
+      $price = floatval($price) + 400000;
+    }
+  }
+?>
 <html>
     <head>
         <link rel="stylesheet" href="css/home.css">
