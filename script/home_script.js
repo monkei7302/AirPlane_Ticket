@@ -1,7 +1,7 @@
 function getHightlights() {
     $.get("./api/get-highlight.php", function (data, status) {
+       
         data.data.forEach(hightlight => {
-
             let col = document.createElement("div");
             col.classList.add("col-sm-4");
 

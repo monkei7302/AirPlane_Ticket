@@ -174,108 +174,30 @@
                                 <li class="list-group-item">
                                     <h6>Hạng chuyến bay</h6>
                                         <div style="margin-bottom: 5px;">
-                                            <input type="checkbox" class="check-btn" name="flight-class[]" id="flight-class" value="Phổ thông"><span style="font-size: 16px; margin-left:10px">Phổ thông</span></input><br>
+                                            <input type="checkbox" class="check-btn-1" name="flight-class" id="flight-class" value="PT"><span style="font-size: 16px; margin-left:10px">Phổ thông</span></input><br>
                                         </div>
                                         <div>
-                                            <input type="checkbox" class="check-btn" name="flight-class[]" id="flight-class" value="Thương gia"><span style="font-size: 16px;margin-left:10px">Thương gia</span></input>
+                                            <input type="checkbox" class="check-btn-1" name="flight-class" id="flight-class" value="TG"><span style="font-size: 16px;margin-left:10px">Thương gia</span></input>
                                         </div>
                                 </li>
                                 <li class="list-group-item">
-                                    <h6>Thời gian</h6> 
-                                    <span style="font-weight: bold;">Giờ khởi hành</span>
+                                    <h6>Hãng hàng không</h6> 
                                     <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn" name="departure-time[]" id="departure-time" value="00-06"><span style="font-size: 16px; margin-left:10px">00:00-06:00</span></input><br>
+                                        <input type="checkbox" class="check-btn-1" name="airline[]" id="airline" value="AL"><span style="font-size: 16px; margin-left:10px">Vietnam Airline</span></input><br>
                                     </div>
                                     <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn" name="departure-time[]" id="departure-time" value="06-12"><span style="font-size: 16px;margin-left:10px">06:00-12:00</span></input>
+                                        <input type="checkbox" class="check-btn-1" name="airline[]" id="airline" value="VJ"><span style="font-size: 16px;margin-left:10px">Vietjet Air</span></input>
                                     </div>
                                     <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn" name="departure-time[]" id="departure-time" value="12-18"><span style="font-size: 16px;margin-left:10px">12:00-18:00</span></input>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn" name="departure-time[]" id="departure-time" value="18-24"><span style="font-size: 16px;margin-left:10px">18:00-24:00</span></input>
-                                    </div>
-                                    <span style="font-weight: bold;">Giờ đến</span>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn" name="arrival-time[]" id="arrival-time" value="00-06"><span style="font-size: 16px; margin-left:10px">00:00-06:00</span></input><br>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn" name="arrival-time[]" id="arrival-time" value="06-12"><span style="font-size: 16px;margin-left:10px">06:00-12:00</span></input>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn" name="arrival-time[]" id="arrival-time" value="12-18"><span style="font-size: 16px;margin-left:10px">12:00-18:00</span></input>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn" name="arrival-time[]" id="arrival-time" value="18-24"><span style="font-size: 16px;margin-left:10px">18:00-24:00</span></input>
+                                        <input type="checkbox" class="check-btn-1" name="airline[]" id="airline" value="BL"><span style="font-size: 16px;margin-left:10px">Jetstar Pacific Airlines</span></input>
                                     </div>
                                 </li>
                             </ul>
-                            <button id="btn-filter">Lọc</button>
                         </form>
                     </div>
                 </div>
             </div>
             <div id = "card-container-start"class="col-lg-8 mt-3">
-                <div id = "card-start" class="card" start="" category="">
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <div class="flight-route">
-                                    <div id="route-start" style="margin-right: 50px;">
-                                        <span style="font-weight: bold;">5h</span><br>
-                                        <span>SGN</span>
-                                    </div> 
-                                    <div>
-                                        <span class="fa">&#xf041;</span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="fa fa-plane"></span><br>
-                                        <span id = "durration" style="margin-left: 30px;">1h30m</span>
-                                    </div>
-                                    <div id="route-end" style="margin-left: 50px;">
-                                        <span style="font-weight: bold;">17:20</span><br>
-                                        <span>DAD</span>
-                                    </div> 
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <span>Phổ thông</span>
-                                <span id='price' style="font-weight: bold;margin-left: 75px;">1.120.000 VNĐ</span>
-                                <button class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail">Xem chi tiết</button>
-                                <a href="signedluggage.html" class="btn-book-ticket">Chọn vé</a>
-                            </li>
-                        </ul>
-                        <div class="modal" id="seedetail">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Hồ Chí Minh (SGN) - Đà Nẵng (DAD)</h4>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <div id="modal-body" class="modal-body">
-                                        Chuyến bay: <b>mã chuyến bay</b> <br>
-                                        Khởi hành: <b>Thứ Bảy 24 Tháng Mười Hai 2022, 10:35pm, Thành phố Hồ Chí Minh</b> <br>
-                                        Đến: <b>Chủ Nhật 25 Tháng Mười Hai 2022, 11:00am, Đà Nẵng </b> <br>
-                                        Hạng: <b>Phổ thông</b> <br>     
-                                        Thời gian: <b>1h30m</b>  <br>    
-                                        Máy bay: <b>mã máy bay</b>  <br>   
-                                        Số ghê: <b>100 (còn 15)</b>  <br>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                        <a href="signedluggage.html" class="btn-book-ticket">Chọn vé</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="card mt-3">
                 <div class="card-body">
@@ -296,89 +218,34 @@
                         <span style="font-weight: bold;font-size: 24px;">Bộ lọc</span>
                         <span style="margin-left: 140px;color: rgb(201, 195, 195);" id="remove-filter">Xóa lọc</span>
                         <form>
-                            <ul id="filters" class="list-group list-group-flush">
+                        <ul id="filters-2" class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     <h6>Hạng chuyến bay</h6>
                                         <div style="margin-bottom: 5px;">
-                                            <input type="checkbox" class="check-btn-1" name="flight-class[]" id="flight-class" value="PT"><span style="font-size: 16px; margin-left:10px">Phổ thông</span></input><br>
+                                            <input type="checkbox" class="check-btn-2" name="flight-class" id="flight-class" value="PT"><span style="font-size: 16px; margin-left:10px">Phổ thông</span></input><br>
                                         </div>
                                         <div>
-                                            <input type="checkbox" class="check-btn-1" name="flight-class[]" id="flight-class" value="TG"><span style="font-size: 16px;margin-left:10px">Thương gia</span></input>
+                                            <input type="checkbox" class="check-btn-2" name="flight-class" id="flight-class" value="TG"><span style="font-size: 16px;margin-left:10px">Thương gia</span></input>
                                         </div>
                                 </li>
                                 <li class="list-group-item">
-                                    <h6>Thời gian</h6> 
-                                    <span style="font-weight: bold;">Giờ khởi hành</span>
+                                    <h6>Hãng hàng không</h6> 
                                     <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="departure-time[]" id="departure-time" value="00-06"><span style="font-size: 16px; margin-left:10px">00:00-06:00</span></input><br>
+                                        <input type="checkbox" class="check-btn-2" name="airline[]" id="airline" value="AL"><span style="font-size: 16px; margin-left:10px">Vietnam Airline</span></input><br>
                                     </div>
                                     <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="departure-time[]" id="departure-time" value="06-12"><span style="font-size: 16px;margin-left:10px">06:00-12:00</span></input>
+                                        <input type="checkbox" class="check-btn-2" name="airline[]" id="airline" value="VJ"><span style="font-size: 16px;margin-left:10px">Vietjet Air</span></input>
                                     </div>
                                     <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="departure-time[]" id="departure-time" value="12-18"><span style="font-size: 16px;margin-left:10px">12:00-18:00</span></input>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="departure-time[]" id="departure-time" value="18-24"><span style="font-size: 16px;margin-left:10px">18:00-24:00</span></input>
-                                    </div>
-                                    <span style="font-weight: bold;">Giờ đến</span>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="arrival-time[]" id="arrival-time" value="00-06"><span style="font-size: 16px; margin-left:10px">00:00-06:00</span></input><br>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="arrival-time[]" id="arrival-time" value="06-12"><span style="font-size: 16px;margin-left:10px">06:00-12:00</span></input>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="arrival-time[]" id="arrival-time" value="12-18"><span style="font-size: 16px;margin-left:10px">12:00-18:00</span></input>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="arrival-time[]" id="arrival-time" value="18-24"><span style="font-size: 16px;margin-left:10px">18:00-24:00</span></input>
+                                        <input type="checkbox" class="check-btn-2" name="airline[]" id="airline" value="BL"><span style="font-size: 16px;margin-left:10px">Jetstar Pacific Airlines</span></input>
                                     </div>
                                 </li>
                             </ul>
-                            <button id="btn-filter">Lọc</button>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="col-lg-8 mt-3" id = "card-container-des">
-                <div class="card" id = "card-des">
-                    <div id='card-body' class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <div class="flight-route">
-                                    <div style="margin-right: 50px;">
-                                        <span style="font-weight: bold;">05:20</span><br>
-                                        <span>SGN</span>
-                                    </div> 
-                                    <div>
-                                        <span class="fa">&#xf041;</span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="fa fa-plane"></span><br>
-                                        <span style="margin-left: 30px;">1h30m</span>
-                                    </div>
-                                    <div style="margin-left: 50px;">
-                                        <span style="font-weight: bold;">17:20</span><br>
-                                        <span>DAD</span>
-                                    </div> 
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <span>Phổ thông</span>
-                                <span style="font-weight: bold;margin-left: 75px;">1.120.000 VNĐ</span>
-                                <button class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail">Xem chi tiết</button>
-                                <a href="signedluggage.html" class="btn-book-ticket">Chọn vé</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
