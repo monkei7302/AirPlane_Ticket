@@ -1,6 +1,6 @@
 function getHightlights() {
     $.get("./api/get-highlight.php", function (data, status) {
-       
+
         data.data.forEach(hightlight => {
             let col = document.createElement("div");
             col.classList.add("col-sm-4");
@@ -63,6 +63,16 @@ $(document).ready(function () {
     getHightlights()
     getStart()
     getDestination()
+
+    $('.radio-btn-1').on('change', function () {
+        let ngayVe = document.getElementById("ngayVe");
+        if ($(this).is(':checked')) {
+            ngayVe.setAttribute("required", "")
+        } else {
+            ngayVe.removeAttribute("required")
+        }
+    })
+
 })
 
 

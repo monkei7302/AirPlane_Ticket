@@ -265,13 +265,13 @@ $(document).ready(function () {
     getDestination();
     getStart();
     getDetail();
+
     $('.check-btn-1').on('change', function () {
         var filter_list = [];
         $('#filters-1 :input:checked').each(function () {
             var category = $(this).val();
             filter_list.push(category);
         });
-        console.log(filter_list)
         if (filter_list.length == 0)
             $('#card-container-start').fadeIn();
         else {
