@@ -1,4 +1,4 @@
-function getFlight(detail) {
+function getFlight() {
     $.get("./api/get-flight.php", function (data, status) {
         let start_selected = document.getElementById("start");
         var start = start_selected.options[start_selected.selectedIndex].text;
@@ -6,21 +6,16 @@ function getFlight(detail) {
         var des = des_selected.options[des_selected.selectedIndex].text;
         let card_container = document.getElementById("card-container-start");
         let hasFlight = false;
-        let price = "";
-        let date = "";
-        let seat = ""
         if (data) {
             data.data.forEach(flight => {
                 if (flight.from_location == start && flight.to_location == des) {
-                    let datetime_start = flight.departure_time.split(' ');
-                    let datetime_des = flight.arrival_time.split(' ');
-                    detail.forEach(d => {
-                        if (d.flight_id == flight.flight_id) {
-                            price = d.price;
-                            date = d.flight_departure_date;
-                            seat = d.available_seats;
-                        }
-                    })
+                    datetime_start = flight.departure_time.split(' ');
+                    datetime_des = flight.arrival_time.split(' ');
+                    price = flight.price;
+                    date = datetime_start[0];
+                    seat = flight.totals_seats;
+
+
                     hasFlight = true;
                     let card = document.createElement("div");
                     card.classList.add("card");
@@ -61,10 +56,11 @@ function getFlight(detail) {
                                         <span>`+ flight.to_location + `</span>
                                     </div> 
                                 </div>
-                                <input type="hidden" name="start" value="`+flight.from_location+`">
-                                <input type="hidden" name="destination" value="`+ flight.to_location+`">
-                                <input type="hidden" name="date" value="`+ datetime_start[0]+`">
-                                <input type="hidden" name="price" value="`+price+`">
+                                <input type="hidden" name="start" value="`+ flight.from_location + `">
+                                <input type="hidden" name="destination" value="`+ flight.to_location + `">
+                                <input type="hidden" name="date" value="`+ datetime_start[0] + `">
+                                <input type="hidden" name="price" value="`+ price + `">
+                                <input type="hidden" name="flight_id" value="`+ flight.flight_id + `">
                             </li>
                             <li class="list-group-item">
                                 <span>`+ category + `</span>
@@ -110,22 +106,7 @@ function getFlight(detail) {
     }, "json");
 }
 
-function getDetail() {
-    $.ajax({
-        url: "./api/get-flight_detail.php",
-        type: 'get',
-        dataType: 'html',
-        async: false,
-        success: function (data, status) {
-            result = data;
-            json = JSON.parse(data);
-            getFlight(json.data)
-            getReturn(json.data);
-        }
-    });
-}
-
-function getReturn(detail) {
+function getReturn() {
     let oneway = document.getElementById("radio2");
     if (!oneway.checked) {
         $.get("./api/get-flight.php", function (data, status) {
@@ -135,20 +116,14 @@ function getReturn(detail) {
             var des = des_selected.options[des_selected.selectedIndex].text;
             let card_container_des = document.getElementById("card-container-des");
             let hasFlight = false;
-            let price = "";
-            let seat = ""
             if (data) {
                 data.data.forEach(flight => {
                     if (flight.from_location == des && flight.to_location == start) {
                         let datetime_start = flight.departure_time.split(' ');
                         let datetime_des = flight.arrival_time.split(' ');
-                        detail.forEach(d => {
-                            if (d.flight_id == flight.flight_id) {
-                                price = d.price;
-                                seat = d.available_seats;
-                                return;
-                            }
-                        })
+                        price = flight.price;
+                        date = datetime_start[0];
+                        seat = flight.totals_seats;
                         hasFlight = true;
                         let card_des = document.createElement("div");
                         card_des.classList.add("card");
@@ -187,6 +162,11 @@ function getReturn(detail) {
                                         <span>`+ flight.to_location + `</span>
                                     </div> 
                                 </div>
+                                <input type="hidden" name="start" value="`+ flight.from_location + `">
+                                <input type="hidden" name="destination" value="`+ flight.to_location + `">
+                                <input type="hidden" name="date" value="`+ datetime_start[0] + `">
+                                <input type="hidden" name="price" value="`+ price + `">
+                                <input type="hidden" name="flight_id" value="`+ flight.flight_id + `">
                             </li>
                             <li class="list-group-item">
                                 <span>`+ category + `</span>

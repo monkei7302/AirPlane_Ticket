@@ -11,6 +11,7 @@
     $destination = $_POST['destination'];
     $day_start = $_POST['day_start'];
     $day_back = $_POST['day_back'];
+
   }
   
 ?>
@@ -80,7 +81,7 @@
               <a class="nav-link active" href="search_flight.html" style = "background-color: #6db7cb;border: 1px solid #6db7cb; border-radius: 25px;">Chuyến bay</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="signedluggage.html" style = "border: 1px solid #6db7cb; border-radius: 25px;">Hành lý</a>
+              <a class="nav-link" href="signedluggage.php" style = "border: 1px solid #6db7cb; border-radius: 25px;">Hành lý</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" style = "border: 1px solid #6db7cb; border-radius: 25px;">Chỗ ngồi</a>

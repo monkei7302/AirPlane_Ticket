@@ -7,6 +7,7 @@
         $destination = $_POST['destination'];
         $date = $_POST['date'];
         $price = $_POST['price'];
+        $flight_id = $_POST['flight_id'];
     }
 ?>
 <!DOCTYPE html>
@@ -31,7 +32,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="home.html" style = "font-size: 30px;">Sky Airlines
+            <a class="navbar-brand" href="home.php" style = "font-size: 30px;">Sky Airlines
                 <div class="logo">
                     <img src="img/plane.png" class="img-fluid">
                 </div>
@@ -39,7 +40,7 @@
             </a>
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="home.html"><i class="fa fa-home" aria-hidden="true"></i> Trang chủ</a>
+                  <a class="nav-link" href="home.php"><i class="fa fa-home" aria-hidden="true"></i> Trang chủ</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="search_flight.html"> Chuyến bay</a>
@@ -61,7 +62,7 @@
         <a class="nav-link active" href="search_flight.html" style = "background-color: #6db7cb;border: 1px solid #6db7cb; border-radius: 25px;">Chuyến bay</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="signedluggage.html" style = "background-color: #6db7cb; border: 1px solid #6db7cb; border-radius: 25px;">Hành lý</a>
+        <a class="nav-link active" href="signedluggage.php" style = "background-color: #6db7cb; border: 1px solid #6db7cb; border-radius: 25px;">Hành lý</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" style = "border: 1px solid #6db7cb; border-radius: 25px;">Chỗ ngồi</a>
@@ -80,6 +81,7 @@
     <div class="container mt-3">
         <form action="planeSeating.php" method="post">
             <input type="hidden" name="price" value="<?php echo $price?>">
+            <input type="hidden" name="flight_id" value="<?php echo $flight_id?>">
             <div class="row">
                 <div class="col-lg-2">
                     <label>
@@ -234,7 +236,7 @@
       </div>
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
         © 2022 Copyright:
-        <a class="text-white" href="home.html">SkyAirlines.com.vn</a>
+        <a class="text-white" href="home.php">SkyAirlines.com.vn</a>
       </div>
   </footer>  
 </body>
