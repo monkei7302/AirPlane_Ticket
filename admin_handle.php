@@ -169,4 +169,95 @@
         }
 
     }
+    else if(isset($_POST['add_flight_pt'])){
+        $check = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` LIKE '%PT%'");
+        if(mysqli_num_rows($check) != 0){
+            $recent_id = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` LIKE '%PT%' ORDER BY `flight_id` DESC LIMIT 1 ");
+            while($row = mysqli_fetch_assoc($recent_id)){
+                $last = $row["flight_id"];
+            }
+            $id = createID($last);
+        }
+        else{
+            $id = createID("PT0000");
+        }
+
+        $from_location = $_POST['from_location'];
+        $to_location = $_POST['to_location'];
+        $check_st = "SELECT * FROM `start_place` WHERE `id_start` = '$from_location'";
+        $check_st_run = mysqli_query($con,$check_st);
+        while($row_check_st = $check_st_run->fetch_array(MYSQLI_ASSOC)){
+            $from_location = $row_check_st['name_start'];
+        }
+        $check_des = "SELECT * FROM `destination` WHERE `id_des` = '$to_location'";
+        $check_des_run = mysqli_query($con,$check_des);
+        while($row_check_des = $check_des_run->fetch_array(MYSQLI_ASSOC)){
+            $to_location = $row_check_des['name_des'];
+        }
+
+        $airline_id = $_POST['airline_id'];
+        $airline_name = $_POST['airline_name'];
+        $departure_time = $_POST['departure_time'];
+        $arrival_time = $_POST['arrival_time'];
+        $duration = $_POST['duration'];
+        $total_seats = $_POST['total_seats'];
+        $price = $_POST['price'];
+        
+
+        $sql = "INSERT INTO `flight` VALUES(?,?,?,?,?,?,?,?,?,?)";
+        $stm = $con -> prepare($sql);
+        $stm -> bind_param("ssssssssii",$id,$airline_id,$airline_name,$from_location,$to_location,$departure_time,$arrival_time,$duration,$total_seats,$price);
+        if(!$stm->execute()){
+            die($stm->error);
+        }
+        else{
+            header("location: admin.php");
+        }
+    }
+    else if(isset($_POST['add_flight_tg'])){
+        $check = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` LIKE '%TG%'");
+        if(mysqli_num_rows($check) != 0){
+            $recent_id = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` LIKE '%TG%' ORDER BY `flight_id` DESC LIMIT 1 ");
+            while($row = mysqli_fetch_assoc($recent_id)){
+                $last = $row["flight_id"];
+            }
+            $id = createID($last);
+        }
+        else{
+            $id = createID("TG0000");
+        }
+
+        $from_location = $_POST['from_location'];
+        $to_location = $_POST['to_location'];
+        $check_st = "SELECT * FROM `start_place` WHERE `id_start` = '$from_location'";
+        $check_st_run = mysqli_query($con,$check_st);
+        while($row_check_st = $check_st_run->fetch_array(MYSQLI_ASSOC)){
+            $from_location = $row_check_st['name_start'];
+        }
+        $check_des = "SELECT * FROM `destination` WHERE `id_des` = '$to_location'";
+        $check_des_run = mysqli_query($con,$check_des);
+        while($row_check_des = $check_des_run->fetch_array(MYSQLI_ASSOC)){
+            $to_location = $row_check_des['name_des'];
+        }
+
+        $airline_id = $_POST['airline_id'];
+        $airline_name = $_POST['airline_name'];
+        $departure_time = $_POST['departure_time'];
+        $arrival_time = $_POST['arrival_time'];
+        $duration = $_POST['duration'];
+        $total_seats = $_POST['total_seats'];
+        $price = $_POST['price'];
+        
+
+        $sql = "INSERT INTO `flight` VALUES(?,?,?,?,?,?,?,?,?,?)";
+        $stm = $con -> prepare($sql);
+        $stm -> bind_param("ssssssssii",$id,$airline_id,$airline_name,$from_location,$to_location,$departure_time,$arrival_time,$duration,$total_seats,$price);
+        if(!$stm->execute()){
+            die($stm->error);
+        }
+        else{
+            header("location: admin.php");
+        }
+    }
+    
 ?>

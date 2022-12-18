@@ -140,6 +140,15 @@
     color: white;
     text-decoration: none;
 }
+.btn_delete_flight{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #D9534F;
+    background-color: #D9534F;
+    color: white;
+    text-decoration: none;
+}
 .btn_delete_history{
     padding-left: 5px;
     padding-right: 5px;

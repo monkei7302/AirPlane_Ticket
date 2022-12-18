@@ -78,7 +78,8 @@
     <div id="flight" class="content">
         <div class="title">
             <span>Quản lý thông tin chuyến bay</span>
-            <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#addflight" >Add</button>
+            <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#addflight_PT" >Add PT</button>  
+            <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#addflight_TG" >Add TG</button>
         </div>
         
         <table class="table table-hover">
@@ -87,30 +88,35 @@
                 <th>Flight ID</th>
                 <th>Information</th>
                 <th>Total Seats</th>
-                <th>Available Seats</th>
                 <th>Price</th>
-                <th>Action</th>
             </tr>
             </thead>
             <tbody id="table-body">
-            <tr>
-                <td>FL01</td>
-                <td>
-                    Mã máy bay:.... <br>
-                    Tên máy bay:....<br>
-                    Đi từ:...... <br>
-                    Đến đâu:.... <br>
-                    Giờ khởi hành:... <br>
-                    Giờ đến:.... <br>
-                    Khoảng thời gian:.... <br>
-                </td>
-                <td>100</td>
-                <td>10</td>
-                <td>1.150.000 VNĐ</td>
-                <td>
-                    <button href="#" class="btn-update" data-bs-toggle="modal" data-bs-target="#updateflight">Edit</button>    <button href="#" class="btn-delete" data-bs-toggle="modal" data-bs-target="#deleteflight">Delete</button>
-                </td>
-            </tr>
+                <?php
+                    $sql_flight = "SELECT * FROM `flight`";
+                    $sql_flight_run = mysqli_query($con,$sql_flight);
+                    while($row_flight = $sql_flight_run->fetch_array(MYSQLI_ASSOC)){
+                        $price_flight = number_format(floatval($row_flight['price']),0,',','.');
+                        echo '
+                        <tr>
+                            <td class="flight_id">'.$row_flight['flight_id'].'</td>
+                            <td>
+                                Mã máy bay: '.$row_flight['airline_id'].' <br>
+                                Tên hãng máy bay: '.$row_flight['airline_name'].'<br>
+                                Đi từ: '.$row_flight['from_location'].'<br>
+                                Đến đâu: '.$row_flight['to_location'].' <br>
+                                Giờ khởi hành: '.$row_flight['departure_time'].' <br>
+                                Giờ đến: '.$row_flight['arrival_time'].' <br>
+                                Khoảng thời gian: '.$row_flight['duration'].' <br>
+                            </td>
+                            <td>'.$row_flight['total_seats'].'</td>
+                            <td>'.$price_flight.' đ</td>
+                        </tr>
+                        ';
+
+                    }
+                ?>
+            
             </tbody>
         </table>
     </div>
@@ -350,33 +356,39 @@
             </tbody>
         </table>
     </div>
-    <!-- Thêm chuyến bay -->
-    <div class="modal" id="addflight">
+    <!-- Thêm chuyến bay phổ thông-->
+    <div class="modal" id="addflight_PT">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Thêm chuyến bay</h4>
+                    <h4 class="modal-title">Thêm chuyến bay phổ thông</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <form>
+                <form action="admin_handle.php" method="POST">
                     <div class="modal-body">
-                        Nhập mã chuyến bay<br>
-                        <input type="text" class="input-control" placeholder="Nhập mã chuyến bay" name="flight_id"/>
                         Nhập mã máy bay<br>
                         <input type="text" class="input-control" placeholder="Nhập mã máy bay" name="airline_id"/>
-                        Nhập tên máy bay<br>
+                        Nhập hãng máy bay<br>
                         <input type="text" class="input-control" placeholder="Nhập tên máy bay" name="airline_name"/>
                         Chọn địa điểm xuất phát<br>
                         <select id="from_location" name="from_location">
-                            <option value="australia">Australia</option>
-                            <option value="canada">Canada</option>
-                            <option value="usa">USA</option>
+                            <?php
+                                $sql_flight_pt_start = "SELECT * FROM `start_place`";
+                                $sql_flight_pt_start = mysqli_query($con,$sql_flight_pt_start);
+                                while($row_flight_pt_start = mysqli_fetch_array($sql_flight_pt_start)):;
+                            ?>
+                            <option value="<?php echo $row_flight_pt_start[0]?>"><?php echo $row_flight_pt_start[1]?></option>
+                            <?php endwhile; ?>
                         </select>
                         Chọn địa điểm đến<br>
                         <select id="to_location" name="to_location">
-                            <option value="australia">Australia</option>
-                            <option value="canada">Canada</option>
-                            <option value="usa">USA</option>
+                        <?php
+                                $sql_flight_pt_des = "SELECT * FROM `destination`";
+                                $sql_flight_pt_des = mysqli_query($con,$sql_flight_pt_des);
+                                while($row_flight_pt_des = mysqli_fetch_array($sql_flight_pt_des)):;
+                            ?>
+                            <option value="<?php echo $row_flight_pt_des[0]?>"><?php echo $row_flight_pt_des[1]?></option>
+                            <?php endwhile; ?>
                         </select>
                         Chọn ngày giờ bay<br>
                         <input type="datetime-local" class="input-control" name="departure_time"/>
@@ -386,46 +398,50 @@
                         <input type="text" class="input-control" placeholder="Nhập khoảng thời gian bay" name="duration"/>
                         Nhập tổng số ghế<br>
                         <input type="number" class="input-control" placeholder="Nhập tổng số ghế" name="total_seats"/>
-                        Nhập số ghế còn<br>
-                        <input type="number" class="input-control" placeholder="Nhập số ghế còn" name="available_seats"/>
                         Nhập giá<br>
                         <input type="text" class="input-control" placeholder="Nhập giá" name="price"/>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <a type="button" class="btn add-color">Add</a>
+                        <button type="submit" class="btn add-color" name="add_flight_pt" value="add">Add</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <!-- Sửa chuyến bay -->
-    <div class="modal" id="updateflight">
+    <!-- Thêm chuyến bay thương gia -->
+    <div class="modal" id="addflight_TG">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Sửa chuyến bay</h4>
+                    <h4 class="modal-title">Thêm chuyến bay thương gia</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <form>
+                <form action="admin_handle.php" method="POST">
                     <div class="modal-body">
-                        Nhập mã chuyến bay<br>
-                        <input type="text" class="input-control" placeholder="Nhập mã chuyến bay" name="flight_id"/>
                         Nhập mã máy bay<br>
                         <input type="text" class="input-control" placeholder="Nhập mã máy bay" name="airline_id"/>
-                        Nhập tên máy bay<br>
+                        Nhập hãng máy bay<br>
                         <input type="text" class="input-control" placeholder="Nhập tên máy bay" name="airline_name"/>
                         Chọn địa điểm xuất phát<br>
                         <select id="from_location" name="from_location">
-                            <option value="australia">Australia</option>
-                            <option value="canada">Canada</option>
-                            <option value="usa">USA</option>
+                            <?php
+                                $sql_flight_pt_start = "SELECT * FROM `start_place`";
+                                $sql_flight_pt_start = mysqli_query($con,$sql_flight_pt_start);
+                                while($row_flight_pt_start = mysqli_fetch_array($sql_flight_pt_start)):;
+                            ?>
+                            <option value="<?php echo $row_flight_pt_start[0]?>"><?php echo $row_flight_pt_start[1]?></option>
+                            <?php endwhile; ?>
                         </select>
                         Chọn địa điểm đến<br>
                         <select id="to_location" name="to_location">
-                            <option value="australia">Australia</option>
-                            <option value="canada">Canada</option>
-                            <option value="usa">USA</option>
+                        <?php
+                                $sql_flight_pt_des = "SELECT * FROM `destination`";
+                                $sql_flight_pt_des = mysqli_query($con,$sql_flight_pt_des);
+                                while($row_flight_pt_des = mysqli_fetch_array($sql_flight_pt_des)):;
+                            ?>
+                            <option value="<?php echo $row_flight_pt_des[0]?>"><?php echo $row_flight_pt_des[1]?></option>
+                            <?php endwhile; ?>
                         </select>
                         Chọn ngày giờ bay<br>
                         <input type="datetime-local" class="input-control" name="departure_time"/>
@@ -435,59 +451,12 @@
                         <input type="text" class="input-control" placeholder="Nhập khoảng thời gian bay" name="duration"/>
                         Nhập tổng số ghế<br>
                         <input type="number" class="input-control" placeholder="Nhập tổng số ghế" name="total_seats"/>
-                        Nhập số ghế còn<br>
-                        <input type="number" class="input-control" placeholder="Nhập số ghế còn" name="available_seats"/>
                         Nhập giá<br>
                         <input type="text" class="input-control" placeholder="Nhập giá" name="price"/>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <a type="button" class="btn add-color">Update</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Xóa chuyến bay -->
-    <div class="modal" id="deleteflight">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Xóa chuyến bay</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <form>
-                    <div class="modal-body">
-                        <p>Bạn có chắc muốn xóa chuyến bay này không?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Sửa lịch sử mua vé của khách -->
-    <div class="modal" id="updatehistory">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Sửa lịch sử mua vé của khách</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <form>
-                    <div class="modal-body">
-                        Nhập mã profile<br>
-                        <input type="text" class="input-control" placeholder="Nhập mã profile" name="profile_id"/>
-                        Nhập mã chuyến bay<br>
-                        <input type="text" class="input-control" placeholder="Nhập mã chuyến bay" name="flight_id"/>
-                        Nhập mã vé<br>
-                        <input type="text" class="input-control" placeholder="Nhập mã vé" name="ticket_id"/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <a type="button" class="btn add-color">Update</a>
+                        <button type="submit" class="btn add-color" name="add_flight_tg" value="add">Add</button>
                     </div>
                 </form>
             </div>
@@ -767,6 +736,14 @@
                 $('#delete_id_his_ticket').val(id3);
 
                 $('#deletehistory').modal('show');
+            })
+
+            $('.btn_delete_flight').click(function(e){
+                e.preventDefault();
+                var id = $(this).closest('tr').find('.flight_id').text();
+                
+                $('#delete_id_flight').val(id);
+                $('#deleteflight').modal('show');
             })
         })
 </script>
