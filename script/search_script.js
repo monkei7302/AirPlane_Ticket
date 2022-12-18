@@ -63,7 +63,7 @@ function getFlight(detail) {
                         </li>
                         <li class="list-group-item">
                             <span>`+ category + `</span>
-                            <span style="font-weight: bold;margin-left: 75px;">`+ price + `VNĐ</span>
+                            <span style="font-weight: bold;margin-left: 75px;">`+ formatNumber(price) + ` VNĐ</span>
                             <button class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail`+ flight.flight_id + `">Xem chi tiết</button>
                             <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
                         </li>
@@ -117,16 +117,6 @@ function getDetail() {
             getReturn(json.data);
         }
     });
-}
-
-function formatDate(date) {
-    let ymd = date.split('-')
-    return ymd[2] + "/" + ymd[1] + "/" + ymd[0];
-}
-
-function formatTime(time) {
-    let hms = time.split(":");
-    return hms[0] + ":" + hms[1];
 }
 
 function getReturn(detail) {
@@ -194,7 +184,7 @@ function getReturn(detail) {
                             </li>
                             <li class="list-group-item">
                                 <span>`+ category + `</span>
-                                <span style="font-weight: bold;margin-left: 75px;">`+ price + `VNĐ</span>
+                                <span style="font-weight: bold;margin-left: 75px;">`+ formatNumber(price) + ` VNĐ</span>
                                 <button class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail`+ flight.flight_id + `">Xem chi tiết</button>
                                 <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
                             </li>
@@ -269,6 +259,45 @@ function getDestination() {
             select.add(option);
         })
     }, "json");
+}
+
+function formatDate(date) {
+    let ymd = date.split('-')
+    return ymd[2] + "/" + ymd[1] + "/" + ymd[0];
+}
+
+function formatTime(time) {
+    let hms = time.split(":");
+    return hms[0] + ":" + hms[1];
+}
+
+function formatNumber(val) {
+    // remove sign if negative
+    var sign = 1;
+    if (val < 0) {
+        sign = -1;
+        val = -val;
+    }
+    // trim the number decimal point if it exists
+    let num = val.toString().includes('.') ? val.toString().split('.')[0] : val.toString();
+    let len = num.toString().length;
+    let result = '';
+    let count = 1;
+
+    for (let i = len - 1; i >= 0; i--) {
+        result = num.toString()[i] + result;
+        if (count % 3 === 0 && count !== 0 && i !== 0) {
+            result = ',' + result;
+        }
+        count++;
+    }
+
+    // add number after decimal point
+    if (val.toString().includes('.')) {
+        result = result + '.' + val.toString().split('.')[1];
+    }
+    // return result with - sign if negative
+    return sign < 0 ? '-' + result : result;
 }
 
 $(document).ready(function () {
