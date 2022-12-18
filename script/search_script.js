@@ -207,7 +207,7 @@ function getReturn(detail) {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                        <a href="signedluggage.html" class="btn-book-ticket">Chọn vé</a>
+                                        <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
                                     </div>
                                 </div>
                             </div>
