@@ -29,33 +29,47 @@
     }
 </style>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="home.html" style = "font-size: 30px;">Sky Airlines
-                <div class="logo">
-                    <img src="img/plane.png" class="img-fluid">
-                </div>
-              </a>
-            </a>
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="home.html"><i class="fa fa-home" aria-hidden="true"></i> Trang chủ</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="search_flight.html"> Chuyến bay</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="history.html">Tra cứu</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="login.html">Đăng nhập</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="help.html"> Trợ giúp</a>
-                </li>
-              </ul>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="home.php" style = "font-size: 30px;">Sky Airlines
+            <div class="logo">
+                <img src="img/plane.png" class="img-fluid">
             </div>
-    </nav> 
+          </a>
+        </a>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="home.php"><i class="fa fa-home"></i> Trang chủ</a>
+            </li>
+            <li class="nav-item aria-current">
+              <a class="nav-link" href="search_flight.php"> Chuyến bay</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="history.php">Tra cứu</a>
+            </li>
+            <?php
+              if(isset($_SESSION['login'])){
+                echo '<li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> Welcome '.$_SESSION['username'].'</a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile.php"> Thông tin cá nhân</a></li>
+                            <li><a class="dropdown-item" href="#"> Lịch sử đặt vé</a></li>
+                            <li><a class="dropdown-item" href="logout.php"> Đăng xuất</a></li>
+                        </ul>
+                      </li>';
+              }
+              else{
+                echo '<li class="nav-item">
+                        <a class="nav-link" href="login.php">Đăng nhập</a>
+                      </li>';
+              }
+            ?>
+            <li class="nav-item">
+              <a class="nav-link" href="help.php"> Trợ giúp</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     <ul class="nav nav-pills navbar-expand-lg mx-auto mt-3 justify-content-center">
       <li class="nav-item">
         <a class="nav-link active" href="search_flight.html" style = "background-color: #6db7cb;border: 1px solid #6db7cb; border-radius: 25px;">Chuyến bay</a>

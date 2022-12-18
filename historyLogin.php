@@ -1,3 +1,7 @@
+<?php
+  require 'connect.php';
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,9 +31,9 @@
     }
 </style>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="home.html" style = "font-size: 30px;">Sky Airlines
+        <a class="navbar-brand" href="home.php" style = "font-size: 30px;">Sky Airlines
             <div class="logo">
                 <img src="img/plane.png" class="img-fluid">
             </div>
@@ -37,63 +41,71 @@
         </a>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="home.html"><i class="fa fa-home"></i> Trang chủ</a>
+              <a class="nav-link active" aria-current="page" href="home.php"><i class="fa fa-home"></i> Trang chủ</a>
             </li>
             <li class="nav-item aria-current">
-              <a class="nav-link" href="search_flight.html"> Chuyến bay</a>
+              <a class="nav-link" href="search_flight.php"> Chuyến bay</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="history.html">Tra cứu</a>
+              <a class="nav-link" href="history.php">Tra cứu</a>
             </li>
+            <?php
+              if(isset($_SESSION['login'])){
+                echo '<li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> Welcome '.$_SESSION['username'].'</a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile.php"> Thông tin cá nhân</a></li>
+                            <li><a class="dropdown-item" href="#"> Lịch sử đặt vé</a></li>
+                            <li><a class="dropdown-item" href="logout.php"> Đăng xuất</a></li>
+                        </ul>
+                      </li>';
+              }
+              else{
+                echo '<li class="nav-item">
+                        <a class="nav-link" href="login.php">Đăng nhập</a>
+                      </li>';
+              }
+            ?>
             <li class="nav-item">
-              <a class="nav-link active" href="login.html"><i class="fa fa-user-o" aria-hidden="true"></i> Đăng nhập</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="help.html"> Trợ giúp</a>
+              <a class="nav-link" href="help.php"> Trợ giúp</a>
             </li>
           </ul>
         </div>
-    </nav> 
+      </nav> 
     <div class="container">
         <h1>Lịch sử đặt vé</h1>
         <di class = "row">
-            <div class = "col-lg-6">
-                <div class="card">
-                    <div class = "card-text">
-                        <span class = "id">TICKET00000001</span>
-                        <br>
-                        <div class = "locate">
-                            <span>Hồ Chí Minh -></span><span>BangKok</span>
-                            <a href="#"  class = "btn btn-danger btn-sm">Xem chi tiết</a>
-                        </div>
-                        <span>16/12/2022</span>
-                        <br>
+            <div class = "col-lg-12">
+              <?php
+                $sql_check = mysqli_query($con,"SELECT * FROM `ticket_info`");
+                while($row = $sql_check->fetch_array(MYSQLI_ASSOC)){
+                  $flight_id = $row['flight_id'];
+                  $ticket_id = $row['ticket_id'];
+
+                  $sql_flight = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` = '$flight_id'");
+                  while($row_flight = $sql_flight->fetch_array(MYSQLI_ASSOC)){
+                    $from = $row_flight['from_location'];
+                    $to = $row_flight['to_location'];
+                    $departure_time = $row_flight['departure_time'];
+                    echo '
+                    <div class="card">
+                      <div class = "card-text">
+                          <span class = "id">'.$ticket_id.'</span>
+                          <br>
+                          <div class = "locate">
+                              <span>'.$from.' -></span><span>'.$to.'</span>
+                              <a href="history_detail.php?id='.$ticket_id.'"  class = "btn btn-danger btn-sm">Xem chi tiết</a>
+                          </div>
+                          <span>16/12/2022</span>
+                          <br>
+                      </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class = "card-text">
-                        <span class = "id">TICKET00000002</span>
-                        <br>
-                        <div class = "locate">
-                            <span>Hồ Chí Minh -></span><span>Hà Nội</span>
-                            <a href="#" class = "btn btn-danger btn-sm">Xem chi tiết</a>
-                        </div>
-                        <span>16/12/2022</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class = "card-text">
-                        <span class = "id">TICKET00000003</span>
-                        <br>
-                        <div class = "locate">
-                            <span>Hà Nội-></span><span>Hồ Chí Minh</span>
-                            <a href="#" class = "btn btn-danger btn-sm">Xem chi tiết</a>
-                        </div>
-                        <span>16/12/2022</span>
-                    </div>
-                </div>
+                    ';
+                  }
+                }
+              ?>
             </div>
-            <div class = "col-lg-6">
+            <!-- <div class = "col-lg-6">
                 <div class = "card mb-5">
                     <div class = "card-body">
                         <h2>TICKET00000001</h2>
@@ -133,7 +145,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <footer class="bg-dark text-center text-lg-start text-white mt-5">
       <div class="container p-4">
