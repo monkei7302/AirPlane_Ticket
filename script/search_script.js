@@ -39,7 +39,7 @@ function getFlight(detail) {
                         <li class="list-group-item">
                             <div class="flight-route">
                                 <div id="route-start" style="margin-right: 50px;">
-                                    <span style="font-weight: bold;">`+ datetime_start[1] + `</span><br>
+                                    <span style="font-weight: bold;">`+ formatTime(datetime_start[1]) + `</span><br>
                                     <span>`+ flight.from_location + `</span>
                                 </div> 
                                 <div>
@@ -53,10 +53,10 @@ function getFlight(detail) {
                                     <span class="dot"></span>
                                     <span class="dot"></span>
                                     <span class="fa fa-plane"></span><br>
-                                    <span style="margin-left: 30px;">`+ flight.duration + `</span>
+                                    <span style="margin-left: 30px;">`+ formatTime(flight.duration) + `</span>
                                 </div>
                                 <div id="route-end" style="margin-left: 50px;">
-                                    <span style="font-weight: bold;">`+ datetime_des[1] + `</span><br>
+                                    <span style="font-weight: bold;">`+ formatTime(datetime_des[1]) + `</span><br>
                                     <span>`+ flight.to_location + `</span>
                                 </div> 
                             </div>
@@ -65,7 +65,7 @@ function getFlight(detail) {
                             <span>`+ category + `</span>
                             <span style="font-weight: bold;margin-left: 75px;">`+ price + `VNĐ</span>
                             <button class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail`+ flight.flight_id + `">Xem chi tiết</button>
-                            <a href="signedluggage.html" class="btn-book-ticket">Chọn vé</a>
+                            <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
                         </li>
                     </ul>
                     <div class="modal" id="seedetail`+ flight.flight_id + `">
@@ -77,16 +77,16 @@ function getFlight(detail) {
                                 </div>
                                 <div id="modal-body" class="modal-body">
                                     Chuyến bay: <b>`+ flight.flight_id + `</b> <br>
-                                    Khởi hành: <b>Ngày `+ datetime_start[0] + `, Vào lúc ` + datetime_start[1] + `, ` + flight.from_location + `</b> <br>
-                                    Đến: <b>Ngày `+ datetime_des[0] + `, Vào lúc ` + datetime_des[1] + `, ` + flight.to_location + ` </b> <br>
+                                    Khởi hành: <b>Ngày `+ formatDate(datetime_start[0]) + `, Vào lúc ` + formatTime(datetime_start[1]) + `, ` + flight.from_location + `</b> <br>
+                                    Đến: <b>Ngày `+ formatDate(datetime_des[0]) + `, Vào lúc ` + formatTime(datetime_des[1]) + `, ` + flight.to_location + ` </b> <br>
                                     Hạng: <b>`+ category + `</b> <br>     
-                                    Thời gian: <b>`+ flight.duration + `</b>  <br>    
+                                    Thời gian: <b>`+ formatTime(flight.duration) + `</b>  <br>    
                                     Máy bay: <b>`+ flight.airline_name + `</b>  <br>   
                                     Số ghế trống: <b>`+ seat + `</b>  <br>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <a href="signedluggage.html" class="btn-book-ticket">Chọn vé</a>
+                                    <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
                                 </div>
                             </div>
                         </div>
@@ -117,6 +117,16 @@ function getDetail() {
             getReturn(json.data);
         }
     });
+}
+
+function formatDate(date) {
+    let ymd = date.split('-')
+    return ymd[2] + "/" + ymd[1] + "/" + ymd[0];
+}
+
+function formatTime(time) {
+    let hms = time.split(":");
+    return hms[0] + ":" + hms[1];
 }
 
 function getReturn(detail) {
@@ -160,7 +170,7 @@ function getReturn(detail) {
                             <li class="list-group-item">
                                 <div class="flight-route">
                                     <div id="route-start" style="margin-right: 50px;">
-                                        <span style="font-weight: bold;">`+ datetime_start[1] + `</span><br>
+                                        <span style="font-weight: bold;">`+ formatTime(datetime_start[1]) + `</span><br>
                                         <span>`+ flight.from_location + `</span>
                                     </div> 
                                     <div>
@@ -174,10 +184,10 @@ function getReturn(detail) {
                                         <span class="dot"></span>
                                         <span class="dot"></span>
                                         <span class="fa fa-plane"></span><br>
-                                        <span style="margin-left: 30px;">`+ flight.duration + `</span>
+                                        <span style="margin-left: 30px;">`+ formatTime(flight.duration) + `</span>
                                     </div>
                                     <div id="route-end" style="margin-left: 50px;">
-                                        <span style="font-weight: bold;">`+ datetime_des[1] + `</span><br>
+                                        <span style="font-weight: bold;">`+ formatTime(datetime_des[1]) + `</span><br>
                                         <span>`+ flight.to_location + `</span>
                                     </div> 
                                 </div>
@@ -186,7 +196,7 @@ function getReturn(detail) {
                                 <span>`+ category + `</span>
                                 <span style="font-weight: bold;margin-left: 75px;">`+ price + `VNĐ</span>
                                 <button class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail`+ flight.flight_id + `">Xem chi tiết</button>
-                                <a href="signedluggage.html" class="btn-book-ticket">Chọn vé</a>
+                                <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
                             </li>
                         </ul>
                         <div class="modal" id="seedetail`+ flight.flight_id + `">
@@ -198,10 +208,10 @@ function getReturn(detail) {
                                     </div>
                                     <div id="modal-body" class="modal-body">
                                         Chuyến bay: <b>`+ flight.flight_id + `</b> <br>
-                                        Khởi hành: <b>Ngày `+ datetime_start[0] + `, Vào lúc ` + datetime_start[1] + `, ` + flight.from_location + `</b> <br>
-                                        Đến: <b>Ngày `+ datetime_des[0] + `, Vào lúc ` + datetime_des[1] + `, ` + flight.to_location + ` </b> <br>
+                                        Khởi hành: <b>Ngày `+ formatDate(datetime_start[0]) + `, Vào lúc ` + formatTime(datetime_start[1]) + `, ` + flight.from_location + `</b> <br>
+                                        Đến: <b>Ngày `+ formatDate(datetime_des[0]) + `, Vào lúc ` + formatTime(datetime_des[1]) + `, ` + flight.to_location + ` </b> <br>
                                         Hạng: <b>`+ category + `</b> <br>     
-                                        Thời gian: <b>`+ flight.duration + `</b>  <br>    
+                                        Thời gian: <b>`+ formatTime(flight.duration) + `</b>  <br>    
                                         Máy bay: <b>`+ flight.airline_id + `</b>  <br>   
                                         Số ghế trống: <b>`+ seat + `</b>  <br>
                                     </div>
