@@ -4,10 +4,13 @@
 
     $message = '';
     if(isset($_GET['error'])) {
-        $message = '! Mật khẩu không khớp !';
+        $message = '! Nhập lại không khớp !';
     }
     else if(isset($_GET['success'])){
         echo '<script>alert("Cập nhật mật khẩu mới thành công! Vui lòng đăng nhập lại để cập nhật thông tin!")</script>';
+    }
+    else if(isset($_GET['incorrect'])){
+      $message = 'Mật khẩu cũ không đúng';
     }
 
 ?>
@@ -120,9 +123,13 @@
                             }
                         ?>
                         <input type="hidden" name="id_user" value="<?php echo $id;?>">
-                        <b>Mật khẩu mới: </b>
+                        <b>Nhập mật khẩu cũ: </b>
                         <br>
                         <input type="password" name="old_password" id="old_password">
+                        <br>
+                        <b>Mật khẩu mới: </b>
+                        <br>
+                        <input type="password" name="expect_password" id="expect_password">
                         <br>
                         <b>Nhập lại mật khẩu: </b>
                         <br>
