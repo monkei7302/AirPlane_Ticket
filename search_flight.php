@@ -112,7 +112,7 @@
                   <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_lower2" type="number" value="<?php if(isset($lower2)){echo $lower2;} else{echo 0;}?>">
               </div>
               <div>
-                <select id="start" disabled class="form-select" aria-label="Default select example" style = "width: 45%" name="start" id="start"> 
+                <select id="start" class="form-select" aria-label="Default select example" style = "width: 45%" name="start" id="start"> 
                   <option selected><?php if(isset($_POST['find_flight'])){ if($start == "Điểm đi"){
                     echo "Chọn điểm đi";
                   }
@@ -125,7 +125,7 @@
 
                   ?></option>
                 </select>
-                <select id="des" disabled class="form-select" aria-label="Default select example" style = "width: 45%" name="destination"> 
+                <select id="des" class="form-select" aria-label="Default select example" style = "width: 45%" name="destination"> 
                   <option selected><?php if(isset($_POST['find_flight'])){ if($destination == "Điểm đến"){
                     echo "Chọn điểm đến";
                   }
@@ -189,7 +189,7 @@
                                         <input type="checkbox" class="check-btn-1" name="airline[]" id="airline" value="VJ"><span style="font-size: 16px;margin-left:10px">Vietjet Air</span></input>
                                     </div>
                                     <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="airline[]" id="airline" value="BL"><span style="font-size: 16px;margin-left:10px">Jetstar Pacific Airlines</span></input>
+                                        <input type="checkbox" class="check-btn-1" name="airline[]" id="airline" value="JP"><span style="font-size: 16px;margin-left:10px">Jetstar Pacific Airlines</span></input>
                                     </div>
                                 </li>
                             </ul>
@@ -199,7 +199,7 @@
             </div>
             <div id = "card-container-start"class="col-lg-8 mt-3">
             </div>
-            <div class="card mt-3">
+            <div class="card mt-3 return-div">
                 <div class="card-body">
                     <h5>Chuyến bay về</h5>
                     <span><span class="fa fa-plane"></span>  <b><?php echo $destination?> đến <?php echo $start;?> </b> 
@@ -212,7 +212,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4 mt-3">
+            <div class="col-lg-4 mt-3 return-div">
                 <div class="card" style="height: 100%; width: 100%;">
                     <div class="card-body">
                         <span style="font-weight: bold;font-size: 24px;">Bộ lọc</span>
@@ -245,7 +245,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 mt-3" id = "card-container-des">
+            <div class="col-lg-8 mt-3 return-div" id = "card-container-des">
             </div>
         </div>
     </div>
