@@ -254,8 +254,8 @@
                 <th>Password</th>
                 <th>Gender</th>
                 <th>Address</th>
-                <th>Email</th>
                 <th>PhoneNumber</th>
+                <th>Email</th>
                 <th>Action</th>
             </tr>
             </thead>
