@@ -69,7 +69,7 @@ function getFlight(detail) {
                             <li class="list-group-item">
                                 <span>`+ category + `</span>
                                 <span style="font-weight: bold;margin-left: 75px;">`+ formatNumber(price) + ` VNĐ</span>
-                                <button class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail`+ flight.flight_id + `">Xem chi tiết</button>
+                                <button type="button" class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail`+ flight.flight_id + `">Xem chi tiết</button>
                                 <button type="submit" name="choose_ticket" value="choose" class="btn-book-ticket">Chọn vé</button>
                             </li>
                         </ul>
@@ -191,7 +191,7 @@ function getReturn(detail) {
                             <li class="list-group-item">
                                 <span>`+ category + `</span>
                                 <span style="font-weight: bold;margin-left: 75px;">`+ formatNumber(price) + ` VNĐ</span>
-                                <button class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail`+ flight.flight_id + `">Xem chi tiết</button>
+                                <button type="button" class="btn-seedel-ticket" data-bs-toggle="modal" data-bs-target="#seedetail`+ flight.flight_id + `">Xem chi tiết</button>
                                 <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
                             </li>
                         </ul>
