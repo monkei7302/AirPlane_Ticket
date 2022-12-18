@@ -1,3 +1,14 @@
+<?php
+    require 'connect.php';
+    session_start();
+    
+    if(isset($_POST['choose_ticket'])){
+        $start = $_POST['start'];
+        $destination = $_POST['destination'];
+        $date = $_POST['date'];
+        $price = $_POST['price'];
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,12 +73,14 @@
     <h1 style="text-align:center">Chọn hành lý</h1>
     <div style="margin-left: 20px;">
         <h2 onclick="check()">Chuyến bay đi(đến)</h2>
-        <span><span class="fa fa-plane"></span>  <b>Tp. Hồ Chí Minh đến Đà Nẵng </b> –Thứ Bảy 24 Tháng Mười Hai 2022</span><br><br>
+        <span><span class="fa fa-plane"></span>  <b><?php echo $start;?> đến <?php echo $destination;?></b> – Ngày <?php echo str_replace('-','/',date("d-m-Y", strtotime($date))) ;?></span><br><br>
         <span style="font-weight: bold;font-size: 24px;">Hành lý ký gửi</span><br>
         <span>Quý khách làm thủ tục cho hành lý ký gửi trước khi đến cổng và sẽ không thể mang hành lý ký gửi lên máy bay.</span><br>
     </div>
     <div class="container mt-3">
-        <div class="row">
+        <form action="planeSeating.php" method="post">
+            <input type="hidden" name="price" value="<?php echo $price?>">
+            <div class="row">
                 <div class="col-lg-2">
                     <label>
                         <input type="radio" id="luggage" name="luggage" value="0" class="card-input-element" />
@@ -75,7 +88,7 @@
                             <div class="card-body" style="text-align: center;">
                                 <img src="css/imageCSS/no_luggage.png" height="50%" width="50%"><br>
                                 <span class="weight-luggage">0 kg</span><br>
-                                <span class="price-luggage">715.000 VNĐ</span>
+                                <span class="price-luggage">0 VNĐ</span>
                             </div>
                         </div>
                     </label>
@@ -87,7 +100,7 @@
                             <div class="card-body" style="text-align: center;">
                                 <img src="css/imageCSS/icon_20kg_luggage.png" height="50%" width="50%"><br>
                                 <span class="weight-luggage">20 kg</span><br>
-                                <span class="price-luggage">715.000 VNĐ</span>
+                                <span class="price-luggage">200.000 VNĐ</span>
                             </div>
                         </div>
                     </label>
@@ -99,7 +112,7 @@
                             <div class="card-body" style="text-align: center;">
                                 <img src="css/imageCSS/icon_25kg_luggage.png" height="50%" width="50%"><br>
                                 <span class="weight-luggage">25 kg</span><br>
-                                <span class="price-luggage">715.000 VNĐ</span>
+                                <span class="price-luggage">250.000 VNĐ</span>
                             </div>
                         </div>
                     </label>
@@ -111,7 +124,7 @@
                             <div class="card-body" style="text-align: center;">
                                 <img src="css/imageCSS/icon_30kg_luggage.png" height="50%" width="50%"><br>
                                 <span class="weight-luggage">30 kg</span><br>
-                                <span class="price-luggage">715.000 VNĐ</span>
+                                <span class="price-luggage">300.000 VNĐ</span>
                             </div>
                         </div>
                     </label>
@@ -123,7 +136,7 @@
                             <div class="card-body" style="text-align: center;">
                                 <img src="css/imageCSS/icon_35-40kg_luggage.png" height="50%" width="50%"><br>
                                 <span class="weight-luggage">35 kg</span><br>
-                                <span class="price-luggage">715.000 VNĐ</span>
+                                <span class="price-luggage">350.000 VNĐ</span>
                             </div>
                         </div>
                     </label>
@@ -135,18 +148,19 @@
                             <div class="card-body" style="text-align: center;">
                                 <img src="css/imageCSS/icon_35-40kg_luggage.png" height="50%" width="50%"><br>
                                 <span class="weight-luggage">40 kg</span><br>
-                                <span class="price-luggage">715.000 VNĐ</span>
+                                <span class="price-luggage">400.000 VNĐ</span>
                             </div>
                         </div>
                     </label>
                 </div>
                 <div class="card" style="margin-top: 180px;">
                     <div class="card-body">
-                        <a href="planeSeating.html" class="btn-continue">Tiếp tục</a>
-                        <span class="price">1.150.000 VNĐ</span>
+                        <button type="submit" class="btn-continue" name="choose_luggage" value="luggage">Tiếp tục</button>
+                        <span class="price"><?php echo $price . " + Giá tiền hành lý VNĐ";?></span>
                     </div>
                 </div>
             </div>
+        </form>
     </div>
     <footer class="bg-dark text-center text-lg-start text-white mt-5">
       <div class="container p-4">

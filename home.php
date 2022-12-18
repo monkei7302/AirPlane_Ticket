@@ -76,7 +76,7 @@
             <form action="search_flight.php" method="post" >
               <div class="card w-75 mx-auto" id = "searchCard"  style="padding-left: 10px;">
                     <div class="card-body">
-                      <div class="radio fs-6" >
+                    <div class="radio fs-6" >
                         <input type="radio" class='radio-btn-1' id="radio1" name="ticket_type" value="Two-way" required><span style="margin-right: 250px;"> Khứ hồi</span>
                         <input type="radio" id="radio2" name="ticket_type" value="One-way" required><span> Một chiều</span>
                       </div>
