@@ -31,7 +31,7 @@
         document.getElementById(functionName).style.display = "block";
         evt.currentTarget.className += " active";
         }
-        document.getElementById("defaultOpen").click(); 
+        
 </script>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-nav">
@@ -60,6 +60,7 @@
         <button class="tablinks" onclick="openfunction(event, 'destinationlocation')">Quản lý địa điểm đến</button>
         <button class="tablinks" onclick="openfunction(event, 'customer')">Quản lý khách hàng</button>
         <button class="tablinks" onclick="openfunction(event, 'historybook')">Quản lý lịch sử mua vé</button>
+        <button class="tablinks" onclick="openfunction(event, 'statistic')">Thống kê</button>
         <button class="tablinks" onclick="openfunction(event, 'statistic')">Thống kê</button>
     </div>
     <div id="dashboard" class="content">
@@ -310,7 +311,7 @@
             </thead>
             <tbody id="table-body">
                 <?php
-                    $sql_history = "SELECT * FROM `history`";
+                    $sql_history = "SELECT * FROM `ticket_info`";
                     $sql_history_run = mysqli_query($con,$sql_history);
                     while($row_history = $sql_history_run->fetch_array(MYSQLI_ASSOC)){
                         echo '
@@ -338,21 +339,32 @@
         <table class="table table-hover">
             <thead>
             <tr style="text-align: center;">
-                <th>Ticket ID</th>
                 <th>Flight ID</th>
-                <th>Airline Name</th>
                 <th>Total Ticket Sales</th>
                 <th>Total Revenue</th>
             </tr>
             </thead>
             <tbody id="table-body">
-            <tr>
-                <td>TK01</td>
-                <td>FL01</td>
-                <td>Tên</td>
-                <td>10</td>
-                <td>1.150.000 VNĐ</td>
-            </tr>
+                <?php
+                    $sql_revenue = mysqli_query($con,"SELECT DISTINCT `flight_id` FROM `ticket_info`");
+                    while($row_revenue_flight = $sql_revenue->fetch_array(MYSQLI_ASSOC)){
+                        $flight_id = $row_revenue_flight['flight_id'];
+                        $sql_revenue_ticket = mysqli_query($con,"SELECT * FROM `ticket_info` WHERE `flight_id` = '$flight_id'");
+                        $count = mysqli_num_rows($sql_revenue_ticket);
+                        $sql_revenue_price = mysqli_query($con,"SELECT SUM(price) AS `total` FROM `ticket_info` WHERE `flight_id` = '$flight_id'");
+                        while($row_price = $sql_revenue_price->fetch_array(MYSQLI_ASSOC)){
+                            $price = $row_price['total'];
+                        }
+                        echo '
+                        <tr>
+                            <td>'.$flight_id.'</td>
+                            <td>'.$count.'</td>
+                            <td>'.number_format(floatval($price),0,',','.').' VNĐ</td>
+                        </tr>
+                        ';
+                    }
+                ?>
+            
             </tbody>
         </table>
     </div>
@@ -474,7 +486,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="id_his_pro" id="delete_id_his_pro">
                         <input type="hidden" name="id_his_flight" id="delete_id_his_flight">
-                        <input type="hidden" name=" " id="delete_id_his_ticket">
+                        <input type="hidden" name="id_his_ticket" id="delete_id_his_ticket">
                         <p>Bạn có chắc muốn xóa lịch sử mua vé này không này không?</p>
                     </div>
                     <div class="modal-footer">
@@ -675,6 +687,7 @@
     </div>
 </body>
 <script>
+        document.getElementById("defaultOpen").click(); 
         $(document).ready(function(){
             $('.btn_delete_user').click(function(e){
                 e.preventDefault();

@@ -159,7 +159,7 @@
         $id_his_flight = $_POST['id_his_flight'];
         $id_his_ticket = $_POST['id_his_ticket'];
 
-        $sql_history = mysqli_query($con,"DELETE FROM `history` WHERE `profile_id` = '$id_his_pro' AND `ticket_id` = '$id_his_ticket' AND `flight_id` = '$id_his_flight'");
+        $sql_history = mysqli_query($con,"DELETE FROM `ticket_info` WHERE `profile_id` = '$id_his_pro' AND `ticket_id` = '$id_his_ticket' AND `flight_id` = '$id_his_flight'");
         
         if($sql_history){
             header("Location: admin.php");

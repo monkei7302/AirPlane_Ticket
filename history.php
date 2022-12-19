@@ -2,6 +2,11 @@
   require 'connect.php';
   session_start();
 
+  $id_ticket_pay = "";
+  if(isset($_GET['id_ticket'])){
+    $id_ticket_pay = $_GET['id_ticket'];
+  }
+
   if(isset($_POST['search'])){
     $id_ticket = $_POST['id_ticket'];
   }
@@ -99,7 +104,7 @@
                       while($row = $sql_check->fetch_array(MYSQLI_ASSOC)){
                         $pro_id = $row['profile_id'];
                         $flight_id = $row['flight_id'];
-                        $status = $row['status'];
+                        $ticket_price = $row['price'];
                       }
                       $sql_flight = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` = '$flight_id'");
                       while($row_flight = $sql_flight->fetch_array(MYSQLI_ASSOC)){
@@ -140,17 +145,12 @@
                                   <br>
                                   <h4>Thông tin hãng bay</h4>
                                   <span><b>Hàng hàng không Sky Airlines</b></span>
-                                  <h2 style  = "float: right; margin-top: 10px; margin-bottom: 10px;">'.number_format(floatval($price),0,',','.').' VND</h2>
+                                  <h2 style  = "float: right; margin-top: 10px; margin-bottom: 10px;">'.number_format(floatval($ticket_price),0,',','.').' VND</h2>
                                   <br><br>
+                                  <h4  style = "text-align: right; font-size: 18px; color: #4fba4b"><i>(Đã thanh toán)</i></h4>
                                   
                               
                         ';
-                      }
-                      if($status == "Paid"){
-                        echo ' <h4  style = "text-align: right; font-size: 18px; color: #4fba4b"><i>(Đã thanh toán)</i></h4>';
-                      }
-                      else if($status == "None"){
-                        echo ' <h4  style = "text-align: right; font-size: 18px; color: #e74c3c"><i>(Chưa thanh toán)</i></h4>';
                       }
                     }
                     else{
@@ -170,7 +170,7 @@
                 <div class = "card">
                       <div class = "card-body" >
                           <h5>Nhập mã đặt vé</h5>
-                          <input type = "text" name="id_ticket" required>
+                          <input type = "text" name="id_ticket" value="<?php echo $id_ticket_pay;?>" required>
                           <button type="submit" class="btn btn-sm btnHover mt-3" name="search" vale="search">Tra cứu <i class="fa fa-search fa-1x" aria-hidden="true"></i></button> 
                       </div>
                   </div>

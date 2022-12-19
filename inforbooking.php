@@ -1,9 +1,11 @@
 <?php
 session_start();
 require 'connect.php';
+print_r($_POST);
 if(isset($_POST['plane_seating'])){
     $seat_price = $_POST['seat_price'];
     $seat_id = $_POST['seat_id'];
+    $price = $_POST['price'];
 }
   $luggage = 400000;
 
@@ -15,6 +17,8 @@ while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
   $to = $row_locate['to_location'];
   $date = explode(" ", $row_locate['departure_time']);
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +99,7 @@ while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
         <h1 class = "text-center mt-3">Điền thông tin và thanh toán</h1>>
     </div>
     <form action="payment_handle.php" method="post">
-        <input type = "hidden" value="<?php echo $seat_id;?>">
+        <input type = "hidden" name="seat_id" value="<?php echo $seat_id;?>">
         <div class="container">
             <div class="row mt-3">
                 <h4>Thông tin liên hệ</h4>
@@ -134,7 +138,11 @@ while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
             <div class="card" style="margin-top: 100px;">
                 <div class="card-body">
                 <a href="#" class="btn-continue" data-bs-toggle="modal" data-bs-target="#payment">Thanh toán</a>
+<<<<<<< Updated upstream
                     <span class="price"><?php echo number_format(floatval($_SESSION['price']*$_SESSION['adult']+$luggage+$seat_price),0,',','.')?> VNĐ</span>
+=======
+                    <span class="price"><?php echo number_format(floatval($price),0,',','.')?> VNĐ</span>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
@@ -149,7 +157,11 @@ while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
                         <div class="modal-body">
                             <h5 class="modal-title" style="margin-bottom: 30px;text-align: center;">Chuyến bay từ <?php echo $from;?> đến <?php echo $to;?> <br> Ngày <?php echo str_replace('-','/',date("d-m-Y", strtotime($date[0])));?></h5>
                             <div style="margin-bottom: 15px;">
+<<<<<<< Updated upstream
                                 <span style="font-weight: bold;font-size: 18px;">Giá vé</span><span style="float: right;font-size: 18px;"><?php if(isset($_SESSION)) echo number_format(floatval($_SESSION['price']),0,',','.') ;?> VNĐ X <?php echo $_SESSION['adult']?></span>
+=======
+                                <span style="font-weight: bold;font-size: 18px;">Giá vé</span><span style="float: right;font-size: 18px;"><?php if(isset($price)) echo number_format(floatval($price - $luggage - $seat_price),0,',','.');?> VNĐ</span>
+>>>>>>> Stashed changes
                             </div>
                             <div style="margin-bottom: 15px;">
                                 <span style="font-weight: bold;font-size: 18px;">Hành lý ký gửi</span><span style="float: right;font-size: 18px;"><?php echo number_format(floatval($luggage),0,',','.')?> VNĐ</span>
@@ -159,6 +171,7 @@ while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <input type="hidden" name="total" value="<?php echo $price;?>">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                             <button type = "submit" class="btn add-color" data-bs-toggle="modal" name="paid" value="paid">Thanh toán</a>
                         </div>

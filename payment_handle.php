@@ -34,12 +34,21 @@
             }
 
             $flight_id = $_SESSION['flight_id'];
-            $status = "Paid";
+            $seat_id = $_POST['seat_id'];
+
+            $sql_seat = "INSERT INTO `seat` VALUES(?,?)";
+            $stm = $con -> prepare($sql_seat);
+            $stm -> bind_param("ss",$seat_id,$flight_id);
+            if(!$stm->execute()){
+                die($stm->error);
+            }
+
+            $total = $_POST['total'];
             
 
             $sql = "INSERT INTO `ticket_info` VALUES(?,?,?,?)";
             $stm = $con -> prepare($sql);
-            $stm -> bind_param("ssss",$id,$pro_id,$flight_id,$status);
+            $stm -> bind_param("sssi",$id,$pro_id,$flight_id,$total);
             if(!$stm->execute()){
                 die($stm->error);
             }
@@ -82,6 +91,16 @@
         $email = $_POST['email'];
         $phone = $_POST['phonenumber'];
 
+        $flight_id = $_SESSION['flight_id'];
+        $seat_id = $_POST['seat_id'];
+
+        $sql_seat = "INSERT INTO `seat` VALUES(?,?)";
+        $stm = $con -> prepare($sql_seat);
+        $stm -> bind_param("ss",$seat_id,$flight_id);
+        if(!$stm->execute()){
+            die($stm->error);
+        }
+
 
         $sql_pro = "INSERT INTO `passenger_profile` VALUES(?,?,?,?,?,?,?,?,?)";
         $stm = $con -> prepare($sql_pro);
@@ -90,18 +109,17 @@
             die($stm->error);
         }
 
-        $flight_id = $_SESSION['flight_id'];
-        $status = "Paid";
         
+        $total = $_POST['total'];
 
-        $sql = "INSERT INTO `ticket_info` VALUES(?,?,?,?)";
-        $stm = $con -> prepare($sql);
-        $stm -> bind_param("ssss",$id_ticket,$id_pro,$flight_id,$status);
+        $sql_ticket = "INSERT INTO `ticket_info` VALUES(?,?,?,?)";
+        $stm = $con -> prepare($sql_ticket);
+        $stm -> bind_param("sssi",$id_ticket,$id_pro,$flight_id,$total);
         if(!$stm->execute()){
             die($stm->error);
         }
         else{
-            header("location: history.php");
+            header("location:history.php?id_ticket=" . urlencode($id_ticket));
         }
     }
 ?>
