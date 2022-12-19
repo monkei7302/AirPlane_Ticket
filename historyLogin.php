@@ -1,22 +1,11 @@
 <?php
   require 'connect.php';
   session_start();
-
-    $message = '';
-    if(isset($_GET['error'])) {
-        $message = '! Nhập lại không khớp !';
-    }
-    else if(isset($_GET['success'])){
-        echo '<script>alert("Cập nhật mật khẩu mới thành công! Vui lòng đăng nhập lại để cập nhật thông tin!")</script>';
-    }
-    else if(isset($_GET['incorrect'])){
-      $message = 'Mật khẩu cũ không đúng';
-    }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="css/home.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,40 +13,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 </head>
 <style>
-    html {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("css/imageCSS/bg_login.png");
-        height: auto; 
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        margin: 0;
-  }
-    body{
-        background-color: transparent;
+    .btn {
+       float: right;
+       margin-right: 15px;
     }
-    h2 {
-        text-align: center; 
-        color: white;
-        margin-top: 30px;
-        margin-bottom: 30px;
-        padding: 10px;
+    .card-text{
+        font-size: 15px;
+        margin-left: 10px;
     }
-    #cre {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        font-style: italic;
-        text-align: center;
-        color: rgb(185, 189, 189);
+    .id {
+        font-weight: bold;
     }
-    b{
-        text-align: center;
-    }
-    .card {
-        width: 40%;
-        background-color: white;
+    .locate{
+        font-weight: 500;
     }
 </style>
 <body>
@@ -102,44 +72,80 @@
           </ul>
         </div>
       </nav> 
-    <div class = "container">
-        <h2>Chỉnh sửa thông tin tài khoản</h2>
-        <div class = "row">
-            <div class = "card mx-auto">
-                <div class = "card-img-top text-center mt-2">
-                    <img src="img/user.png" alt="user" width="100" height="100">
-                </div>
-                <div class="card-body mx-auto">
-                    <form action="profile_handle.php" method="post">
-                        <?php
-                        $check_user = $_SESSION['username'];
-                        $sql_pro = "SELECT * FROM `passenger_profile` WHERE `passenger_username` LIKE '$check_user'";
-                        $sql_pro_run = mysqli_query($con,$sql_pro);
-                        while($row = $sql_pro_run->fetch_array(MYSQLI_ASSOC)){
-                            $id = $row['profile_id'];
-                            echo '
-                            
-                                <p style = "text-align: center; margin-top: -50px;">'.$row['passenger_username'].'</p>';
-                            }
-                        ?>
-                        <input type="hidden" name="id_user" value="<?php echo $id;?>">
-                        <b>Nhập mật khẩu cũ: </b>
+    <div class="container">
+        <h1>Lịch sử đặt vé</h1>
+        <di class = "row">
+            <div class = "col-lg-12">
+              <?php
+                $sql_check = mysqli_query($con,"SELECT * FROM `ticket_info`");
+                while($row = $sql_check->fetch_array(MYSQLI_ASSOC)){
+                  $flight_id = $row['flight_id'];
+                  $ticket_id = $row['ticket_id'];
+
+                  $sql_flight = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` = '$flight_id'");
+                  while($row_flight = $sql_flight->fetch_array(MYSQLI_ASSOC)){
+                    $from = $row_flight['from_location'];
+                    $to = $row_flight['to_location'];
+                    $departure_time = $row_flight['departure_time'];
+                    echo '
+                    <div class="card">
+                      <div class = "card-text">
+                          <span class = "id">'.$ticket_id.'</span>
+                          <br>
+                          <div class = "locate">
+                              <span>'.$from.' -></span><span>'.$to.'</span>
+                              <a href="history_detail.php?id='.$ticket_id.'"  class = "btn btn-danger btn-sm">Xem chi tiết</a>
+                          </div>
+                          <span>16/12/2022</span>
+                          <br>
+                      </div>
+                    </div>
+                    ';
+                  }
+                }
+              ?>
+            </div>
+            <!-- <div class = "col-lg-6">
+                <div class = "card mb-5">
+                    <div class = "card-body">
+                        <h2>TICKET00000001</h2>
+                        <h4>Thông tin khách hàng</h4>
+                        <span style = "margin-right: 100px;"><b>Họ: </b>Lê</span>
+                        <span style = "margin-right: 100px;"><b>Tên: </b> Ngân</span>
+                        <span><b>Giới tính: </b>Nữ</span>
                         <br>
-                        <input type="password" name="old_password" id="old_password">
+                        <span><b>Địa chỉ: </b>19 Nguyễn Hữu Thọ, Tân Phong, Quận 7,  TP. Hồ Chí Minh</span>
                         <br>
-                        <b>Mật khẩu mới: </b>
+                        <span style = "margin-right: 100px;"><b>Số điện thoại: </b>0909.291.123</span>
+                        <span> <b>Email liên hệ: </b>nganle1234@gmail.com</span>
+                        <h4>Thông tin vé máy bay</h4>
+                        <span><b>Mã đặt vé: </b>TICKET00000001</span>
                         <br>
-                        <input type="password" name="expect_password" id="expect_password">
+                        <span><b>Loại vé: </b>Phổ thông</span>
                         <br>
-                        <b>Nhập lại mật khẩu: </b>
+                        <span><b>Số người: </b>3</span>
                         <br>
-                        <input type="password" name="new_password" id="new_password">
-                        <p><?php echo '<p style = "color: #FF8A80; font-weight: bold; margin-top:-5px;">'.$message.'</p>';?></p>
-                        <button type="submit" style = "margin-left: 13px;" class = " mt-3 btn btn-success" name="update_password" value="update" id="update">Cập nhật mật khẩu</button>
-                    </form>
+                        <span><b>Kiểu vé: </b>Một chiều</span>
+                        <br>
+                        <span style = "margin-right: 75px;"><b>Điểm đi:</b> Hồ Chí Minh - Việt Nam (HCM)</span>
+                        <span> <b>Điểm đến: </b>BangKok - Thái Lan (BK)</span>
+                        <br>
+                        <span style = "margin-right: 240px;"><b>Ngày đi:</b> 16/12/2022</span>
+                        <span> <b>Ngày về:</b></span>
+                        <br>
+                        <span><b>Thời gian khởi hành: </b>3.25 PM</span>
+                        <br>
+                        <span><b>Thời gian đến dự kiến: </b>5.00 PM</span>
+                        <br>
+                        <h4>Thông tin hãng bay</h4>
+                        <span><b>Hàng hàng không Sky Airlines</b></span>
+                        <h2 style  = "float: right; margin-top: 10px; margin-bottom: 10px;">1.950.000đ</h2>
+                        <br><br>
+                        <h4  style = "text-align: right; font-size: 18px; color: #4fba4b"><i>(Đã thanh toán)</i></h4>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <footer class="bg-dark text-center text-lg-start text-white mt-5">
       <div class="container p-4">
@@ -213,7 +219,7 @@
       </div>
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
         © 2022 Copyright:
-        <a class="text-white" href="home.php">SkyAirlines.com.vn</a>
+        <a class="text-white" href="home.html">SkyAirlines.com.vn</a>
       </div>
   </footer>  
 </body>
