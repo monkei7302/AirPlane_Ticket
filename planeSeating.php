@@ -222,6 +222,7 @@
                 <div class="plane card col-lg-3">
                     <div class="exit exit--front"></div>
                     <ol class="cabin ">
+                      <!-- Hàng 1 -->
                       <li class="row row--1">
                         <ol class="seats typeSeat1" type="A">
                           <li class="seat">
@@ -250,6 +251,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 2 -->
                       <li class="row row--2 ">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
@@ -278,6 +280,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 3 -->
                       <li class="row row--3">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
@@ -306,6 +309,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 4 -->
                       <li class="row row--4">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
@@ -334,6 +338,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 5 -->
                       <li class="row row--5">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
@@ -362,6 +367,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 6 -->
                       <li class="row row--6">
                         <ol class="seats" type="A">
                           <li class="seat">
@@ -390,6 +396,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 7 -->
                       <li class="row row--7">
                         <ol class="seats" type="A">
                           <li class="seat">
@@ -418,6 +425,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 8 -->
                       <li class="row row--8">
                         <ol class="seats" type="A">
                           <li class="seat">
@@ -446,6 +454,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 9 -->
                       <li class="row row--9">
                         <ol class="seats" type="A">
                           <li class="seat">
@@ -474,6 +483,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 10 -->
                       <li class="row row--10">
                         <ol class="seats" type="A">
                           <li class="seat">

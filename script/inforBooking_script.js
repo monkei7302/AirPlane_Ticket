@@ -2,7 +2,6 @@
 //nếu user đã đăng nhập
 function getProfile() {
 
-    console.log()
     let data = {
         passenger_username: $('#passenger_username').val(),
     }
