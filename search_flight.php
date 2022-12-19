@@ -2,14 +2,12 @@
   require 'api/connect.php';
   session_start();
   if(isset($_POST['find_flight'])){
-    $ticket_type = $_POST['ticket_type'];
     $over12 = $_POST['numberOfPassenger_over12'];
     $lower12 = $_POST['numberOfPassenger_lower12'];
     $_SESSION['baby'] = $_POST['numberOfPassenger_lower2'];
     $start = $_POST['start'];
     $destination = $_POST['destination'];
     $day_start = $_POST['day_start'];
-    $day_back = $_POST['day_back'];
     $_SESSION['adult'] = $lower12 +  $over12;
 
   }
@@ -59,8 +57,9 @@
                 echo '<li class="nav-item dropdown">
                         <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> Welcome '.$_SESSION['username'].'</a>
                           <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"> Lịch sử đặt vé</a></li>
-                            <li><a class="dropdown-item" href="logout.php"> Đăng xuất</a></li>
+                          <li><a class="dropdown-item" href="profile.php"> Thông tin cá nhân</a></li>
+                          <li><a class="dropdown-item" href="historyLogin.php"> Lịch sử đặt vé</a></li>
+                          <li><a class="dropdown-item" href="logout.php"> Đăng xuất</a></li>
                         </ul>
                       </li>';
               }
@@ -98,12 +97,6 @@
         <div class="row">
         <form action="search_flight.php" method="post" >
             <div class="card w-75 mx-auto mt-3 mb-3" id = "searchCard" style="padding-left: 10px;"> 
-                <div class="card-body">
-                  <div class="radio fs-6">
-                    <input type="radio" id="radio1" name="ticket_type" <?php if (isset($ticket_type) && $ticket_type=="Two-way") echo "checked";?> value="Two-way" required><span style="margin-right: 250px;"> Khứ hồi</span>
-                    <input type="radio" id="radio2" name="ticket_type" <?php if (isset($ticket_type) && $ticket_type=="One-way") echo "checked";?> value="One-way" required><span> Một chiều</span>
-                  </div>
-                </div>
                 <div class = "radio passenger">
                 <span>Người lớn (từ 12 tuổi trở lên):</span>
                   <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_over12" type="number" value="<?php if(isset($over12)){echo $over12;} else{echo 0;}?>">
@@ -143,10 +136,6 @@
               <div class = "radio">
                 <span>Chọn ngày đi: </span>
                 <input type = "date" id = "ngayDi" style = "margin-right: 150px;" value="<?php if(isset($day_start)){echo $day_start;}?>"  name="day_start" required>
-                <br><br>
-                <span>Chọn ngày về: </span>
-                <input type = "date" id = "ngayVe" value="<?php if(isset($day_back)){echo $day_back;}?>" name="day_back">
-                <span>(Nếu chọn khứ hồi)</span>
                 <br><br>
               </div>
               <button type="submit" id = "searchButton" class="btnHover btn text-white mx-auto mt-3 mb-3" name="find_flight">Tìm chuyến bay <i class="fa fa-search fa-1x" aria-hidden="true"></i></button>
@@ -201,57 +190,7 @@
                 </div>
             </div>
             <div id = "card-container-start"class="col-lg-8 mt-3">
-            </div>
-            <div class="card mt-3 return-div">
-                <div class="card-body">
-                    <h5>Chuyến bay về</h5>
-                    <span><span class="fa fa-plane"></span>  <b><?php if(isset($destination))echo $destination;?> đến <?php if(isset($start))echo $start;?> </b> 
-                    – <?php
-                    if(isset($day_back)){
-                      $day = explode("-", $day_back);
-                      $back_date = 'Ngày '.$day[2].'/'.$day[1].'/'.$day[0];
-                      echo $back_date;
-                    }
-                    ?>
-                  </span>
-                </div>
-            </div>
-            
-            <div class="col-lg-4 mt-3 return-div">
-                <div class="card" style="height: 100%; width: 100%;">
-                    <div class="card-body">
-                        <span style="font-weight: bold;font-size: 24px;">Bộ lọc</span>
-                        <span style="margin-left: 140px;color: rgb(201, 195, 195);" id="remove-filter">Xóa lọc</span>
-                        <form>
-                        <ul id="filters-2" class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <h6>Hạng chuyến bay</h6>
-                                        <div style="margin-bottom: 5px;">
-                                            <input type="checkbox" class="check-btn-2" name="flight-class" id="flight-class" value="PT"><span style="font-size: 16px; margin-left:10px">Phổ thông</span></input><br>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" class="check-btn-2" name="flight-class" id="flight-class" value="TG"><span style="font-size: 16px;margin-left:10px">Thương gia</span></input>
-                                        </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <h6>Hãng hàng không</h6> 
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-2" name="airline[]" id="airline" value="AL"><span style="font-size: 16px; margin-left:10px">Vietnam Airline</span></input><br>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-2" name="airline[]" id="airline" value="VJ"><span style="font-size: 16px;margin-left:10px">Vietjet Air</span></input>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-2" name="airline[]" id="airline" value="BL"><span style="font-size: 16px;margin-left:10px">Jetstar Pacific Airlines</span></input>
-                                    </div>
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 mt-3 return-div" id = "card-container-des">
-            </div>
+            </div>            
         </div>
     </div>
     <footer class="bg-dark text-center text-lg-start text-white">

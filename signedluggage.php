@@ -172,7 +172,7 @@
                 <div class="card" style="margin-top: 180px;">
                     <div class="card-body">
                         <button type="submit" class="btn-continue" name="choose_luggage" value="luggage">Tiếp tục</button>
-                        <span class="price"><?php echo $price . " + Giá tiền hành lý VNĐ";?></span>
+                        <span class="price"><?php echo number_format(floatval($price),0,',','.') . " + (Giá tiền hành lý) VNĐ";?></span>
                     </div>
                 </div>
             </div>

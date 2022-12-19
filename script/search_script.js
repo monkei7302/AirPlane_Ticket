@@ -82,11 +82,9 @@ function getFlight() {
                                         Hạng: <b>`+ category + `</b> <br>     
                                         Thời gian: <b>`+ formatTime(flight.duration) + `</b>  <br>    
                                         Máy bay: <b>`+ flight.airline_name + `</b>  <br>   
-                                        Số ghế trống: <b>`+ seat + `</b>  <br>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                        <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
                                     </div>
                                 </div>
                             </div>
@@ -189,11 +187,9 @@ function getReturn() {
                                         Hạng: <b>`+ category + `</b> <br>     
                                         Thời gian: <b>`+ formatTime(flight.duration) + `</b>  <br>    
                                         Máy bay: <b>`+ flight.airline_id + `</b>  <br>   
-                                        Số ghế trống: <b>`+ seat + `</b>  <br>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                        <a href="signedluggage.php" class="btn-book-ticket">Chọn vé</a>
                                     </div>
                                 </div>
                             </div>

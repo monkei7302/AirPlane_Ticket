@@ -23,6 +23,8 @@ $(document).ready(function () {
     function submitData(e) {
         var numberOfChecked = $('input:checkbox:checked').length;
         price = document.getElementById("price")
+        console.log(numberOfChecked)
+        console.log(numOfPassenger)
         if (numberOfChecked == numOfPassenger) {
 
             seat_price = 0

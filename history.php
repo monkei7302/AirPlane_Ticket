@@ -133,6 +133,9 @@
                                   <h4>Thông tin vé máy bay</h4>
                                   <span><b>Mã đặt vé: </b>'.$id_ticket.'</span>
                                   <br>
+                                  <span style = "margin-right: 75px;"><b>Mã chuyến bay:</b> '.$_SESSION['flight_id'].'</span>
+                                  <span> <b>Ghế ngồi: </b>'.$_SESSION['num_seat'].'</span>
+                                  <br>
                                   <span style = "margin-right: 75px;"><b>Điểm đi:</b> '.$from.'</span>
                                   <span> <b>Điểm đến: </b>'.$to.'</span>
                                   <br>

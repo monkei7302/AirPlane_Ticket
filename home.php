@@ -75,12 +75,6 @@
           <div class="row">
             <form action="search_flight.php" method="post" >
               <div class="card w-75 mx-auto" id = "searchCard"  style="padding-left: 10px;">
-                    <div class="card-body">
-                    <div class="radio fs-6" >
-                        <input type="radio" class='radio-btn-1' id="radio1" name="ticket_type" value="Two-way" required><span style="margin-right: 250px;"> Khứ hồi</span>
-                        <input type="radio" id="radio2" name="ticket_type" value="One-way" required><span> Một chiều</span>
-                      </div>
-                    </div>
                     <div class = "radio passenger">
                       <span>Người lớn (từ 12 tuổi trở lên):</span>
                       <input aria-label="quantity" class="input-qty" max="2" min="0" name="numberOfPassenger_over12" type="number" value="0">
@@ -101,10 +95,6 @@
                     <span>Chọn ngày đi: </span>
                     <input type = "date" id = "ngayDi" style = "margin-right: 150px;" name="day_start" required>
                     <br><br>
-                    <span>Chọn ngày về: </span>
-                    <input type = "date" id = "ngayVe" name="day_back">
-                    <span>(Nếu chọn khứ hồi)</span>
-                    <br>
                   </div>
                   <button type="submit" id = "searchButton" class="btnHover btn text-white mx-auto mt-3 mb-3" name="find_flight">Tìm chuyến bay <i class="fa fa-search fa-1x" aria-hidden="true"></i></button>
               </div>
@@ -136,7 +126,6 @@
                               <p class="card-text">Ngày đi: '.$date_hl.'</p>
                               <p class="card-text">'.$des_hl.'</p>
                               <h5 class = "text-danger font-weight-bold">Giá chỉ từ: '.number_format(floatval($price_hl),0,',','.').' đ</h5>
-                              <a href="#" class="btnHover btn mt-3">Tìm hiểu thêm</a>
                             </div>
                           </div>
                         </div>
@@ -167,16 +156,16 @@
               <h5 class="text-uppercase">về chúng tôi</h5>
               <ul class="list-unstyled mb-0">
                 <li>
-                  <a href="#!" class="text-white">Tập đoàn</a>
+                  <a href="aboutus.php" class="text-white">Tập đoàn</a>
                 </li>
                 <li>
-                  <a href="#!" class="text-white">Đội bay</a>
+                  <a href="aboutus.php" class="text-white">Đội bay</a>
                 </li>
                 <li>
-                  <a href="#!" class="text-white">Cam kết với khách hàng</a>
+                  <a href="aboutus.php" class="text-white">Cam kết với khách hàng</a>
                 </li>
                 <li>
-                  <a href="#!" class="text-white">Các điều kiện và điều khoản</a>
+                  <a href="aboutus.php" class="text-white">Các điều kiện và điều khoản</a>
                 </li>
               </ul>
             </div>
@@ -185,10 +174,7 @@
     
               <ul class="list-unstyled">
                 <li>
-                  <i class="fa fa-ticket" aria-hidden="true"></i><a href="search_flight.html" class="text-white"> Vé máy bay</a>
-                </li>
-                <li>
-                  <i class="fa fa-bell-o" aria-hidden="true"></i> <a href="#!" class="text-white"> Combo khuyến mãi</a>
+                  <i class="fa fa-ticket" aria-hidden="true"></i><a href="search_flight.php" class="text-white"> Vé máy bay</a>
                 </li>
               </ul>
             </div>
@@ -196,28 +182,28 @@
               <h5 class="text-uppercase">Đối tác thanh toán</h5>
               <ul class="list-unstyled">
                 <li>
-                  <a href="#!" class="text-white">
+                  <a class="text-white">
                     <div>
                       VISA
                     </div>
                   </a>
                 </li>
                 <li>
-                  <a href="#!" class="text-white">
+                  <a class="text-white">
                     <div>
                       MASTERCARD
                     </div>
                   </a>
                 </li>
                 <li>
-                  <a href="#!" class="text-white">
+                  <a class="text-white">
                     <div>
                       MOMO
                     </div>
                   </a>
                 </li>
                 <li>
-                  <a href="#!" class="text-white">
+                  <a class="text-white">
                     <div>
                       ZALOPAY
                     </div>

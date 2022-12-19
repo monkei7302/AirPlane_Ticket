@@ -105,47 +105,6 @@
                 }
               ?>
             </div>
-            <!-- <div class = "col-lg-6">
-                <div class = "card mb-5">
-                    <div class = "card-body">
-                        <h2>TICKET00000001</h2>
-                        <h4>Thông tin khách hàng</h4>
-                        <span style = "margin-right: 100px;"><b>Họ: </b>Lê</span>
-                        <span style = "margin-right: 100px;"><b>Tên: </b> Ngân</span>
-                        <span><b>Giới tính: </b>Nữ</span>
-                        <br>
-                        <span><b>Địa chỉ: </b>19 Nguyễn Hữu Thọ, Tân Phong, Quận 7,  TP. Hồ Chí Minh</span>
-                        <br>
-                        <span style = "margin-right: 100px;"><b>Số điện thoại: </b>0909.291.123</span>
-                        <span> <b>Email liên hệ: </b>nganle1234@gmail.com</span>
-                        <h4>Thông tin vé máy bay</h4>
-                        <span><b>Mã đặt vé: </b>TICKET00000001</span>
-                        <br>
-                        <span><b>Loại vé: </b>Phổ thông</span>
-                        <br>
-                        <span><b>Số người: </b>3</span>
-                        <br>
-                        <span><b>Kiểu vé: </b>Một chiều</span>
-                        <br>
-                        <span style = "margin-right: 75px;"><b>Điểm đi:</b> Hồ Chí Minh - Việt Nam (HCM)</span>
-                        <span> <b>Điểm đến: </b>BangKok - Thái Lan (BK)</span>
-                        <br>
-                        <span style = "margin-right: 240px;"><b>Ngày đi:</b> 16/12/2022</span>
-                        <span> <b>Ngày về:</b></span>
-                        <br>
-                        <span><b>Thời gian khởi hành: </b>3.25 PM</span>
-                        <br>
-                        <span><b>Thời gian đến dự kiến: </b>5.00 PM</span>
-                        <br>
-                        <h4>Thông tin hãng bay</h4>
-                        <span><b>Hàng hàng không Sky Airlines</b></span>
-                        <h2 style  = "float: right; margin-top: 10px; margin-bottom: 10px;">1.950.000đ</h2>
-                        <br><br>
-                        <h4  style = "text-align: right; font-size: 18px; color: #4fba4b"><i>(Đã thanh toán)</i></h4>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
     <footer class="bg-dark text-center text-lg-start text-white mt-5">
       <div class="container p-4">

@@ -34,14 +34,20 @@
             }
 
             $flight_id = $_SESSION['flight_id'];
-            $seat_id = $_POST['seat_id'];
+            $seat_id = explode(" ",$_POST['seat_id']);
+            $_SESSION['num_seat'] = $_POST['seat_id'];
+            $count_seat = str_word_count($_POST['seat_id']);
 
-            $sql_seat = "INSERT INTO `seat` VALUES(?,?)";
-            $stm = $con -> prepare($sql_seat);
-            $stm -> bind_param("ss",$seat_id,$flight_id);
-            if(!$stm->execute()){
-                die($stm->error);
+            for($x = 0; $x < $count_seat; $x++){
+                $sql_seat = "INSERT INTO `seat` VALUES(?,?)";
+                $stm = $con -> prepare($sql_seat);
+                $stm -> bind_param("ss",$seat_id[$x],$flight_id);
+                if(!$stm->execute()){
+                    die($stm->error);
+                }
             }
+
+            
 
             $total = $_POST['total'];
             
@@ -92,13 +98,17 @@
         $phone = $_POST['phonenumber'];
 
         $flight_id = $_SESSION['flight_id'];
-        $seat_id = $_POST['seat_id'];
+        $seat_id = explode(" ",$_POST['seat_id']);
+        $_SESSION['num_seat'] = $_POST['seat_id'];
+        $count_seat = str_word_count($_POST['seat_id']);
 
-        $sql_seat = "INSERT INTO `seat` VALUES(?,?)";
-        $stm = $con -> prepare($sql_seat);
-        $stm -> bind_param("ss",$seat_id,$flight_id);
-        if(!$stm->execute()){
-            die($stm->error);
+        for($x = 0; $x < $count_seat; $x++){
+            $sql_seat = "INSERT INTO `seat` VALUES(?,?)";
+            $stm = $con -> prepare($sql_seat);
+            $stm -> bind_param("ss",$seat_id[$x],$flight_id);
+            if(!$stm->execute()){
+                die($stm->error);
+            }
         }
 
 
@@ -110,7 +120,7 @@
         }
 
         
-        $total = $_POST['total'];
+        $total = $_POST['total'];   
 
         $sql_ticket = "INSERT INTO `ticket_info` VALUES(?,?,?,?)";
         $stm = $con -> prepare($sql_ticket);
