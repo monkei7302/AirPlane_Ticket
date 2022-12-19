@@ -18,28 +18,41 @@ $(document).ready(function () {
 
     let button = document.getElementById("btn-continue")
     button.addEventListener("click", submitData, false);
+    var numOfPassenger = $('#adult').val();
+
     function submitData(e) {
-        seat = document.querySelector('input[name="seat"]:checked');
+        var numberOfChecked = $('input:checkbox:checked').length;
         price = document.getElementById("price")
-        totalprice = price.value
-        if (seat == null) {
-            alert("Vui lòng chọn chỗ ngồi")
+        if (numberOfChecked == numOfPassenger) {
+
+            seat_price = 0
+            seatid = []
+
+            $("input:checkbox[type=checkbox]:checked").each(function () {
+                seatid.push($(this).attr("id"))
+                if ($(this).attr("cate") == "1") {
+                    seat_price += 300000;
+                }
+                if ($(this).attr("cate") == "2") {
+                    seat_price += 150000
+                }
+                if ($(this).attr("cate") == "3") {
+                    seat_price += 80000
+                }
+            });
+
+            $("#seat_id").val(seatid)
+            $("#seat_price").val(seat_price)
+
+
+        }
+        else if (numberOfChecked < numOfPassenger) {
+            alert("Vui lòng chọn đủ chỗ ngồi cho " + numOfPassenger + " hành khách")
             e.preventDefault();
         }
         else {
-            if (seat.getAttribute("cate") == "1") {
-                seat_price = 300000;
-            }
-            if (seat.getAttribute("cate") == "2") {
-                seat_price = 150000
-            }
-            if (seat.getAttribute("cate") == "3") {
-                seat_price = 80000
-            }
-            $("#seat_price").val(seat_price)
-            $("#seat_id").val(seat.getAttribute("id"))
-            totalprice = parseInt(totalprice) + seat_price
-            price.value = totalprice;
+            alert("Bạn đã chọn dư " + (numberOfChecked - numOfPassenger) + " ghế");
+            e.preventDefault();
         }
     }
 })

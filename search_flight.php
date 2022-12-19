@@ -1,16 +1,16 @@
 <?php
   require 'api/connect.php';
   session_start();
-
   if(isset($_POST['find_flight'])){
     $ticket_type = $_POST['ticket_type'];
     $over12 = $_POST['numberOfPassenger_over12'];
     $lower12 = $_POST['numberOfPassenger_lower12'];
-    $lower2 = $_POST['numberOfPassenger_lower2'];
+    $_SESSION['baby'] = $_POST['numberOfPassenger_lower2'];
     $start = $_POST['start'];
     $destination = $_POST['destination'];
     $day_start = $_POST['day_start'];
     $day_back = $_POST['day_back'];
+    $_SESSION['adult'] = $lower12 +  $over12;
 
   }
   
@@ -337,7 +337,7 @@
         </div>
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
           © 2022 Copyright:
-          <a class="text-white" href="home.html">SkyAirlines.com.vn</a>
+          <a class="text-white" href="home.php">SkyAirlines.com.vn</a>
         </div>
       </footer>
 </body>

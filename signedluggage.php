@@ -1,13 +1,13 @@
 <?php
     require 'connect.php';
     session_start();
-    
     if(isset($_POST['choose_ticket'])){
         $start = $_POST['start'];
         $destination = $_POST['destination'];
         $date = $_POST['date'];
         $price = $_POST['price'];
         $flight_id = $_POST['flight_id'];
+        $_SESSION['price'] = $price;
     }
 ?>
 <!DOCTYPE html>

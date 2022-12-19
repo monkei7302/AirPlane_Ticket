@@ -83,11 +83,11 @@
                     </div>
                     <div class = "radio passenger">
                       <span>Người lớn (từ 12 tuổi trở lên):</span>
-                      <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_over12" type="number" value="0">
+                      <input aria-label="quantity" class="input-qty" max="2" min="0" name="numberOfPassenger_over12" type="number" value="0">
                       <span>Trẻ em (dưới 12 tuổi):</span>
-                      <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_lower12" type="number" value="0">
+                      <input aria-label="quantity" class="input-qty" max="7" min="0" name="numberOfPassenger_lower12" type="number" value="0">
                       <span>Em bé (dưới 2 tuổi):</span>
-                      <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_lower2" type="number" value="0">
+                      <input aria-label="quantity" class="input-qty" max="2" min="0" name="numberOfPassenger_lower2" type="number" value="0">
                     </div>
                     <div>
                     <select id = "start" class="form-select" aria-label="Default select example" style = "width: 45%" name="start" required="true"> 
@@ -243,7 +243,7 @@
         </div>
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
           © 2022 Copyright:
-          <a class="text-white" href="home.html">SkyAirlines.com.vn</a>
+          <a class="text-white" href="home.php">SkyAirlines.com.vn</a>
         </div>
       </footer>
 

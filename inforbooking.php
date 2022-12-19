@@ -1,28 +1,12 @@
 <?php
+session_start();
 require 'connect.php';
 if(isset($_POST['plane_seating'])){
     $seat_price = $_POST['seat_price'];
     $seat_id = $_POST['seat_id'];
 }
-session_start();
-if($_SESSION['type_luggage'] == 0){
-  $luggage = 0;
-}
-else if($_SESSION['type_luggage'] == 20){
-  $luggage = 200000;
-}
-else if($_SESSION['type_luggage'] == 25){
-  $luggage = 250000;
-}
-else if($_SESSION['type_luggage'] == 30){
-  $luggage = 300000;
-}
-else if($_SESSION['type_luggage'] == 35){
-  $luggage = 350000;
-}
-else if($_SESSION['type_luggage'] == 40){
   $luggage = 400000;
-}
+
 
 $flight_id = $_SESSION['flight_id'];
 $sql_locate = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` = '$flight_id'");
@@ -150,7 +134,7 @@ while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
             <div class="card" style="margin-top: 100px;">
                 <div class="card-body">
                 <a href="#" class="btn-continue" data-bs-toggle="modal" data-bs-target="#payment">Thanh toán</a>
-                    <span class="price"><?php echo number_format(floatval($_SESSION['price']),0,',','.')?> VNĐ</span>
+                    <span class="price"><?php echo number_format(floatval($_SESSION['price']*$_SESSION['adult']+$luggage+$seat_price),0,',','.')?> VNĐ</span>
                 </div>
             </div>
         </div>
@@ -165,7 +149,7 @@ while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
                         <div class="modal-body">
                             <h5 class="modal-title" style="margin-bottom: 30px;text-align: center;">Chuyến bay từ <?php echo $from;?> đến <?php echo $to;?> <br> Ngày <?php echo str_replace('-','/',date("d-m-Y", strtotime($date[0])));?></h5>
                             <div style="margin-bottom: 15px;">
-                                <span style="font-weight: bold;font-size: 18px;">Giá vé</span><span style="float: right;font-size: 18px;"><?php if(isset($_SESSION)) echo number_format(floatval($_SESSION['price']),0,',','.');?> VNĐ</span>
+                                <span style="font-weight: bold;font-size: 18px;">Giá vé</span><span style="float: right;font-size: 18px;"><?php if(isset($_SESSION)) echo number_format(floatval($_SESSION['price']),0,',','.') ;?> VNĐ X <?php echo $_SESSION['adult']?></span>
                             </div>
                             <div style="margin-bottom: 15px;">
                                 <span style="font-weight: bold;font-size: 18px;">Hành lý ký gửi</span><span style="float: right;font-size: 18px;"><?php echo number_format(floatval($luggage),0,',','.')?> VNĐ</span>
