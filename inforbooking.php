@@ -1,26 +1,31 @@
 <?php
-session_start();
-require 'connect.php';
-if(isset($_POST['plane_seating'])){
-    $seat_price = $_POST['seat_price'];
-    $seat_id = $_POST['seat'];
 
-    $obj = "";
-    foreach($seat_id as $obj1){
-      $obj .= $obj1." ";
-    }
+  //Kích hoạt các biến giá trị session
+  session_start();
+  //Kết nối dữ liệu database
+  require 'connect.php';
 
-}
+  //Chuyển mảng chỗ ngồi thành dạng chuỗi
+  if(isset($_POST['plane_seating'])){
+      $seat_price = $_POST['seat_price'];
+      $seat_id = $_POST['seat'];
+
+      $obj = "";
+      foreach($seat_id as $obj1){
+        $obj .= $obj1." ";
+      }
+
+  }
   $luggage = 400000;
 
 
-$flight_id = $_SESSION['flight_id'];
-$sql_locate = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` = '$flight_id'");
-while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
-  $from = $row_locate['from_location'];
-  $to = $row_locate['to_location'];
-  $date = explode(" ", $row_locate['departure_time']);
-}
+  $flight_id = $_SESSION['flight_id'];
+  $sql_locate = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` = '$flight_id'");
+  while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
+    $from = $row_locate['from_location'];
+    $to = $row_locate['to_location'];
+    $date = explode(" ", $row_locate['departure_time']);
+  }
 
 
 ?>
@@ -153,7 +158,7 @@ while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
                         <h4 class="modal-title">Tóm tắt thanh toán</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    
+                    <!-- Lấy dữ liệu và hiển thị ở modal tóm tắt thanh toán -->
                         <div class="modal-body">
                             <h5 class="modal-title" style="margin-bottom: 30px;text-align: center;">Chuyến bay từ <?php echo $from;?> đến <?php echo $to;?> <br> Ngày <?php echo str_replace('-','/',date("d-m-Y", strtotime($date[0])));?></h5>
                             <div style="margin-bottom: 15px;">
