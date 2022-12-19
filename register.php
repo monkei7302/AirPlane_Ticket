@@ -11,10 +11,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/login_register_style.css">
-<style>
-</style>
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/login_register_style.css">
 </head>
 <body>
     <div class="form" style="margin-top:35px;">
