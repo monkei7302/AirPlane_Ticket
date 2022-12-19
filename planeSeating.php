@@ -5,7 +5,8 @@
     $type_luggage = $_POST['luggage'];
 
     $_SESSION['flight_id'] = $flight_id;
-
+    //Kiểm tra trước đó user chọn loại hành lý gì
+    //Gán cho giá tiền tương ứng loại đó
     if($type_luggage == 0){
       $luggage = 0;
     }
@@ -157,6 +158,7 @@
                       <a class="nav-link" href="history.php">Tra cứu</a>
                     </li>
                     <?php
+                    //Nếu đã đăng nhập thì sẽ hiển thị thông tin thay cho nút đăng nhập
                       if(isset($_SESSION['login'])){
                         echo '<li class="nav-item dropdown">
                                 <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> Welcome '.$_SESSION['username'].'</a>
@@ -198,6 +200,7 @@
 
         <form action="inforbooking.php" method="post">
         <div class  ="container mx-auto">   
+          <!-- Tính giá tiền = giá vé + giá hành lý -->
           <input id = "price" type="hidden" name="price" value="<?php echo floatval($_SESSION['price'])+$luggage;?>">
           <input id = "flight_id" type="hidden" name="flight_id" value="<?php echo $flight_id?>">
             <div class = "row">
@@ -215,9 +218,11 @@
                         <div class = "card-text">Lưu ý: Trẻ em dưới 2 tuổi không tính ghế</div>
                     </div>
                 </div>
+                <!-- Hiển thị các hàng ghế ngồi -->
                 <div class="plane card col-lg-3">
                     <div class="exit exit--front"></div>
                     <ol class="cabin ">
+                      <!-- Hàng 1 -->
                       <li class="row row--1">
                         <ol class="seats typeSeat1" type="A">
                           <li class="seat">
@@ -246,6 +251,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 2 -->
                       <li class="row row--2 ">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
@@ -274,6 +280,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 3 -->
                       <li class="row row--3">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
@@ -302,6 +309,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 4 -->
                       <li class="row row--4">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
@@ -330,6 +338,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 5 -->
                       <li class="row row--5">
                         <ol class="seats typeSeat2" type="A">
                           <li class="seat">
@@ -358,6 +367,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 6 -->
                       <li class="row row--6">
                         <ol class="seats" type="A">
                           <li class="seat">
@@ -386,6 +396,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 7 -->
                       <li class="row row--7">
                         <ol class="seats" type="A">
                           <li class="seat">
@@ -414,6 +425,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 8 -->
                       <li class="row row--8">
                         <ol class="seats" type="A">
                           <li class="seat">
@@ -442,6 +454,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 9 -->
                       <li class="row row--9">
                         <ol class="seats" type="A">
                           <li class="seat">
@@ -470,6 +483,7 @@
                           </li>
                         </ol>
                       </li>
+                       <!-- Hàng 10 -->
                       <li class="row row--10">
                         <ol class="seats" type="A">
                           <li class="seat">

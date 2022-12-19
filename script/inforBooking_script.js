@@ -1,6 +1,7 @@
+//Lấy thông tin user từ database và load lên form 
+//nếu user đã đăng nhập
 function getProfile() {
 
-    console.log()
     let data = {
         passenger_username: $('#passenger_username').val(),
     }
@@ -23,6 +24,7 @@ function getProfile() {
 }
 
 $(document).ready(function () {
+    //Check xem user đăng nhập hay chưa
     if ($('#passenger_username').val()) {
         getProfile()
     }

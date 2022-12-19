@@ -1,3 +1,5 @@
+//Lấy ra danh sách ghế đã được đặt
+//và disable ghế đó ,không cho chọn
 function getOccupiedSeat() {
 
     let data = {
@@ -20,6 +22,7 @@ $(document).ready(function () {
     button.addEventListener("click", submitData, false);
     var numOfPassenger = $('#adult').val();
 
+    //Kiểm tra số ghế khi bấm nút tiếp tục
     function submitData(e) {
         var numberOfChecked = $('input:checkbox:checked').length;
         price = document.getElementById("price")
@@ -30,6 +33,7 @@ $(document).ready(function () {
             seat_price = 0
             seatid = []
 
+            //Kiểm tra loại ghế được chọn là gì để tính giá tiền phù hợp
             $("input:checkbox[type=checkbox]:checked").each(function () {
                 seatid.push($(this).attr("id"))
                 if ($(this).attr("cate") == "1") {
@@ -48,10 +52,12 @@ $(document).ready(function () {
 
 
         }
+        //Chọn chưa đủ số ghế
         else if (numberOfChecked < numOfPassenger) {
             alert("Vui lòng chọn đủ chỗ ngồi cho " + numOfPassenger + " hành khách")
             e.preventDefault();
         }
+        //Chọn dư số ghế
         else {
             alert("Bạn đã chọn dư " + (numberOfChecked - numOfPassenger) + " ghế");
             e.preventDefault();

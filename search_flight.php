@@ -1,4 +1,5 @@
 <?php
+
   require 'api/connect.php';
   session_start();
   if(isset($_POST['find_flight'])){
@@ -53,6 +54,8 @@
               <a class="nav-link" href="history.php">Tra cứu</a>
             </li>
             <?php
+            //Nếu user đã đăng nhập thì nút đăng nhập đổi thành 
+            //Thông tin cá nhân, lịch sử, đăng xuất
               if(isset($_SESSION['login'])){
                 echo '<li class="nav-item dropdown">
                         <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> Welcome '.$_SESSION['username'].'</a>
@@ -106,6 +109,7 @@
                   <input aria-label="quantity" class="input-qty" max="50" min="0" name="numberOfPassenger_lower2" type="number" value="<?php if(isset($lower2)){echo $lower2;} else{echo 0;}?>">
               </div>
               <div>
+                <!-- Đặt điểm đi mặc định cho thẻ select là giá trị user đã chọn từ trang trước-->
                 <select id="start" class="form-select" aria-label="Default select example" style = "width: 45%" name="start" id="start"> 
                   <option selected><?php if(isset($_POST['find_flight'])){ if($start == "Điểm đi"){
                     echo "Chọn điểm đi";
@@ -119,6 +123,7 @@
 
                   ?></option>
                 </select>
+                <!-- Đặt điểm đến mặc định cho thẻ select -->
                 <select id="des" class="form-select" aria-label="Default select example" style = "width: 45%" name="destination"> 
                   <option selected><?php if(isset($_POST['find_flight'])){ if($destination == "Điểm đến"){
                     echo "Chọn điểm đến";
@@ -146,6 +151,7 @@
                     <h5>Chuyến bay đi</h5>
                     <span><span class="fa fa-plane"></span>  <b><?php if(isset($start)) {echo $start;}?> đến <?php if(isset($destination)){echo $destination;}?> </b> – 
                     <?php
+                    //Hiển thị ngày đi nếu ngày đi không rỗng
                     if(isset($day_start)){
                       $day = explode("-", $day_start);
                       $start_date = 'Ngày '.$day[2].'/'.$day[1].'/'.$day[0];
@@ -269,6 +275,7 @@
       </footer>
 </body>
 <script>
+  //Xử lí bỏ chọn tất cả checkbox khi click nút xóa lọc
     let btn_remove_checked = document.getElementById("remove-filter");
     btn_remove_checked.addEventListener('click',removeChecked);
     function removeChecked(){

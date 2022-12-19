@@ -1,3 +1,5 @@
+
+//Lấy danh sách nơi xuất phát từ databse truyền vào thẻ select
 function getStart() {
     $.get("./api/get-start_place.php", function (data, status) {
         let select = document.getElementById("start");
@@ -11,6 +13,7 @@ function getStart() {
     }, "json");
 }
 
+//Lấy danh sách điểm đến từ databse truyền vào thẻ select
 function getDestination() {
     $.get("./api/get-destination.php", function (data, status) {
         let select = document.getElementById("destination");
@@ -28,6 +31,8 @@ $(document).ready(function () {
     getStart()
     getDestination()
 
+    // Xử lí sự kiện chọn vé khứ hồi / một chiều
+    //Vé khứ hồi bắt buộc phải chọn ngày về
     $('.radio-btn-1').on('change', function () {
         let ngayVe = document.getElementById("ngayVe");
         if ($(this).is(':checked')) {
