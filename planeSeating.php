@@ -211,6 +211,8 @@
                         <br>
                         <div class = "note" style = "background-color: #f6616d"></div>
                         <div class = "card-text">Chỗ ngồi tiêu chuẩn - 80.000đ</div>
+                        <br>
+                        <div class = "card-text">Lưu ý: Trẻ em dưới 2 tuổi không tính ghế</div>
                     </div>
                 </div>
                 <div class="plane card col-lg-3">

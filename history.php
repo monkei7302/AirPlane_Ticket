@@ -1,12 +1,16 @@
 <?php
+  //Kết nối dữ liệu database
   require 'connect.php';
+  //Kích hoạt các biến giá trị session
   session_start();
 
+  //Lưu giá trị id_ticket_pay là id vé sau khi đã thanh toán
   $id_ticket_pay = "";
   if(isset($_GET['id_ticket'])){
     $id_ticket_pay = $_GET['id_ticket'];
   }
 
+  //Lưu giá trị id_ticket là id vé sau khi bấm tìm kiếm theo từ khóa id vé
   if(isset($_POST['search'])){
     $id_ticket = $_POST['id_ticket'];
   }
@@ -65,6 +69,7 @@
             <li class="nav-item">
               <a class="nav-link" href="history.php">Tra cứu</a>
             </li>
+            <!-- Hiển thị thao tác xem thông tin cá nhân, lịch sử đặt vé, đăng xuất khi người dùng đăng nhập thành công -->
             <?php
               if(isset($_SESSION['login'])){
                 echo '<li class="nav-item dropdown">
@@ -76,6 +81,7 @@
                         </ul>
                       </li>';
               }
+              // Ản thao tác xem thông tin cá nhân, lịch sử đặt vé, đăng xuất khi không đăng nhập
               else{
                 echo '<li class="nav-item">
                         <a class="nav-link" href="login.php">Đăng nhập</a>
@@ -94,6 +100,8 @@
           <div class = "col-lg-8">
             <div class = "card" >
                 <div class = "card-body">
+                  <!-- Đoạn mã lấy dữ liệu từ database về thông tin khách hàng, thông tin vé, thông tin chuyến bay để hiển thị
+                  chi tiết lịch sử đặt vé của người dùng khi chọn tìm kiếm vé dựa theo id_ticket -->
                   <?php
                   if(isset($_POST['search'])){
                     $sql_search = "SELECT * FROM `ticket_info` WHERE `ticket_id` = '$id_ticket'";
@@ -117,6 +125,7 @@
                       $departure_time = explode(" ", $departure_time);
                       $arrival_time = explode(" ", $arrival_time);
                       $sql_pro = mysqli_query($con, "SELECT * FROM `passenger_profile` WHERE `profile_id` = '$pro_id'");
+                      //Vòng lặp while lấy dữ liệu từ database và cập nhật vào thông tin để hiển thị lên màn hình
                       while($row_pro = $sql_pro->fetch_array(MYSQLI_ASSOC)){
                         echo '
                           
@@ -156,6 +165,7 @@
                         ';
                       }
                     }
+                    //Hiển thị không tìm thấy vé khi người dùng nhập id vé không phù hợp
                     else{
                       echo '<h5 style="text-align: center; margin-top: 30px "><b><i>Không tìm thấy vé!</i></b></h5>';
                       

@@ -1,6 +1,9 @@
 <?php
+    //Kết nối dữ liệu database
     require 'connect.php';
+    //Kích hoạt các biến giá trị session
     session_start();
+    //Lưu các biến khi chọn vé thành công
     if(isset($_POST['choose_ticket'])){
         $start = $_POST['start'];
         $destination = $_POST['destination'];
@@ -48,6 +51,7 @@
             <li class="nav-item">
               <a class="nav-link" href="history.php">Tra cứu</a>
             </li>
+            <!-- Hiển thị thao tác xem thông tin cá nhân, lịch sử đặt vé, đăng xuất khi người dùng đăng nhập thành công -->
             <?php
               if(isset($_SESSION['login'])){
                 echo '<li class="nav-item dropdown">
@@ -59,6 +63,7 @@
                         </ul>
                       </li>';
               }
+              // Ản thao tác xem thông tin cá nhân, lịch sử đặt vé, đăng xuất khi không đăng nhập
               else{
                 echo '<li class="nav-item">
                         <a class="nav-link" href="login.php">Đăng nhập</a>
@@ -88,6 +93,7 @@
     <h1 style="text-align:center">Chọn hành lý</h1>
     <div style="margin-left: 20px;">
         <h2 onclick="check()">Chuyến bay đi(đến)</h2>
+        <!-- Hiển thị các địa điểm đi, đến, ngày đi -->
         <span><span class="fa fa-plane"></span>  <b><?php echo $start;?> đến <?php echo $destination;?></b> – Ngày <?php echo str_replace('-','/',date("d-m-Y", strtotime($date))) ;?></span><br><br>
         <span style="font-weight: bold;font-size: 24px;">Hành lý ký gửi</span><br>
         <span>Quý khách làm thủ tục cho hành lý ký gửi trước khi đến cổng và sẽ không thể mang hành lý ký gửi lên máy bay.</span><br>
@@ -171,8 +177,9 @@
                 </div>
                 <div class="card" style="margin-top: 180px;">
                     <div class="card-body">
+                        <!-- Hiển thị giá tiền của vé -->
                         <button type="submit" class="btn-continue" name="choose_luggage" value="luggage">Tiếp tục</button>
-                        <span class="price"><?php echo number_format(floatval($price),0,',','.') . " + (Giá tiền hành lý) VNĐ";?></span>
+                        <span class="price"><?php echo "Giá vé: ". number_format(floatval($price),0,',','.') . " + (Giá tiền hành lý) VNĐ";?></span>
                     </div>
                 </div>
             </div>

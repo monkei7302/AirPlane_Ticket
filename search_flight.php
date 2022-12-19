@@ -172,18 +172,6 @@
                                             <input type="checkbox" class="check-btn-1" name="flight-class" id="flight-class" value="TG"><span style="font-size: 16px;margin-left:10px">Thương gia</span></input>
                                         </div>
                                 </li>
-                                <li class="list-group-item">
-                                    <h6>Hãng hàng không</h6> 
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="airline[]" id="airline" value="AL"><span style="font-size: 16px; margin-left:10px">Vietnam Airline</span></input><br>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="airline[]" id="airline" value="VJ"><span style="font-size: 16px;margin-left:10px">Vietjet Air</span></input>
-                                    </div>
-                                    <div style="margin-bottom: 5px;">
-                                        <input type="checkbox" class="check-btn-1" name="airline[]" id="airline" value="JP"><span style="font-size: 16px;margin-left:10px">Jetstar Pacific Airlines</span></input>
-                                    </div>
-                                </li>
                             </ul>
                         </form>
                     </div>

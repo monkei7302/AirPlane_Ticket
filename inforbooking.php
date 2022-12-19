@@ -167,7 +167,7 @@ while($row_locate = $sql_locate->fetch_array(MYSQLI_ASSOC)){
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <input type="hidden" name="total" value="<?php echo (floatval($_SESSION['price']) + floatval($luggage) + floatval($seat_price));?>">
+                            <input type="hidden" name="total" value="<?php echo (floatval($_SESSION['price'])*floatval($_SESSION['adult']) + floatval($luggage) + floatval($seat_price));?>">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                             <button type = "submit" class="btn add-color" data-bs-toggle="modal" name="paid" value="paid">Thanh toán</a>
                         </div>

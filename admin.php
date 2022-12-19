@@ -1,6 +1,14 @@
 <?php
+    //Kết nối dữ liệu database
     require 'connect.php';
+    //Kích hoạt các biến giá trị session
     session_start();
+
+    //Kiểm tra nếu chưa đăng nhập sẽ đẩy ra trang login yêu cầu đăng nhập
+    if(!isset($_SESSION['login'])){
+        header("location: login.php");
+      }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,6 +101,7 @@
             </tr>
             </thead>
             <tbody id="table-body">
+                <!-- Liệt kê tất cả chuyến bay hiện có trong database -->
                 <?php
                     $sql_flight = "SELECT * FROM `flight`";
                     $sql_flight_run = mysqli_query($con,$sql_flight);
@@ -141,6 +150,7 @@
             </tr>
             </thead>
             <tbody id="table-body">
+                <!-- Liệt kê tất cả chuyến bay nổi bật hiện có trong database -->
                 <?php
                 $sql_hl = "SELECT * FROM `hight_light`";
                 $sql_hl_run = mysqli_query($con,$sql_hl);
@@ -187,6 +197,7 @@
             </tr>
             </thead>
             <tbody id="table-body">
+                <!-- Liệt kê tất cả địa điểm bắt đầu hiện có trong database -->
                 <?php
                     $sql_start = "SELECT * FROM `start_place`";
                     $sql_start_run = mysqli_query($con,$sql_start);
@@ -222,7 +233,8 @@
             </tr>
             </thead>
             <tbody id="table-body">
-            <?php
+                <!-- Liệt kê tất cả địa điểm đến hiện có trong database -->
+                <?php
                     $sql_des = "SELECT * FROM `destination`";
                     $sql_des_run = mysqli_query($con,$sql_des);
                     while($row_des = $sql_des_run->fetch_array(MYSQLI_ASSOC)){
@@ -261,6 +273,7 @@
             </tr>
             </thead>
             <tbody id="table-body">
+                <!-- Liệt kê tất cả thông tin khách hàng hiện có trong database (bao gồm khách hàng đăng ký và không đăng ký tài khoản) -->
             <?php
                 $sql_profile = "SELECT * FROM `passenger_profile`";
                 $sql_profile_run = mysqli_query($con,$sql_profile);
@@ -310,6 +323,7 @@
             </tr>
             </thead>
             <tbody id="table-body">
+                <!-- Liệt kê tất cả vé bán hiện có trong database -->
                 <?php
                     $sql_history = "SELECT * FROM `ticket_info`";
                     $sql_history_run = mysqli_query($con,$sql_history);
@@ -345,6 +359,7 @@
             </tr>
             </thead>
             <tbody id="table-body">
+                <!-- Liệt kê thông số doanh thu của các chuyến bay hiện có trong database -->
                 <?php
                     $sql_revenue = mysqli_query($con,"SELECT DISTINCT `flight_id` FROM `ticket_info`");
                     while($row_revenue_flight = $sql_revenue->fetch_array(MYSQLI_ASSOC)){
@@ -384,6 +399,7 @@
                         <input type="text" class="input-control" placeholder="Nhập tên máy bay" name="airline_name"/>
                         Chọn địa điểm xuất phát<br>
                         <select id="from_location" name="from_location">
+                            <!-- Cập nhật dữ liệu vào danh sách option địa điểm bắt đầu-->
                             <?php
                                 $sql_flight_pt_start = "SELECT * FROM `start_place`";
                                 $sql_flight_pt_start = mysqli_query($con,$sql_flight_pt_start);
@@ -394,7 +410,8 @@
                         </select>
                         Chọn địa điểm đến<br>
                         <select id="to_location" name="to_location">
-                        <?php
+                            <!-- Cập nhật dữ liệu vào danh sách option địa điểm đến-->
+                            <?php
                                 $sql_flight_pt_des = "SELECT * FROM `destination`";
                                 $sql_flight_pt_des = mysqli_query($con,$sql_flight_pt_des);
                                 while($row_flight_pt_des = mysqli_fetch_array($sql_flight_pt_des)):;
@@ -437,6 +454,7 @@
                         <input type="text" class="input-control" placeholder="Nhập tên máy bay" name="airline_name"/>
                         Chọn địa điểm xuất phát<br>
                         <select id="from_location" name="from_location">
+                            <!-- Cập nhật dữ liệu vào danh sách option địa điểm bắt đầu-->
                             <?php
                                 $sql_flight_pt_start = "SELECT * FROM `start_place`";
                                 $sql_flight_pt_start = mysqli_query($con,$sql_flight_pt_start);
@@ -447,7 +465,8 @@
                         </select>
                         Chọn địa điểm đến<br>
                         <select id="to_location" name="to_location">
-                        <?php
+                            <!-- Cập nhật dữ liệu vào danh sách option địa điểm đến-->
+                            <?php
                                 $sql_flight_pt_des = "SELECT * FROM `destination`";
                                 $sql_flight_pt_des = mysqli_query($con,$sql_flight_pt_des);
                                 while($row_flight_pt_des = mysqli_fetch_array($sql_flight_pt_des)):;
@@ -687,8 +706,12 @@
     </div>
 </body>
 <script>
+        //Đoạn mã auto open trang chủ admin
         document.getElementById("defaultOpen").click(); 
+
+        //Đoạn mã lưu giá trị id của các thao tác
         $(document).ready(function(){
+            //Lưu giá trị id user được chọn sẽ xóa
             $('.btn_delete_user').click(function(e){
                 e.preventDefault();
                 var id = $(this).closest('tr').find('.user_id').text();
@@ -697,6 +720,7 @@
                 $('#deletecustomer').modal('show');
             })
 
+            //Lưu giá trị id chuyến bay nổi bật được chọn sẽ xóa
             $('.btn_delete_hight_light').click(function(e){
                 e.preventDefault();
                 var id = $(this).closest('tr').find('.hl_id').text();
@@ -705,6 +729,7 @@
                 $('#deletehightflight').modal('show');
             })
 
+            //Lưu giá trị id chuyến bay nổi bật được chọn sẽ cập nhật
             $('.btn_update_hight_light').click(function(e){
                 $('#updatehightflight').modal('show');
                 $tr = $(this).closest('tr');
@@ -722,6 +747,7 @@
                 $('#pricehight').val(data[5]);
             })
 
+            //Lưu giá trị id địa điểm bắt đầu được chọn sẽ xóa
             $('.btn_delete_start').click(function(e){
                 e.preventDefault();
                 var id = $(this).closest('tr').find('.start_id').text();
@@ -730,6 +756,7 @@
                 $('#deletestart').modal('show');
             })
 
+            //Lưu giá trị id địa điểm đến được chọn sẽ xóa
             $('.btn_delete_des').click(function(e){
                 e.preventDefault();
                 var id = $(this).closest('tr').find('.des_id').text();
@@ -738,6 +765,7 @@
                 $('#deletedes').modal('show');
             })
 
+            //Lưu giá trị id lịch sử đặt vé được chọn sẽ xóa
             $('.btn_delete_history').click(function(e){
                 e.preventDefault();
                 var id1 = $(this).closest('tr').find('.his_pro_id').text();
@@ -749,14 +777,6 @@
                 $('#delete_id_his_ticket').val(id3);
 
                 $('#deletehistory').modal('show');
-            })
-
-            $('.btn_delete_flight').click(function(e){
-                e.preventDefault();
-                var id = $(this).closest('tr').find('.flight_id').text();
-                
-                $('#delete_id_flight').val(id);
-                $('#deleteflight').modal('show');
             })
         })
 </script>

@@ -1,12 +1,16 @@
 <?php
-    require 'api/connect.php';
+    //Kết nối dữ liệu database
+    require 'connect.php';
 
+    //Lưu biến massage và flag để hiển thị thông báo tương ứng
     $message = '';
     $flag = '';
+    //Thông báo không tìm thấy tài khoản khi nhận biến error
     if(isset($_GET['error'])) {
       $flag = false;
       $message = '! Không tìm thấy tài khoản !';
     }
+    //Thông báo đăng ký thành công khi nhận biến signup
     else if(isset($_GET['signup'])){
       $flag = true;
       $message = '~ Đăng ký thành công ~';
@@ -33,6 +37,7 @@
               <p class="title">ĐĂNG NHẬP</p>
               <input type="text" class="input-control" placeholder="Tên đăng nhập" name="username" required/>
               <input type="password" class="input-control" placeholder="Mật khẩu" name="password" required/>
+              <!-- Hiển thị thông báo lỗi tương ứng dựa vào flag -->
               <?php
                     if($flag == true){
                         echo '<p style = "color: #CCFF90; font-weight: bold; margin-top:-5px;">'.$message.'</p>';

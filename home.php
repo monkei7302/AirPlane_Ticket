@@ -1,5 +1,7 @@
 <?php
+  //Kết nối dữ liệu database
   require 'connect.php';
+  //Kích hoạt các biến giá trị session
   session_start();
 ?>
 <!DOCTYPE html>
@@ -27,52 +29,54 @@
   }
 </style>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
         <a class="navbar-brand" href="home.php" style = "font-size: 30px;">Sky Airlines
-            <div class="logo">
-                <img src="img/plane.png" class="img-fluid">
-            </div>
-          </a>
+          <div class="logo">
+              <img src="img/plane.png" class="img-fluid">
+          </div>
         </a>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="home.php"><i class="fa fa-home"></i> Trang chủ</a>
-            </li>
-            <li class="nav-item aria-current">
-              <a class="nav-link" href="search_flight.php"> Chuyến bay</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="history.php">Tra cứu</a>
-            </li>
-            <?php
-              if(isset($_SESSION['login'])){
-                echo '<li class="nav-item dropdown">
-                        <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> Welcome '.$_SESSION['username'].'</a>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="profile.php"> Thông tin cá nhân</a></li>
-                            <li><a class="dropdown-item" href="historyLogin.php"> Lịch sử đặt vé</a></li>
-                            <li><a class="dropdown-item" href="logout.php"> Đăng xuất</a></li>
-                        </ul>
-                      </li>';
-              }
-              else{
-                echo '<li class="nav-item">
-                        <a class="nav-link" href="login.php">Đăng nhập</a>
-                      </li>';
-              }
-            ?>
-            <li class="nav-item">
-              <a class="nav-link" href="help.php"> Trợ giúp</a>
-            </li>
-          </ul>
-        </div>
-      </nav> 
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="home.php"><i class="fa fa-home"></i> Trang chủ</a>
+          </li>
+          <li class="nav-item aria-current">
+            <a class="nav-link" href="search_flight.php"> Chuyến bay</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="history.php">Tra cứu</a>
+          </li>
+          <!-- Hiển thị thao tác xem thông tin cá nhân, lịch sử đặt vé, đăng xuất khi người dùng đăng nhập thành công -->
+          <?php
+            if(isset($_SESSION['login'])){
+              echo '<li class="nav-item dropdown">
+                      <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> Welcome '.$_SESSION['username'].'</a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="profile.php"> Thông tin cá nhân</a></li>
+                          <li><a class="dropdown-item" href="historyLogin.php"> Lịch sử đặt vé</a></li>
+                          <li><a class="dropdown-item" href="logout.php"> Đăng xuất</a></li>
+                      </ul>
+                    </li>';
+            }
+            else{
+              // Ản thao tác xem thông tin cá nhân, lịch sử đặt vé, đăng xuất khi không đăng nhập
+              echo '<li class="nav-item">
+                      <a class="nav-link" href="login.php">Đăng nhập</a>
+                    </li>';
+            }
+          ?>
+          <li class="nav-item">
+            <a class="nav-link" href="help.php"> Trợ giúp</a>
+          </li>
+        </ul>
+      </div>
+    </nav> 
       <div class="mx-auto ml-5 ">
         <img src="img/banner.png" alt="background" width="100%" height="650px">
       </div>
       <div class="container mt-3">
           <div class="row">
+          <h1 style = "text-align: center;">Tìm chuyến bay</h1>   
             <form action="search_flight.php" method="post" >
               <div class="card w-75 mx-auto" id = "searchCard"  style="padding-left: 10px;">
                     <div class = "radio passenger">
@@ -106,6 +110,7 @@
                 <img src = "img/symbols/anh4.png" width="250px" height="250px">
               </div>
               <h3 id="h3_hl">Chặng bay nổi bật của Sky Airlines</h3>
+              <!-- Liệt kê tất cả những chuyến bay nổi bật có trong database -->
               <?php
                     $sql_hl = "SELECT * FROM `hight_light`";
                     $run_hl = mysqli_query($con,$sql_hl);
@@ -117,19 +122,19 @@
                       $des_hl = $row['description'];
                       $price_hl = $row['price'];
                       echo '
-                      <div class="col-sm-4">
-                        <div class="highlights">
-                          <div class="card">
-                            <img src="img/highlights/'.$image_hl.'" class="card-img-top">
-                            <div class="card-body">
-                              <h5 class="card-title">'.$name_hl.'</h5>
-                              <p class="card-text">Ngày đi: '.$date_hl.'</p>
-                              <p class="card-text">'.$des_hl.'</p>
-                              <h5 class = "text-danger font-weight-bold">Giá chỉ từ: '.number_format(floatval($price_hl),0,',','.').' đ</h5>
+                        <div class="col-sm-4">
+                          <div class="highlights">
+                            <div class="card">
+                              <img src="img/highlights/'.$image_hl.'" class="card-img-top">
+                              <div class="card-body">
+                                <h5 class="card-title">'.$name_hl.'</h5>
+                                <p class="card-text">Ngày đi: '.$date_hl.'</p>
+                                <p class="card-text">'.$des_hl.'</p>
+                                <h5 class = "text-danger font-weight-bold">Giá chỉ từ: '.number_format(floatval($price_hl),0,',','.').' đ</h5>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
                       ';
                     }
                 ?>

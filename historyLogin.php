@@ -1,6 +1,14 @@
 <?php
+  //Kết nối dữ liệu database
   require 'connect.php';
+  //Kích hoạt các biến giá trị session
   session_start();
+
+  //Kiểm tra nếu chưa đăng nhập sẽ đẩy ra trang login yêu cầu đăng nhập
+  if(!isset($_SESSION['login'])){
+    header("location: login.php");
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +57,7 @@
             <li class="nav-item">
               <a class="nav-link" href="history.php">Tra cứu</a>
             </li>
+            <!-- Hiển thị thao tác xem thông tin cá nhân, lịch sử đặt vé, đăng xuất khi người dùng đăng nhập thành công -->
             <?php
               if(isset($_SESSION['login'])){
                 echo '<li class="nav-item dropdown">
@@ -60,6 +69,7 @@
                         </ul>
                       </li>';
               }
+              // Ản thao tác xem thông tin cá nhân, lịch sử đặt vé, đăng xuất khi không đăng nhập
               else{
                 echo '<li class="nav-item">
                         <a class="nav-link" href="login.php">Đăng nhập</a>
@@ -76,6 +86,7 @@
         <h1>Lịch sử đặt vé</h1>
         <di class = "row">
             <div class = "col-lg-12">
+              <!-- Lấy dữ liệu từ database, hiển thị list lịch sử đặt vé của khách hàng khi đã đăng nhập -->
               <?php
                 $sql_check = mysqli_query($con,"SELECT * FROM `ticket_info`");
                 while($row = $sql_check->fetch_array(MYSQLI_ASSOC)){

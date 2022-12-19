@@ -1,17 +1,29 @@
 <?php
-  require 'connect.php';
-  session_start();
+    //Kết nối dữ liệu database
+    require 'connect.php';
+    //Kích hoạt các biến giá trị session
+    session_start();
 
+    //Tạo biến lưu thông báo khi thực hiện thao tác
     $message = '';
+    //Trường hợp nhập lại mật khẩu không khớp
     if(isset($_GET['error'])) {
         $message = '! Nhập lại không khớp !';
     }
+    //Trường hợp cập nhật tài khoản thành công
     else if(isset($_GET['success'])){
         echo '<script>alert("Cập nhật mật khẩu mới thành công! Vui lòng đăng nhập lại để cập nhật thông tin!")</script>';
     }
+    //Trường hợp nhập mật khẩu không đúng
     else if(isset($_GET['incorrect'])){
       $message = 'Mật khẩu cũ không đúng';
     }
+
+    //Kiểm tra nếu chưa đăng nhập sẽ đẩy ra trang login yêu cầu đăng nhập
+    if(!isset($_SESSION['login'])){
+      header("location: login.php");
+    }
+  
 
 ?>
 <!DOCTYPE html>
@@ -79,6 +91,7 @@
             <li class="nav-item">
               <a class="nav-link" href="history.php">Tra cứu</a>
             </li>
+            <!-- Hiển thị thao tác xem thông tin cá nhân, lịch sử đặt vé, đăng xuất khi người dùng đăng nhập thành công -->
             <?php
               if(isset($_SESSION['login'])){
                 echo '<li class="nav-item dropdown">
@@ -90,6 +103,7 @@
                         </ul>
                       </li>';
               }
+              // Ản thao tác xem thông tin cá nhân, lịch sử đặt vé, đăng xuất khi không đăng nhập
               else{
                 echo '<li class="nav-item">
                         <a class="nav-link" href="login.php">Đăng nhập</a>
@@ -111,6 +125,7 @@
                 </div>
                 <div class="card-body mx-auto">
                     <form action="profile_handle.php" method="post">
+                        <!-- Lấy dữ liệu username từ database hiển thị lên màn hình -->
                         <?php
                         $check_user = $_SESSION['username'];
                         $sql_pro = "SELECT * FROM `passenger_profile` WHERE `passenger_username` LIKE '$check_user'";

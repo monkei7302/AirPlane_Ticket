@@ -1,6 +1,8 @@
 <?php
-    require 'api/connect.php';
+    //Kết nối dữ liệu database
+    require 'connect.php';
 
+    //Lưu biến message thông báo lỗi khi username đã tồn tại
     $message = '';
     if(isset($_GET['exist'])) {
       $message = '! Username đã tồn tại !';
@@ -18,6 +20,7 @@
     <div class="form" style="margin-top:35px;">
         <form action="register_handle.php" method="post">
             <p class="title">ĐĂNG KÝ TÀI KHOẢN</p>
+            <!-- Hiển thị thông báo -->
             <?php
                 echo '<p style = "color: #FF9E80; font-weight: bold; margin-top:-5px;">'.$message.'</p>';
             ?>
