@@ -16,7 +16,7 @@
       }
 
   }
-  $luggage = 400000;
+  $luggage = $_SESSION['luggage'];
 
 
   $flight_id = $_SESSION['flight_id'];

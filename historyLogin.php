@@ -89,32 +89,39 @@
             <div class = "col-lg-12">
               <!-- Lấy dữ liệu từ database, hiển thị list lịch sử đặt vé của khách hàng khi đã đăng nhập -->
               <?php
-                $sql_check = mysqli_query($con,"SELECT * FROM `ticket_info`");
-                while($row = $sql_check->fetch_array(MYSQLI_ASSOC)){
-                  $flight_id = $row['flight_id'];
-                  $ticket_id = $row['ticket_id'];
-
-                  $sql_flight = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` = '$flight_id'");
-                  while($row_flight = $sql_flight->fetch_array(MYSQLI_ASSOC)){
-                    $from = $row_flight['from_location'];
-                    $to = $row_flight['to_location'];
-                    $departure_time = $row_flight['departure_time'];
-                    echo '
-                    <div class="card">
-                      <div class = "card-text">
-                          <span class = "id">'.$ticket_id.'</span>
-                          <br>
-                          <div class = "locate">
-                              <span>'.$from.' -></span><span>'.$to.'</span>
-                              <a href="history_detail.php?id='.$ticket_id.'"  class = "btn btn-danger btn-sm">Xem chi tiết</a>
-                          </div>
-                          <span>16/12/2022</span>
-                          <br>
+                $username = $_SESSION['username'];
+                $sql_pro = mysqli_query($con,"SELECT * FROM `passenger_profile` WHERE `passenger_username` LIKE '%$username%'");
+                while($row_pro = $sql_pro->fetch_array(MYSQLI_ASSOC)){
+                  $id_user = $row_pro['profile_id'];
+                  $sql_check = mysqli_query($con,"SELECT * FROM `ticket_info` WHERE `profile_id` = '$id_user'");
+                  while($row = $sql_check->fetch_array(MYSQLI_ASSOC)){
+                    $flight_id = $row['flight_id'];
+                    $ticket_id = $row['ticket_id'];
+  
+                    
+                    $sql_flight = mysqli_query($con,"SELECT * FROM `flight` WHERE `flight_id` = '$flight_id'");
+                    while($row_flight = $sql_flight->fetch_array(MYSQLI_ASSOC)){
+                      $from = $row_flight['from_location'];
+                      $to = $row_flight['to_location'];
+                      $departure_time = $row_flight['departure_time'];
+                      echo '
+                      <div class="card">
+                        <div class = "card-text">
+                            <span class = "id">'.$ticket_id.'</span>
+                            <br>
+                            <div class = "locate">
+                                <span>'.$from.' -></span><span>'.$to.'</span>
+                                <a href="history_detail.php?id='.$ticket_id.'"  class = "btn btn-danger btn-sm">Xem chi tiết</a>
+                            </div>
+                            <span>16/12/2022</span>
+                            <br>
+                        </div>
                       </div>
-                    </div>
-                    ';
+                      ';
+                    }
                   }
                 }
+                
               ?>
             </div>
     </div>
