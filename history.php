@@ -28,7 +28,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="home.html" style = "font-size: 30px;">Sky Airlines
+        <a class="navbar-brand" href="home.php" style = "font-size: 30px;">Sky Airlines
             <div class="logo">
                 <img src="img/plane.png" class="img-fluid">
             </div>
